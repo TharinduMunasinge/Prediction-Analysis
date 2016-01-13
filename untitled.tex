@@ -1,32 +1,39 @@
 \textbf\section{{Adaptive Online Prediction Technique for Workload prediction in PaaS systems}}
 
 
-Workload prediction 
+\subsection{Workload prediction }
+
 As described in the <<FIRST>> chapter, to avoid the drawbacks of threshold based reactive systems a proactive scaling algorithm should be run on top of the predicted future workload values. our proactive scaling solution has 3 major components
 Workload Predictor - Predicting the workload for future time horizon
 Scaling decision maker- Calculating the number of virtual machines required to handle the predicted workload while minimizing the cost of the scaling action.
 Cost optimizer - Performing further cost optimizations like smart killing
 
-Challenges
+\subsection{Challenges}
+
 We have identified several challenges specific to workload prediction in a PaaS platforms.
 PaaS system can have different applications with different workload characteristics, so that the workload predictor should not be overfitted to a specific workload pattern.
 Workload predictive algorithm should be evolved and continuously learn the workload characteristics . 
 Workload predictor should be able to give results within a bounded time period.
 Give that the  time horizon for the prediction should be chosen based on the constraints like VM uptime and gracefully shutting down time, predictor should be able to give sufficiently accurate results.
-Existing Works
+
+\section{Existing Works}
+
 There is a significant amount of already established research work in the workload prediction domain. Exponential smoothing is popularly used for predicting purposes. Mi et al. [18] also used a quadratic exponential smoothing against real workload traces (World Cup 98), and showed good accurate results, with a small amount of error. The auto-regression method has been widely used in the literature ([19], [20], [21]). Kupferman et al. [19] applied autoregression of single order to predict request rate and found that its performance depends largely on several user-defined parameters: the size of the input window and the size of the horizon window.Auto-regressive moving average method (ARMA) is the dominant time series analysis technique for workload and resource usage prediction. Roy et al. [4] use a second order ARMA for workload prediction on the World Cup 98 traces and showed good accurate results. Machine learning techniques like neural networks and regression have been applied by several authors but those techniques are not widely used as time series methods. There were researches on using history window values as the input for a neural network [22] and a multiple linear regression equation [19], [22]. The accuracy of both methods depends on the input window size.
 
 
-Limitations of the existing research works
+\subsection{Limitations of the existing research works}
+
  These research works were primarily based on specific datasets. So that the resulted predictive model might not be a good fit for an application with different workload characteristics. In some of the solutions the predictive model was found using offline training on datasets so that the dynamic adaptation for the current workload changes is not there. 
 In mathematically some time series prediction techniques like exponential moving average and ARIMA has some preconditions to be fitted well with the dataset. It’s quite unlikely that all the applications will met these preconditions. Even in a single prediction technique, there are parameters to be adjusted to fit with specific data set. So identifying optimum parameters for the model should be happend dynamic online training process rather than having constants defined in offline training process.
 
-Prediction horizon
+\subsection{Prediction horizon}
+
 
 Prediction Horizon
 Another interesting point in workload prediction is estimating the prediction interval, r. Islam et al. [22] proposed using a 12-minute interval, because the set-up time of VM instances in the cloud was typically around 5-15 minutes by that time. Time-series forecasting can be combined with reactive techniques. Iqbal et al. [23] proposed a hybrid scaling technique that utilizes reactive rules for scaling up (based on CPU usage) and a regression-based approach for scaling down.
 
-Evaluation of the existing models
+\subsection{Evaluation of the existing models}
+
 We have chosen 4 widely used prediction techniques in the literature (ARIMA, Neural network, Exponential Models and Naive prediction) and the existing workload prediction technique in Stratos. Then tested on several workloads <<DESCRIBE THOSE LOADS>> and saw that the some prediction technique performs well in some workload patterns while other technique perform well in different workloads.
 For evaluation purpose we have used forecast package in R << DETAILS ABOUT THE PACKAGE>>. In that library there are time series datasets in different domains with typical patterns like trends, cycles and seasonality factors. In this analysis we wanted to qualitatively analyse the ability of each prediction technique to learn from current workload history and predict the time series while time series data is evolving periodically as what happen in autonomous autoscaler in operation. So that we have simulated online training scenario by streaming data points of the time series one at a time to each method and get the 1-step lookahead prediction and plotted against the real data points. Since the objective of this experiment to identify  how well an individual method can predict the future values by only considering the past history, we tried several publically available datasets in this package with predictable patterns even though they are not really related to the cloud workloads. The experimental results elaborated in <<IN SUB SECTION 1>>, are based on actual cloud workload datasets (CPU,Memory and Http Request in flight)  in which we  compare and contrast the performance of the proposed method vs existing methods. 
 For this evaluation we have used the implementations of the Forecast pacakge[ID] . <<DESCRIPTON ABOUT THE IMPLEMENTATION>>>>
@@ -36,16 +43,20 @@ Ets: Model the data with best fitted exponential model [https://www.otexts.org/f
 
 	Nnetar: [https://www.otexts.org/fpp/9/3]
 
-Dataset 1:
+\subsubsection{Dataset 1:}
+
 airmiles : The revenue passenger miles flown by commercial airlines in the United States for each year from 1937 to 1960.
 
 
-Dataset 2:
+\subsubsection{Dataset 2:}
+
 
 Euretial: Quarterly retail trade index in the Euro area (17 countries), 1996-2011, covering wholesale and retail trade, and repair of motor vehicles and motorcycles. (Index: 2005 = 100).
 
 
-Dataset 3: Annual oil production (millions of tonnes), Saudi Arabia, 1965-2010.
+\subsubsection{Dataset 3:}
+
+Annual oil production (millions of tonnes), Saudi Arabia, 1965-2010.
 
 
 
@@ -54,7 +65,8 @@ Dataset 4: Annual averages of the daily sunspot areas (in units of millionths of
 
 
 
-Error Measures
+\subsubsection{Error Measures}
+
 
 
 For quantitative analysis, we used 2 types of  typical error measures 
@@ -68,7 +80,16 @@ Percentage errors have the advantage of being scale-independent, but it overlook
 
 
 
-
+\begin{table} 
+    \begin{tabular}{ c c c c c c c c c }
+        Data & Arima &  & Neural &  & Exponential &  & Current &  \\ 
+         & MSE & MAPE & MSE & MAPE & MSE & MAPE & MSE & MAPE \\ 
+        euretail &  &  &  &  &  &  &  &  \\ 
+        air &  &  &  &  &  &  &  &  \\ 
+        oil &  &  &  &  &  &  &  &  \\ 
+    \end{tabular} 
+    \caption{Results table} 
+\end{table}
 
 Dataset
 Arima
