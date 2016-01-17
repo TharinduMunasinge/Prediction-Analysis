@@ -12,7 +12,6 @@ figures/Rplot05/Rplot05.png
 subsubsection_Dataset_4_sunspot_areas__.tex
 figures/Rplot06/Rplot06.png
 figures/Rplot07/Rplot07.png
-subsubsection_Dataset_1_airmiles_airmiles__.tex
 subsection_Error_Measures_For_quantitative__.tex
 section_Proposed_Ensemble_Prediction_Method__.tex
 subsection_Experimental_Results__.tex
