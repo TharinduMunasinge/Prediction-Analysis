@@ -54,8 +54,8 @@ $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right 
 So that when calculating the contributions based on the errors, errors based on the last observation overlook the overall accuracy and assume the last prediction error is the only important. On the other extreme in average errors in last predictions assumes all the last prediction errors have same level of significance. But we really need an error measure which has large contribution from the errors in most recent predictions while having smaller contribution from more early predictions. Exponential smoothing provide the best to fit our requirement , so we can calculate the contribution as the errors are fitted in exponential model.
 
 \begin{multline}
-$$c_{i,t}= \alpha e_t + (1-\alpha)c_{i,t-1} \\ 
-c_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . ..$$
+c_{i,t}= \alpha e_t + (1-\alpha)c_{i,t-1} \\ 
+c_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. \\
 $where \ 0\leq \alpha \leq 1	\  e_{t} \ can \ be \ Absolute \ error , Squared \ error \ or Absolute \ relative \ error \ at \ t^{th} \ prediction $
 \end{multline}
 
