@@ -1,0 +1,30 @@
+\section{Proposed Ensemble Prediction Method}
+
+In the median-based combining, the combination function f is the median of the individual forecasts. Median is 
+sometimes preferred over simple average as it is less sensitive to extreme values [12, 13].
+In the error-based combining, the weight to each model is assigned to be the inverse of the past forecast error (e
+.g. MSE, MAE, MAPE, etc.) of the corresponding model [3, 10].
+In the variance-based method, the optimal weights are determined through the minimization of the total Sum of 
+Squared Error (SSE) [7, 10].
+Proposed Ensemble Prediction Method
+We are proposing an error based ensemble technique for workload prediction. As mentioned in <<subsection 1>>, 
+offline training is not possible in this problem since the  workload history data may not be available at the 
+beginning of the operation. While autoscaler in the operation workload history  is accumulated based on the user's 
+workload requirement ( CPU, Memory, and Http request count). From the available dataset the prediction method 
+should be able to predict for the future horizon. After the predictions, true values will be available in next time 
+periods . So we accumulated latest real value to workload history and recalculate for the next forecast horizon. 
+        
+    In the existing error based combining techniques, Mean values of Absolute error, Absolute percentage error , 
+squared error .. etc are taken into account when calculating the contribution from individual methods. 
+
+
+We are proposing an error based ensemble technique for workload prediction. As mentioned in <<subsection 1>>, offline training is not possible in this problem since the  workload history data may not be available at the beginning of the operation. While autoscaler in the operation workload history  is accumulated based on the user's workload requirement ( CPU, Memory, and Http request count). From the available dataset the prediction method should be able to predict for the future horizon. After the predictions, true values will be available in next time periods . So we accumulated latest real value to workload history and recalculate for the next forecast horizon. 
+		
+	In the existing error based combining techniques, Mean values of Absolute error, Absolute percentage error , squared error .. etc are taken into account when calculating the contribution from individual methods. 
+
+
+
+
+
+
+Experimental Results
