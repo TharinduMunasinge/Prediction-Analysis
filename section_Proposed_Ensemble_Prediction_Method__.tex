@@ -56,9 +56,21 @@ $$c_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(
 where $$0\leq \alpha \leq 1$$	$$ e_{t} \ can \ be \ Absolute \ error , Squared \ error \ or Absolute \ relative \ error \ at \ t^{th} \ prediction $$
 
 Prediction algorithm:
- Let's take the  time series history window at time t, $$X=[x_{1},x_{2},.. x_{t}]$$ 
-calculate forecasted value for  h- horizon from the i th method $$\hat{x}_{(t+h)}^{(i)}$$ $$\forall i \in \{1,2,3,...,k\}$$ 
-Fit, the fitted values from i ith method for last t window ,  in an exponential smoothing model and calculate the contribution factor from ith model at t ci,t
-Calculate the point forecast for t+h time using 
-$$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$$
-At time t+1,  actual value for time t+1  will be obtained. so add  to the history window $$X=X\cup \{x_{t+1}\}$$ and repeat from 2)
+\begin{enumerate}
+\item  Let's take the  time series history window at time t, $$X=[x_{1},x_{2},.. x_{t}]$$ 
+\end{enumerate}
+\begin{enumerate}
+\item calculate forecasted value for  h- horizon from the i th method $$\hat{x}_{(t+h)}^{(i)}$$ $$\forall i \in \{1,2,3,...,k\}$$ 
+\end{enumerate}
+\begin{enumerate}
+\item Fit, the fitted values from i ith method for last t window ,  in an exponential smoothing model and calculate the contribution factor from ith model at t ci,t
+\end{enumerate}
+\begin{enumerate}
+\item Calculate the point forecast for t+h time using 
+\end{enumerate}
+\begin{enumerate}
+\item $$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$$
+\end{enumerate}
+\begin{enumerate}
+\item At time t+1,  actual value for time t+1  will be obtained. so add  to the history window $$X=X\cup \{x_{t+1}\}$$ and repeat from 2)
+\end{enumerate}
