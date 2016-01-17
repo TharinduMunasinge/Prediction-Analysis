@@ -5,6 +5,7 @@ section_Limitations_of_the_existing__.tex
 subsubsection_Dataset_1_airmiles_airmiles__1.tex
 figures/Rplot1/Rplot1.png
 subsubsection_Dataset_2_euretial_Euretial__.tex
+figures/Rplot03/Rplot03.png
 subsubsection_Dataset_3_oil_Annual__.tex
 subsubsection_Dataset_4_sunspot_areas__.tex
 section_Prediction_horizon_Prediction_Horizon__.tex
