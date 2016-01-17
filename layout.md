@@ -9,6 +9,7 @@ figures/Rplot03/Rplot03.png
 subsubsection_Dataset_3_oil_Annual__.tex
 figures/Rplot05/Rplot05.png
 subsubsection_Dataset_4_sunspot_areas__.tex
+figures/Rplot06/Rplot06.png
 section_Prediction_horizon_Prediction_Horizon__.tex
 figures/Rplot07/Rplot07.png
 subsubsection_Dataset_1_airmiles_airmiles__.tex
