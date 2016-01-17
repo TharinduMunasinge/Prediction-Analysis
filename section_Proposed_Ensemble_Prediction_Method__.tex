@@ -10,10 +10,55 @@ periods . So we accumulated latest real value to workload history and recalculat
     In the existing error based combining techniques, Mean values of Absolute error, Absolute percentage error , 
 squared error .. etc are taken into account when calculating the contribution from individual methods. 
 
+Let's take the current available data set in the time series as, $$X=[x_{1},x_{2},.. x_{t}]$$  
 
-We are proposing an error based ensemble technique for workload prediction. As mentioned in <<subsection 1>>, offline training is not possible in this problem since the  workload history data may not be available at the beginning of the operation. While autoscaler in the operation workload history  is accumulated based on the user's workload requirement ( CPU, Memory, and Http request count). From the available dataset the prediction method should be able to predict for the future horizon. After the predictions, true values will be available in next time periods . So we accumulated latest real value to workload history and recalculate for the next forecast horizon. 
+we want to calculate the predictions for  $$x_{t+h}$$ , let's’ take the final predicted value be $$\hat{x}_{(t+h)}$$ and $$\hat{x}_{(t+h)}^{(i)}$$ be the predicted value for $$x_{t+h}$$ from ith model. We defined the $$\hat{x}_{(t+h)}$$ as a weighted sum of predictions from each model
+ $$\hat{x}_{(t+h)}= \sum_{i=1}^{k}w_i \hat{x}_{(t+h)}^{(i)}$$   $$\forall k \in \{1,2,3,...,n\}$$ 
+
+Here, wi is the weight assigned to the ith forecasting method. To ensure unbiasedness, it is often assumed that the weights add up to unity. [Combining Multiple Time Series Models Through A Robust Weighted Mechanism]
+So that we define the the contribution from ith model to the final result as ci , so that the same equation can be redefined as  
+$$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_i}$$  here the   $$w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$$  
+
+since   $$\sum_{j=1}^{k}w_{j}=1$$ , this weight assignment is unbiased and this is the weighted average of the predictions.
+
+
+Determination of the Contribution coefficients.
+
+To determine the optimal contribution coefficients in our proposed ensemble technique,  we used past forecast errors in each model. In our prediction problem, the accuracy of the prediction for next time horizon is more significant. So that the  contributions are calculated from inverse of the past forecasting error measure. There are various choices for error measure,  we have identified the pros and consequences in each measure. 
+
+Error of the most recent prediction
+Does not capture overall accuracy.only capture how well the last prediction is accurately calculated from the model. if the model has repeatedly made large errors in past predictions except the most recent one, contribution coefficients are biased and may take the error prone decision
+
+Absolute error of the last prediction
+$$AE_t=|\hat{x}_t-x_t|$$
+
+Squared error of the last prediction
+$$SE_t=(\hat{x}_t-x_t)^2$$
+penalize the errors more than what in AE.
+
+Absolute percentage/relative error
+$$APE_t=100\left |\frac{\hat{x}_t-x_t}{x_t}  \right |$$
+sensitive to the errors in small actual values. 
 		
-	In the existing error based combining techniques, Mean values of Absolute error, Absolute percentage error , squared error .. etc are taken into account when calculating the contribution from individual methods. 
+Average error over the history
+capture the overall error in past predictions all the past errors have the same level of significance . if a method produce a larger error in older predictions  the contribution is reduced significantly even though it produces the best predictions for most recent values.
 
+Mean Absolute error/ Root mean squared error
+$$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$ 
 
+Mean Absolute error/ Root mean squared error
+$$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
+So that when calculating the contributions based on the errors, errors based on the last observation overlook the overall accuracy and assume the last prediction error is the only important. On the other extreme in average errors in last predictions assumes all the last prediction errors have same level of significance. But we really need an error measure which has large contribution from the errors in most recent predictions while having smaller contribution from more early predictions. Exponential smoothing provide the best to fit our requirement , so we can calculate the contribution as the errors are fitted in exponential model.
+
+$$c_{i,t}= \alpha e_t + (1-\alpha)c_{i,t-1}$$
+$$c_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . ..$$
+where $$0\leq \alpha \leq 1$$	$$ e_{t} \ can \ be \ Absolute \ error , Squared \ error \ or Absolute \ relative \ error \ at \ t^{th} \ prediction $$
+
+Prediction algorithm:
+ Let's take the  time series history window at time t, $$X=[x_{1},x_{2},.. x_{t}]$$ 
+calculate forecasted value for  h- horizon from the i th method $$\hat{x}_{(t+h)}^{(i)}$$ $$\forall i \in \{1,2,3,...,k\}$$ 
+Fit, the fitted values from i ith method for last t window ,  in an exponential smoothing model and calculate the contribution factor from ith model at t ci,t
+Calculate the point forecast for t+h time using 
+$$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$$
+At time t+1,  actual value for time t+1  will be obtained. so add  to the history window $$X=X\cup \{x_{t+1}\}$$ and repeat from 2)
