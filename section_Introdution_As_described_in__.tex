@@ -1,0 +1,37 @@
+\section{Introdution}
+
+
+As described in the <<FIRST>> chapter, to avoid the drawbacks of threshold based reactive systems a proactive scaling algorithm should be run on top of the predicted future workload values. our proactive scaling solution has 3 major components
+
+\begin{itemize}
+\item Workload Predictor - Predicting the workload for future time horizon
+\end{itemize}
+
+\begin{itemize}
+\item Scaling decision maker- Calculating the number of virtual machines required to handle the predicted workload while minimizing the cost of the scaling action.
+\end{itemize}
+
+\begin{itemize}
+\item Cost optimizer - Performing further cost optimizations like smart killing
+\end{itemize}
+
+\usepackage{multirow}
+
+
+\subsection{Challenges}
+
+We have identified several challenges specific to workload prediction in a PaaS platforms.
+\begin{itemize}
+\item PaaS system can have different applications with different workload characteristics, so that the workload predictor should not be overfitted to a specific workload pattern.
+\end{itemize}
+\begin{itemize}
+\item Workload predictive algorithm should be evolved and continuously learn the workload characteristics . 
+\end{itemize}
+\begin{itemize}
+\item Workload predictor should be able to give results within a bounded time period.
+\end{itemize}
+\begin{itemize}
+\item Give that the  time horizon for the prediction should be chosen based on the constraints like VM uptime and gracefully shutting down time, predictor should be able to give sufficiently accurate results.
+\end{itemize}
+
+
