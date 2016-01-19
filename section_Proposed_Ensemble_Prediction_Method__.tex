@@ -51,12 +51,14 @@ $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
 Mean Absolute error/ Root mean squared error
 $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
-So that when calculating the contributions based on the errors, errors based on the last observation overlook the overall accuracy and assume the last prediction error is the only important. On the other extreme in average errors in last predictions assumes all the last prediction errors have same level of significance. But we really need an error measure which has large contribution from the errors in most recent predictions while having smaller contribution from more early predictions. Exponential smoothing provide the best to fit our requirement , so we can calculate the contribution as the errors are fitted in exponential model.
+So that when calculating the contributions based on the errors, errors based on the last observation overlook the overall accuracy and assume the last prediction error is the only important. On the other extreme in average errors in last predictions assumes all the last prediction errors have same level of significance. But we really need an error measure which has large contribution from the errors in most recent predictions while having smaller contribution from more early predictions. Exponential smoothing provide the best to fit our requirement , so we can calculate the contribution as the errors are fitted in exponential model. Contribution coefficients $c_{i,t}$ are calculated from the inverse of the the fitted past forecast errors($e_{t}$). Let $b_{i,t}$ be the fitted value of the past forecasting error from $i^{th}$ model at $t^{th}$ time interval, so that 
+$c_{i,t}=\frac{1}{b_{i,t}}$
 
 \begin{multline}
-c_{i,t}= \alpha e_t + (1-\alpha)c_{i,t-1} \ where \ 0\leq \alpha \leq 1	\\ 
-c_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. \  \\
- e_{t} \ can \ be \ Absolute \ error , Squared \ error \ or Absolute \ relative \ error \ at \ t^{th} \ prediction 
+b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1} \ where \ 0\leq \alpha \leq 1	\\ 
+b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. \  \\
+ e_{t} \ can \ be \ Absolute \ error , Squared \ error \ or Absolute \ relative \ error \ at \ t^{th} \ prediction  \\
+ c_{i,t}=\frac{1}{b_{i,t}}
 \end{multline}
 
 \subsubsection{Prediction algorithm:}
