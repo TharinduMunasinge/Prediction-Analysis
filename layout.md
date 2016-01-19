@@ -16,4 +16,3 @@ section_Proposed_Ensemble_Prediction_Method__.tex
 usepackage_booktabs_usepackage_multirow_usepackage__.tex
 CONCLUSIONS.tex
 ACKNOWLEDGMENT.tex
-References.tex
