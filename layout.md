@@ -16,7 +16,6 @@ subsubsection_Dataset_3_oil_Annual__.tex
 figures/Rplot05/Rplot05.png
 subsubsection_Dataset_4_sunspot_areas__.tex
 figures/Rplot06/Rplot06.png
-figures/Rplot07/Rplot07.png
 subsection_Error_Measures_For_quantitative__.tex
 section_Proposed_Ensemble_Prediction_Method__.tex
 usepackage_booktabs_usepackage_multirow_usepackage__.tex
