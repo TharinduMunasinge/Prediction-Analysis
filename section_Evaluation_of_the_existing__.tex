@@ -1,5 +1,5 @@
 
-\section{Evaluation of the existing models}
+\section{Evaluation of existing models}
 
 We have chosen 4 widely used prediction techniques in the literature (ARIMA, Neural network, Exponential Models and Naive prediction) and the existing workload prediction technique in Stratos. Then tested on several workloads <<DESCRIBE THOSE LOADS>> and saw that the some prediction technique performs well in some workload patterns while other technique perform well in different workloads.
 For evaluation purpose we have used forecast package in R << DETAILS ABOUT THE PACKAGE>>. In that library there are time series datasets in different domains with typical patterns like trends, cycles and seasonality factors. In this analysis we wanted to qualitatively analyse the ability of each prediction technique to learn from current workload history and predict the time series while time series data is evolving periodically as what happen in autonomous autoscaler in operation. So that we have simulated online training scenario by streaming data points of the time series one at a time to each method and get the 1-step lookahead prediction and plotted against the real data points. Since the objective of this experiment to identify  how well an individual method can predict the future values by only considering the past history, we tried several publically available datasets in this package with predictable patterns even though they are not really related to the cloud workloads. The experimental results elaborated in <<IN SUB SECTION 1>>, are based on actual cloud workload datasets (CPU,Memory and Http Request in flight)  in which we  compare and contrast the performance of the proposed method vs existing methods. 
@@ -11,3 +11,4 @@ Ets: Model the data with best fitted exponential model [https://www.otexts.org/f
     \cite{Wagner_2011}
     
 	Nnetar: [https://www.otexts.org/fpp/9/3]
+
