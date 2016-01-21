@@ -1,24 +1,42 @@
 \section{Evaluation of existing models}
 
-In this analysis we wanted to qualitatively analyze the ability of individual prediction technique to learn from current workload history and predict the time series while time series data is evolving periodically as what happen in autonomous auto-scaler in operation. We simulated an online training scenario by streaming data points of the time series one at a time to each method and plotted the one-step lookahead prediction from the resulting models at each stage, against the real data points. 
+In this analysis we wanted to qualitatively analyze the ability of individual prediction technique to learn from current workload history and predict the time series while time series data is evolving periodically as what happen in autonomous auto-scaler in operation. We simulated an online training scenario by streaming data points of the time series one at a time to each method and plotted the one-step lookahead prediction from the resulting models at each stage, against the real data points.
 
 \subsection{Time series Forecasting techniques}
 We chosen three widely used prediction methods in the literature: ARIMA, Neural network, Exponential Models and the existing workload prediction technique in Stratos.
 
 \subsubsection{ARIMA}
-METHOD DETAILS
+This model combine two models called autoregression (of order p) and moving average (of order q).
+
+Autoregression model (p): In an autoregression model, the variable of interest is forecasted using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus an autoregressive model of order p can be written as
+	$$x_{t} = c + \phi_{1}x_{t - 1} + \phi_{2}x_{t - 2} + ...+ \phi_{p}x_{t-p}$$
+where c is a constant and et is white noise. Autoregressive models are normally restricted to stationary data, and then some constraints on the values of the parameters are required [16]. \\
+For an AR(1) model: $-1 \leq  \phi_{1} \leq 1$ \\
+For an AR(2) model: $-1 \leq  \phi_{2} \leq 1, -1 \leq  \phi_{1}+\phi_{2} \leq 1, -1 \leq  \phi_{2}-\phi_{2} \leq 1 $ \\
+
+Moving average model MA(q): Moving average model uses past forecast errors in a regression-like model.
+	$$	x_{t} = c + \theta _{1}x_{t - 1} + \theta _{2}x_{t - 2} + ...+ \theta _{p}x_{t-q}$$
+where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the past few forecast errors. \\
+
+By  differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for AutoRegressive Integrated Moving Average (“integration” in this context is the reverse of differencing). The full model can be written as:
+		$x_{t} = c + \phi_{1}x_{t - 1} + \phi_{2}x_{t - 2} + ...+ \phi_{p}x_{t-p}  + \theta _{1}x_{t - 1} + \theta _{2}e_{t - 2} + ...+ \theta_{p}e_{t-q}$
+		
+The “predictors” on the right hand side include both lagged values of past values ($X_t$) and lagged forecasting errors( $e_t$). This is called this an ARIMA(p, d, q) model, where p and q are the orders of the autoregressive and moving average parts respectively, and d is the degree of first differencing involved.
+
 
 \subsubsection{Neural Network}
-Method details
+
+ANNs are a class of nonlinear, nonparametric, data driven and self-adaptive models, originally inspired by the
+intelligent working mechanism of human brains [4, 16]. Over the years, ANNs are used as excellent alternative to the common statistical models for time series forecasting. The most popular ANN architectures in forecasting domain are the Multilayer Perceptrons (MLPs). They consist of a feed forward structure of three layers, viz. an input layer, one or more hidden layer and an output layer. The nodes in each layer are connected to those in the immediate next layer by acyclic links [16]. Single hidden layer is sufficient for most applications. It is often customary to use the notation (p, h, q) for referring an ANN with p input, h hidden and q output nodes. A typical MLP architecture is shown in Fig. 1. The forecasting performance of an ANN model depends on a number of factors, e.g. the selection of proper network architecture, training algorithm, activation functions, significant time lags, etc [16, 17]. Unfortunately, no rigorous theoretical procedure is available in this regard and often these issues have to be resolved experimentally
 
 \subsubsection{Exponential Model}
-Method details
 
 
 
 
 \subsection{datasets}
 Since the objective of this experiment to identify how well an individual method can predict the future values by only considering the past history. we tried several publicly available datasets in the forecast package with predictable patterns even though they are not really related to the cloud workloads. Neverthless the experimental results elaborated in Section 5 in which we  compare and contrast the performance of the proposed method vs existing methods. , are based on two real-world cloud workloads, Google cluster data  in addition to the datasets in forecast package. For evaluation purpose we used forecast package in R \cite{forecastPackage} in which there are time series datasets in different domains with typical patterns like trends, cycles and seasonality factors. 
+
 
 \begin{itemize}
 \item airmiles : The revenue passenger miles flown by commercial airlines in the United States for each year from 1937 to 1960.
@@ -29,9 +47,11 @@ Since the objective of this experiment to identify how well an individual method
 
 
 
+
+
 \subsection{implementation of methods}
 For this evaluation we have used the implementations of the Forecast pacakge \cite{forecastPackage}
-ARIMA: According to <<ROBIN>> auto.arima()  find out the best fitted ARIMA model and approximated the model coeffficents in by minimizing the error<<<BESPECIFIC >>> [https://www.otexts.org/fpp/8/7]
+ARIMA: According to <<ROBIN>> auto.arima()  find out the best fitted ARIMA model and approximated the model coefficients in by minimizing the error<<<BESPECIFIC >>> [https://www.otexts.org/fpp/8/7]
 
 Ets: Model the data with best fitted exponential model [https://www.otexts.org/fpp/7/7]
     \cite{Wagner_2011}
