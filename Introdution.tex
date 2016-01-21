@@ -1,18 +1,12 @@
 \section{BAR_Introdution}
 
-Cloud computing is no longer the next revolution, it has already gain the ground with advantages like scalability, high availability and on-demand resource provisioning. According to the NIST definition \cite{Mell_2011} , cloud computing refers to the delivery of computing resources like networks, servers, storage, application and platform over the network based on the demand.Cloud computing mainly based on the virtualization allowing for pooling and dynamically allocating hardware resources. Elasticity is a major feature in cloud platform. This is often achieved via an auto-scaling process, which dynamically allocates and deallocates resources for a cloud application to optimize its resource utilization while minimizing the cost as well as achieving the desired Quality of Service (QoS) and availability goals\cite{Roy_2011}\cite{Armbrust_2010}.
+Cloud computing is no longer the next revolution, it has already gain the ground with advantages like scalability, high availability and on-demand resource provisioning. According to the NIST definition \cite{Mell_2011} ,  cloud computing refers to the delivery of computing resources like networks, servers, storage, application and platform over the network based on the user’s demand. Even from the definition it’s clear that Elasticity is a major feature in cloud platform which is often achieved via an auto-scaling process. Auto scaling refers to  dynamically allocates and deallocates resources for a cloud application to optimize its resource utilization while minimizing the cost as well as achieving the desired Quality of Service (QoS) and availability goals.\cite{Roy_2011}\cite{Armbrust_2010}.
 
-Autoscaling can be achieved  reactive based approach or proactive based approach. In reactive, threshold based auto-scaling, users have to specify the policies that would evaluate when to trigger the scale-up or scale-down events, and scaling would occur only after the scaling event is triggered \cite{Lorido_Botran_2014} .
-Although policy-aware auto-scaling seems to be the most customizable approach from the user’s perspective [7], it has several weaknesses \cite{Alipour:2014:AAI:2735522.2735532} :
+Autoscaling can be achieved  reactive based approach or proactive based approach. In reactive, threshold based auto-scaling, users have to specify the thresholds for workloads  and scaling would occur only after the thresholds are exceeded\cite{Lorido_Botran_2014}. In reactive-threshold autoscaling, eventhough its desirable to have high thresholds which makes the resource utilization higher, thresholds should be sufficiently small to compensate for the delay in taking the scaling action[REVISE] .    Although this seems to be the most customizable approach from the user’s perspective, it has several weaknesses \cite{Alipour:2014:AAI:2735522.2735532} like inability to adapt to workload patterns (e.g., thrashing during load fluctuations),low resource utilization and higher cost under the smaller thresholds and having a larger threshold introduce the risk of service degradation at rapidly increasing workloads. To come up with a optimum thresholds in an reactive autoscaling system is non trivial and it requires prior user expertise (e.g., of traffic patterns and IaaS/PaaS parameters like pricing models and packages) for composing effective thresholds that can carry out scaling efficiently.
 
-\begin{itemize}
-\item Necessity of prior user expertise (e.g., of traffic patterns, service health patterns and IaaS/PaaS parameters like pricing models and packages) for composing effective rules that can carry out scaling efficiently
-\item Existing systems do not consider the startup time of an instance (fault tolerance time) when taking an auto-scaling decision
-\item Inability to adapt to workload patterns (e.g., thrashing during load fluctuations)
-\end{itemize}
-
-
-As described in the <<FIRST>> chapter, to avoid the drawbacks of threshold based reactive systems a proactive scaling algorithm should be run on top of the predicted future workload values. our proactive scaling solution has 3 major components
+proactive approach to triggering resource requests can be taken by forecasting future resource demand values based on demand history.With accurate predictions, an application can preemptively scale to the correct level and thus alleviate
+some or all of the scaling overhead.
+To avoid the drawbacks of threshold based reactive systems a proactive scaling algorithm should be run on top of the forecasted future workload values. our proactive scaling solution has 3 major components.
 
 \begin{itemize}
 \item Workload Predictor - Predicting the workload for future time horizon
