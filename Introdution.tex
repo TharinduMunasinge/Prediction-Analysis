@@ -1,42 +1,23 @@
-\section{BAR_Introdution}
+\section{Introdution}
 
 Cloud computing is no longer the next revolution, it has already gain the ground with advantages like scalability, high availability and on-demand resource provisioning. According to the NIST definition \cite{Mell_2011} ,  cloud computing refers to the delivery of computing resources like networks, servers, storage, application and platform over the network based on the user’s demand. Even from the definition it’s clear that Elasticity is a major feature in cloud platform which is often achieved via an auto-scaling process. Auto scaling refers to  dynamically allocates and deallocates resources for a cloud application to optimize its resource utilization while minimizing the cost as well as achieving the desired Quality of Service (QoS) and availability goals.\cite{Roy_2011}\cite{Armbrust_2010}.
 
 Autoscaling can be achieved  reactive based approach or proactive based approach. In reactive, threshold based auto-scaling, users have to specify the thresholds for workloads  and scaling would occur only after the thresholds are exceeded\cite{Lorido_Botran_2014}. In reactive-threshold autoscaling, eventhough its desirable to have high thresholds which makes the resource utilization higher, thresholds should be sufficiently small to compensate for the delay in taking the scaling action[REVISE] .    Although this seems to be the most customizable approach from the user’s perspective, it has several weaknesses \cite{Alipour:2014:AAI:2735522.2735532} like inability to adapt to workload patterns (e.g., thrashing during load fluctuations),low resource utilization and higher cost under the smaller thresholds and having a larger threshold introduce the risk of service degradation at rapidly increasing workloads. To come up with a optimum thresholds in an reactive autoscaling system is non trivial and it requires prior user expertise (e.g., of traffic patterns and IaaS/PaaS parameters like pricing models and packages) for composing effective thresholds that can carry out scaling efficiently.
 
-proactive approach to triggering resource requests can be taken by forecasting future resource demand values based on demand history.With accurate predictions, an application can preemptively scale to the correct level and thus alleviate
-some or all of the scaling overhead.
-To avoid the drawbacks of threshold based reactive systems a proactive scaling algorithm should be run on top of the forecasted future workload values. our proactive scaling solution has 3 major components.
-
+In proactive approach resource requirement for the future time horizon is forecast by based on demand history.With accurate predictions, an application can take early scaling decisions so that when the workload demand reach to particular value, required resources will already be allocated. So that the resource  utilization can be increased to a maximum level. But the reliability of such approach mainly depends on the accuracy of the predicted values.Since we forecast the future workload require (Eg. Memroy consumption, Cpu utilization, Network request count) from the past history of the same measure , time series forecasting methods can be used for this calculation. 
+We have identified several challenges specific to workload prediction for auto scaling.
 \begin{itemize}
-\item Workload Predictor - Predicting the workload for future time horizon
+\item PaaS system can have different applications with different workload patterns, so that the workload prediction model should not be over fitted to a specific workload pattern.
+\item Workload data set continuously grow with time so that the predictive model should be evolved and continuously learn the workload characteristic. 
+\item Workload predictor should be able to give results within a bounded time period.
+\item Give that the  time horizon for the prediction should be chosen based on the physical constraints like VM uptime and gracefully shutting down time, predictor should be able to give sufficiently accurate results in longer horizon.
 \end{itemize}
 
-\begin{itemize}
-\item Scaling decision maker- Calculating the number of virtual machines required to handle the predicted workload while minimizing the cost of the scaling action.
-\end{itemize}
+But performance will be affected when the peak load occurs. Conversely, leasing more virtual resources leads to a performance improvement, but also bears a higher cost. Catering to the user Service Level Agreement (SLA) while still keeping costs low is challenging for service clouds primarily due to the frequent variation of
+platform workloads. With such a problem there should be an universal method to predict the platform workload, and then virtual resources can be added and released depending on this predicted workload
 
-\begin{itemize}
-\item Cost optimizer - Performing further cost optimizations like smart killing
-\end{itemize}
 
+The goal of this work is to assess the applicability of several time series forecasting models on real cloud workloads to support the development of dynamic resource allocation systems
 \usepackage{multirow}
 
-
 \subsection{Challenges}
-
-We have identified several challenges specific to workload prediction in a PaaS platforms.
-\begin{itemize}
-\item PaaS system can have different applications with different workload characteristics, so that the workload predictor should not be overfitted to a specific workload pattern.
-\end{itemize}
-\begin{itemize}
-\item Workload predictive algorithm should be evolved and continuously learn the workload characteristics . 
-\end{itemize}
-\begin{itemize}
-\item Workload predictor should be able to give results within a bounded time period.
-\end{itemize}
-\begin{itemize}
-\item Give that the  time horizon for the prediction should be chosen based on the constraints like VM uptime and gracefully shutting down time, predictor should be able to give sufficiently accurate results.
-\end{itemize}
-
-
