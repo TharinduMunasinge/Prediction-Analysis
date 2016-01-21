@@ -8,13 +8,13 @@ We chosen three widely used prediction methods in the literature: ARIMA, Neural 
 \subsubsection{ARIMA}
 This model combine two models called autoregression (of order p) and moving average (of order q) .\\
 
-Autoregression model (p): \\
+Autoregression model (p): 
 In an autoregression model, the variable of interest is forecasted using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus an autoregressive model of order p can be written as
 	$$x_t = c + \phi_1x_{ t-1} + \phi_2x_{t-2} +...+ \phi_px_{t-p} + e_{t}$$
 where c is a constant and et is white noise. Autoregressive models are normally restricted to stationary data, and then some constraints on the values of the parameters are required [16]. \\
 For an AR(1) model: $-1 < \phi_{1} < 1$ \\
 For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - \phi_{1} < 1$ \\
-Moving average model MA(q): \\ 
+Moving average model MA(q):  
 Moving average model uses past forecast errors in a regression-like model.
 	$$x_t =  c + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
 where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the past few forecast errors. However, moving average models should not be confused with moving average smoothing. The former is used for forecasting future values while the latter is used for estimating the trend-cycle of past values.
