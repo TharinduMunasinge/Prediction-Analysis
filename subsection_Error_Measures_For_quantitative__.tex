@@ -10,44 +10,6 @@ $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
 Percentage errors have the advantage of being scale-independent, but it overlooked the errors for the small actual values.
 $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
-% \usepackage[normalem]{ulem}
-% \useunder{\uline}{\ul}{}
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
-\begin{table}[]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{|l|r|r|r|r|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                     & \multicolumn{2}{c|}{Euretail}                        \\ \cline{2-5} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
-Arima                                        & 382.36019                & 1.35863                   & 0.52439                  & 0.00417                   \\ \hline
-Exponential                                  & 505.75034                & 1.16073                   & 0.57553                  & 0.01071                   \\ \hline
-Nnet                                         & 473.92407                & 0.46524                   & 1.88208                  & 0.00618                   \\ \hline
-Current                                      & 546.93791                & 0.96513                   & 0.65035                  & 0.00391                   \\ \hline
-\end{tabular}
-\end{table}
-
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
-\begin{table}[]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{|l|r|r|r|r|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{oil}                             & \multicolumn{2}{c|}{airmiles}                        \\ \cline{2-5} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
-Arima                                        & 55.31262                 & 0.25081                   & 1,412.94416              & 0.72068                   \\ \hline
-Exponential                                  & 54.98904                 & 0.25078                   & 1,370.47426              & 0.43516                   \\ \hline
-Nnet                                         & 51.61619                 & 0.15951                   & 2,400.57153              & 0.71841                   \\ \hline
-Current                                      & 61.80686                 & 0.58458                   & 1,367.01715              & 0.92456                   \\ \hline
-\end{tabular}
-\end{table}
-
 \\The highlighted cell represents the minimum RMSE and MAPE. According to the results obtained, there is no an individual method which perform well in all the cases. Each method will fit the datasets which satisfies its assumptions well . If the conditions are not met, performance of some methods are below the average. For example neural network perform well on ‘oil’ dataset but perform worse in ‘euretail’.  Current stratos prediction method has the highest mean errors in almost all the cases.
 
 major conclusions of this analysis that there is no single method which perform best in all the case. on the other hand a method which performs well in some dataset, might perform worst in another dataset.
