@@ -31,8 +31,6 @@ $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
-% \usepackage[normalem]{ulem}
-% \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
 \caption{My caption}
@@ -42,12 +40,11 @@ $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right 
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{oil}                             & \multicolumn{2}{c|}{airmiles}                        \\ \cline{2-5} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
 Arima                                        & 55.31262                 & 0.25081                   & 1,412.94416              & 0.72068                   \\ \hline
-Exponential                                  & 54.98904                 & 0.25078                   & 1,370.47426              & \textbf\{0.43516\}        \\ \hline
-Nnet                                         & 51.61619                 & \textbf\{0.15951\}        & \{\ul 2,400.57153\}      & 0.71841                   \\ \hline
-Current                                      & \{\ul 61.80686\}         & \{\ul 0.58458\}           & 1,367.01715              & \{\ul 0.92456\}           \\ \hline
+Exponential                                  & 54.98904                 & 0.25078                   & 1,370.47426              & 0.43516                   \\ \hline
+Nnet                                         & 51.61619                 & 0.15951                   & 2,400.57153              & 0.71841                   \\ \hline
+Current                                      & 61.80686                 & 0.58458                   & 1,367.01715              & 0.92456                   \\ \hline
 \end{tabular}
 \end{table}
-
 
 \\The highlighted cell represents the minimum RMSE and MAPE. According to the results obtained, there is no an individual method which perform well in all the cases. Each method will fit the datasets which satisfies its assumptions well . If the conditions are not met, performance of some methods are below the average. For example neural network perform well on ‘oil’ dataset but perform worse in ‘euretail’.  Current stratos prediction method has the highest mean errors in almost all the cases.
 
