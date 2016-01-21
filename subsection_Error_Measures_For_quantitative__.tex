@@ -9,24 +9,42 @@ $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
 
 Percentage errors have the advantage of being scale-independent, but it overlooked the errors for the small actual values.
 $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
-
 % Please add the following required packages to your document preamble:
-\usepackage{multirow}
-\usepackage[normalem]{ulem}
-\useunder{\uline}{\ul}{}
-
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
 \caption{My caption}
 \label{my-label}
-\begin{tabular}{|l|r|r|r|r|r|r|r|r|}
+\begin{tabular}{lrrrr}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                     & \multicolumn{2}{c|}{Euretail}                        & \multicolumn{2}{c|}{oil}                             & \multicolumn{2}{c|}{airmiles}                        \\ \cline{2-9} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
-Arima                                        & 382.36019                & {\ul 1.35863}             & \textbf{0.52439}         & 0.00417                   & 55.31262                 & 0.25081                   & 1,412.94416              & 0.72068                   \\ \hline
-Exponential                                  & 505.75034                & 1.16073                   & 0.57553                  & {\ul 0.01071}             & 54.98904                 & 0.25078                   & 1,370.47426              & \textbf{0.43516}          \\ \hline
-Nnet                                         & 473.92407                & 0.46524                   & {\ul 1.88208}            & 0.00618                   & 51.61619                 & \textbf{0.15951}          & {\ul 2,400.57153}        & 0.71841                   \\ \hline
-Current                                      & {\ul \textit{546.93791}} & 0.96513                   & 0.65035                  & 0.00391                   & {\ul 61.80686}           & {\ul 0.58458}             & 1,367.01715              & {\ul 0.92456}             \\ \hline
+\multicolumn{1}{c}{\multirow{2}{*}{Model}} & \multicolumn{2}{c}{sunspotarea}                                                    & \multicolumn{2}{c}{Euretail}                                               \\ \cline{2-5} 
+\multicolumn{1}{c}{}                       & \multicolumn{1}{c|}{MSE}                      & \multicolumn{1}{c|}{MAPE}          & \multicolumn{1}{c|}{MSE}              & \multicolumn{1}{c|}{MAPE}          \\ \hline
+\multicolumn{1}{|l|}{Arima}                & \multicolumn{1}{r|}{382.36019}                & \multicolumn{1}{r|}{{\ul 1.35863}} & \multicolumn{1}{r|}{\textbf{0.52439}} & \multicolumn{1}{r|}{0.00417}       \\ \hline
+\multicolumn{1}{|l|}{Exponential}          & \multicolumn{1}{r|}{505.75034}                & \multicolumn{1}{r|}{1.16073}       & \multicolumn{1}{r|}{0.57553}          & \multicolumn{1}{r|}{{\ul 0.01071}} \\ \hline
+\multicolumn{1}{|l|}{Nnet}                 & \multicolumn{1}{r|}{473.92407}                & \multicolumn{1}{r|}{0.46524}       & \multicolumn{1}{r|}{{\ul 1.88208}}    & \multicolumn{1}{r|}{0.00618}       \\ \hline
+\multicolumn{1}{|l|}{Current}              & \multicolumn{1}{r|}{{\ul \textit{546.93791}}} & \multicolumn{1}{r|}{0.96513}       & \multicolumn{1}{r|}{0.65035}          & \multicolumn{1}{r|}{0.00391}       \\ \hline
+\end{tabular}
+\end{table}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{oil}                             & \multicolumn{2}{c|}{airmiles}                        \\ \cline{2-5} 
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
+Arima                                        & 55.31262                 & 0.25081                   & 1,412.94416              & 0.72068                   \\ \hline
+Exponential                                  & 54.98904                 & 0.25078                   & 1,370.47426              & \textbf\{0.43516\}        \\ \hline
+Nnet                                         & 51.61619                 & \textbf\{0.15951\}        & \{\ul 2,400.57153\}      & 0.71841                   \\ \hline
+Current                                      & \{\ul 61.80686\}         & \{\ul 0.58458\}           & 1,367.01715              & \{\ul 0.92456\}           \\ \hline
 \end{tabular}
 \end{table}
 
