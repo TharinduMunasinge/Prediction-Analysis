@@ -39,6 +39,8 @@ Double exponential smoothing: Double smoothing can be applied to a time-series w
 Triple exponential smoothing: Triple smoothing can be applied to a time-series with existing trend and seasonality. This can be derived by applying exponential smoothing to the data already smoothed using double exponential smoothing.
 
 
+\subsubsection{Prediction method in Apache Stratos}
+
 
 \subsection{datasets}
 Since the objective of this experiment to identify how well an individual method can predict the future values by only considering the past history. we tried several publicly available datasets in the forecast package with predictable patterns even though they are not really related to the cloud workloads. Neverthless the experimental results elaborated in Section 5 in which we  compare and contrast the performance of the proposed method vs existing methods. , are based on two real-world cloud workloads, Google cluster data  in addition to the datasets in forecast package. For evaluation purpose we used forecast package in R \cite{forecastPackage} in which there are time series datasets in different domains with typical patterns like trends, cycles and seasonality factors. 
