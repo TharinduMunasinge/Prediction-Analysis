@@ -1,7 +1,7 @@
 
 \section{Experimental Results}
 
-We have implemented the prediction algorithm in R using the time series and machine learning model implementations in forecast package. We used the publicly available datasets mentioned in <<SECTION 1>> and also we have tested on several real world cloud workload datasets [GITHUB LINK FOR DATASET] collected from server applications.
+We have implemented the prediction algorithm in R using time series and machine learning model implementations in the forecast package. We have tested it against the publicly available datasets mentioned in Section 4.2, as well as several real world cloud workload datasets [GITHUB LINK FOR DATASET] collected from server applications.
 % Please add the following required packages to your document preamble:
 
 \begin{table}[]
@@ -37,6 +37,6 @@ Ensamble                                     & \multicolumn{1}{l|}{1,361.41694} 
 \end{table}
 
 
-Highlighted cells contains the smallest error value for each column(dataset). where as underlined cells contains the worst performance from all the methods. 
+Highlighted cells contain the smallest error values for each dataset column, whereas underlined cells contain the worst performance observed for each dataset among all methods. 
 
-According to the results obtained, Stratos existing model has largest error in many datasets while each individual model has largest error atleaset in one dataset. Our proposed prediction technique provides the best prediction resuts in couple of datasets while it doesn't perform worser than individual prediction methods. 
+According to the results obtained, the existing model from Stratos shows the largest errors in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
