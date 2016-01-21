@@ -1,14 +1,14 @@
 
 \subsection{Error Measures}
 
-For quantitative analysis, we used 2 types of  typical error measures 
+For quantitative analysis, we used 2 types of typical error measures:
 
-Root Mean squared error which  not which is on the same scale as the data. since the RMSD is scale dependent, it cannot be used to make comparisons between series that are on different scales.[https://www.otexts.org/fpp/2/5]
+\begin{itemize}
+\item \textit{Root mean squared errors (RMSE)} are of the same scale as the data. since it is scale dependent, it cannot be used to make comparisons between series that are of different scales. \cite{forecasting_otexts}
 $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
-
-
-Percentage errors have the advantage of being scale-independent, but it overlooked the errors for the small actual values.
-$$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
+\item \textit{Percentage errors} have the advantage of being scale-independent, but they overemphasize the errors for values that are actually small.
+$$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
+\end{itemize}
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -20,9 +20,9 @@ $$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right 
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                     & \multicolumn{2}{c|}{Euretail}                        \\ \cline{2-5} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
-Arima                                        & 382.36019                & 1.35863                   & 0.52439                  & 0.00417                   \\ \hline
+ARIMA                                        & 382.36019                & 1.35863                   & 0.52439                  & 0.00417                   \\ \hline
 Exponential                                  & 505.75034                & 1.16073                   & 0.57553                  & 0.01071                   \\ \hline
-Nnet                                         & 473.92407                & 0.46524                   & 1.88208                  & 0.00618                   \\ \hline
+Neural net.                                         & 473.92407                & 0.46524                   & 1.88208                  & 0.00618                   \\ \hline
 Current                                      & 546.93791                & 0.96513                   & 0.65035                  & 0.00391                   \\ \hline
 \end{tabular}
 \end{table}
@@ -47,7 +47,7 @@ Current                                      & 61.80686                 & 0.5845
 
 
 
-\\The highlighted cell represents the minimum RMSE and MAPE. According to the results obtained, there is no an individual method which perform well in all the cases. Each method will fit the datasets which satisfies its assumptions well . If the conditions are not met, performance of some methods are below the average. For example neural network perform well on ‘oil’ dataset but perform worse in ‘euretail’.  Current stratos prediction method has the highest mean errors in almost all the cases.
+\\The highlighted cells represent the minimum RMSE and MAPE. According to the results obtained, there is no an individual method which perform well in all the cases. Each method will fit the datasets which satisfies its assumptions well . If the conditions are not met, performance of some methods are below the average. For example neural network perform well on ‘oil’ dataset but perform worse in ‘euretail’.  Current stratos prediction method has the highest mean errors in almost all the cases.
 
 major conclusions of this analysis that there is no single method which perform best in all the case. on the other hand a method which performs well in some dataset, might perform worst in another dataset.
 Since an PaaS autonomous autoscaler should be able to expect any type of workload pattern, the prediction method should be able to give good enough estimates in average case while without without making a large error on specific patterns.
