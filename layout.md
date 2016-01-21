@@ -5,7 +5,6 @@ section_Evaluation_of_existing_models__.tex
 subsection_Performance_of_individual_methods__.tex
 figures/Rplot1/Rplot1.png
 figures/Rplot03/Rplot03.png
-subsubsection_Dataset_3_oil_Annual__.tex
 figures/Rplot05/Rplot05.png
 subsubsection_Dataset_4_sunspot_areas__.tex
 figures/Rplot06/Rplot06.png
