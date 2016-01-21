@@ -6,7 +6,6 @@ subsection_Performance_of_individual_methods__.tex
 figures/Rplot1/Rplot1.png
 figures/Rplot03/Rplot03.png
 figures/Rplot05/Rplot05.png
-subsubsection_Dataset_4_sunspot_areas__.tex
 figures/Rplot06/Rplot06.png
 subsection_Error_Measures_For_quantitative__.tex
 section_Proposed_Ensemble_Prediction_Method__.tex
