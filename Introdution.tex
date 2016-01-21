@@ -13,8 +13,18 @@ We have identified several challenges specific to workload prediction for auto s
 \item Give that the  time horizon for the prediction should be chosen based on the physical constraints like VM uptime and gracefully shutting down time, predictor should be able to give sufficiently accurate results in longer horizon.
 \end{itemize}
 
+The objective of this work is to come up with a prediction method that can be trained real-time in each iteration to capture the latest trends and provides sufficiently accurate results over drastically different workload patterns. First we evaluated the ability of individual models to give accurate answers in real-time predictions on evolving dataset. In that experiment we tested time series forecasting methods including both statistical methods like ARIMA and Exponential Model, machine learning models like neural network and a prediction method used in Apache Stratos an open source Platform as a service framework. Then we have implemented our proposed ensemble technique combining the results from neural network, AEIMA and exponential model, and tested on three publicly available datasets, two real-world cloud workload dataset and Google cluster dataset. According to the experimental results our proposed solution outperform each individual methods, and two other ensemble techniques.
+
+
+assess the applicability of several time series forecasting models on real cloud workloads to support the development of dynamic resource allocation systems. 
+
+A number of factors which must be considered in producing accurate forecasts are explored including the frequency
+at which data is collected, the amount of data used to make a prediction, the model used to make predictions, and the number future values are predicted. The following forecasting models are evaluated for their ability to produce accurate predictions of real cloud workloads:
+
+
 But performance will be affected when the peak load occurs. Conversely, leasing more virtual resources leads to a performance improvement, but also bears a higher cost. Catering to the user Service Level Agreement (SLA) while still keeping costs low is challenging for service clouds primarily due to the frequent variation of
 platform workloads. With such a problem there should be an universal method to predict the platform workload, and then virtual resources can be added and released depending on this predicted workload
+
 
 
 The goal of this work is to assess the applicability of several time series forecasting models on real cloud workloads to support the development of dynamic resource allocation systems
