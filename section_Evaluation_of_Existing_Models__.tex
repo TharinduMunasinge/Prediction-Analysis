@@ -3,7 +3,7 @@
 In this analysis we wanted to qualitatively analyze the ability of individual prediction techniques to learn from current workload history and predict the time series while time series data is evolving periodically, similar to what happens in case of an autonomous auto-scaler in operation. We simulated an online training scenario by streaming data points of the time series one at a time to each method and plotted the one-step lookahead predictions from the resulting models at each stage, against the real data points. For evaluation purpose we used the forecast package in R \cite{forecastPackage} in which there are time series datasets in different domains with typical patterns like trends, cycles and seasonality factors.
 
 \subsection{Datasets}
-Since the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we tried several publicly available datasets in the forecast package with predictable patterns, even when they are not directly related to cloud workloads. Neverthless, the experimental results elaborated in Section 5, in which we  compare and contrast the performance of the proposed method vs existing methods, are based on two real-world cloud workloads and the Google cluster dataset, in addition to those found in forecast package.
+Since the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we tried several publicly available datasets in the forecast package with predictable patterns, even when they are not directly related to cloud workloads. Neverthless, the experimental results elaborated in Section 5, in which we  compare and contrast the performance of the proposed method vs existing methods, are based on two real-world cloud workloads and the Google cluster dataset, in addition to those found in the forecast package.
 
 \begin{itemize}
 \item airmiles : The revenue passenger miles flown by commercial airlines in the United States for each year from 1937 to 1960
@@ -13,12 +13,12 @@ Since the objective of this experiment is to identify how well an individual pre
 \end{itemize}
 
 \subsection{Time series forecasting techniques}
-We chosen three widely used prediction methods from literature, ARIMA, neural network, exponential models and the existing workload prediction technique in Stratos.
+We chose three widely used prediction methods from literature, ARIMA, neural network and exponential models, and the existing workload prediction technique in Stratos.
 
 \subsubsection{ARIMA}
-This model combine two models called autoregression (of order p) and moving average (of order q) .\\
+This model combines two models called auto regression (of order $p$) and moving average (of order $q$) .\\
 
-Autoregression model (p): 
+Autoregression model ($p$): 
 In an autoregression model, the variable of interest is forecasted using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus an autoregressive model of order p can be written as
 	$$x_t = c + \phi_1x_{ t-1} + \phi_2x_{t-2} +...+ \phi_px_{t-p} + e_{t}$$
 where c is a constant and et is white noise. Autoregressive models are normally restricted to stationary data, and then some constraints on the values of the parameters are required [16]. \\
