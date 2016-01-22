@@ -30,11 +30,10 @@ Moving average model uses past forecast errors in a regression-like model.
 where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the past few forecast errors. However, moving average models should not be confused with moving average smoothing. The former is used for forecasting future values while the latter is used for estimating the trend-cycle of past values.
 By combining the differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for AutoRegressive Integrated Moving Average. The full model can be written as:
 
-    \begin{eqnarray}\nonumber
-	 {x}'_t &=& c + \phi_1{x}'_{ t-1} + \phi_2{x}'_{t-2} +...+ \phi_p{x}'_{t-p} + e_{t}  \\
-     + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q} \\
+    \begin{eqnarray}
+	{x}'_t = c + \phi_1{x}'_{ t-1} + \phi_2{x}'_{t-2} +...+ \phi_p{x}'_{t-p} + e_{t} \\ 
+	+ \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}
 	\end{eqnarray}
-	
 The “predictors” on the right hand side include both lagged values of Xt and lagged errors. This is called this an ARIMA(p, d, q) model, where p and q are the orders of the autoregressive and moving average parts respectively, and d is the degree of first differencing involved.
 
 
