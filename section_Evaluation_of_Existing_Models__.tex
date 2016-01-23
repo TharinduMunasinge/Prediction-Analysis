@@ -1,9 +1,9 @@
 \section{Evaluation of Existing Models}
 
-In this analysis we wanted to qualitatively analyze the ability of individual prediction techniques to learn from current workload history and predict the time series while time series data is evolving periodically, similar to what happens in case of an autonomous auto-scaler in operation. We simulated an online training scenario by streaming data points of the time series one at a time to each method and plotted the one-step lookahead predictions from the resulting models at each stage, against the real data points. For evaluation purpose we used the forecast package in R \cite{forecastPackage} in which there are time series datasets in different domains with typical patterns like trends, cycles and seasonality factors.
+In this analysis we wanted to qualitatively analyze the ability of individual prediction techniques to learn from current workload history and predict a time series while time series itself is evolving periodically, similar to what happens in case of an autonomous auto-scaler in operation. We simulated an online training scenario by streaming data points of the time series one at a time to each method and plotted the one-step lookahead predictions from the resulting models at each stage, against the real data points. For evaluation purpose we used the forecast package in R \cite{forecastPackage} which contains time series datasets in different domains with typical patterns like trends, cycles and seasonality factors.
 
 \subsection{Datasets}
-Since the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we used several publicly available datasets in the forecast package with predictable patterns, some of which are not directly related to cloud workloads. Neverthless, the experimental results elaborated in Section 5, in which we compare and contrast the performance of the proposed method vs existing methods, are based on two real-world cloud workloads and the Google cluster dataset, in addition to those found in the forecast package.
+Since the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we used several publicly available datasets with predictable patterns from the forecast package, some of which are not directly related to cloud workloads. Neverthless, the experimental results elaborated in Section 5, where we compare and contrast the performance of the proposed method vs existing methods, are based on two real-world cloud workloads and the Google cluster dataset, in addition to those found in the forecast package.
 
 \begin{itemize}
 \item airmiles: The revenue passenger miles flown by commercial airlines in the United States for each year from 1937 to 1960
@@ -13,33 +13,34 @@ Since the objective of this experiment is to identify how well an individual pre
 \end{itemize}
 
 \subsection{Time series forecasting techniques}
-We chose three widely used prediction methods from literature, ARIMA, neural network and exponential models, and the existing workload prediction technique in Stratos.
+We chose three widely used prediction methods from literature, namely ARIMA, neural network and exponential models, and the existing workload prediction technique in Stratos.
 
 \subsubsection{ARIMA}
 This model combines two models called autoregression (of order $p$) and moving average (of order $q$) .\\
 
-Autoregression model ($p$): 
-In an autoregression model, the variable of interest is forecasted using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus an autoregressive model of order $p$ can be written as
+\textit{Autoregression model AR($p$):}
+In an autoregression model, the variable of interest is forecast using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus an autoregressive model of order $p$ can be written as
 	$$x_t = c + \phi_1x_{ t-1} + \phi_2x_{t-2} +...+ \phi_px_{t-p} + e_{t}$$
-where $c$ is a constant and $e_t$ is white noise. Autoregressive models are normally restricted to stationary data, and then some constraints on the values of the parameters are required [16]. \\
+where $c$ is a constant and $e_t$ is white noise. Autoregressive models are normally restricted to stationary data, and then some constraints are applied on the values of the parameters \cite{Forecasting_OTexts}. \\
 For an AR(1) model: $-1 < \phi_{1} < 1$ \\
 For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - \phi_{1} < 1$ \\
-Moving average model MA(q):  
-Moving average model uses past forecast errors in a regression-like model.
+
+\textit{Moving average model MA($q$):}
+This model uses past forecast errors in a regression-like model.
 	$$x_t =  c + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
-where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the past few forecast errors. However, moving average models should not be confused with moving average smoothing. The former is used for forecasting future values while the latter is used for estimating the trend-cycle of past values.
-By combining the differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for AutoRegressive Integrated Moving Average. The full model can be written as:
+where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the last few forecast errors. However, moving average models should not be confused with moving average smoothing. The former is used for forecasting future values while the latter is used for estimating the trend-cycle of past values.
+By combining differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for \textit{autoregressive integrated moving average}. The full model can be written as:
 
 	$${x}'_t = c + \phi_1{x}'_{ t-1} + \phi_2{x}'_{t-2} +...+ \phi_p{x}'_{t-p} + e_{t} + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
-The “predictors” on the right hand side include both lagged values of Xt and lagged errors. This is called this an ARIMA(p, d, q) model, where p and q are the orders of the autoregressive and moving average parts respectively, and d is the degree of first differencing involved.
+The “predictors” on the right hand side include both lagged values of $X_t$ and lagged errors. This is called an ARIMA($p$, $d$, $q$) model, where $p$ and $q$ are the orders of the autoregressive and moving average parts respectively, and $d$ is the degree of first differencing involved.
 
 
-\subsubsection{Neural Network}
-ANNs are a class of nonlinear, nonparametric, datadriven and self-adaptive models, originally inspired by the
-intelligent working mechanism of human brains . Over the years, ANNs are used as excellent alternative to the common statistical models for time series forecasting. The most popular ANN architectures in forecasting domain are the Multilayer Perceptrons (MLPs). They consist of a feedforward structure of three layers, viz. an input layer, one or more hidden layer and an output layer. The nodes in each layer are connected to those in the immediate next layer by acyclic links . Single hidden layer is sufficient for most applications. It is often customary to use the notation (p, h, q) for referring an ANN with p input, h hidden and q output nodes.
+\subsubsection{Neural networks}
+ANNs are a class of nonlinear, nonparametric, data-driven and self-adaptive models, originally inspired by the intelligent working mechanism of human brains. Over the years, ANNs are used as excellent alternative to the common statistical models for time series forecasting. The most popular ANN architectures in the forecasting domain are the multilayer perceptrons (MLPs). They consist of a feed-forward structure of three layers, viz. an input layer, one or more hidden layer and an output layer. The nodes in each layer are connected to those in the immediate next layer by acyclic links . Single hidden layer is sufficient for most applications. It is often customary to use the notation (p, h, q) for referring an ANN with p input, h hidden and q output nodes.
 
-\subsubsection{Exponential Model}
-Exponential weighted moving average: In exponential weighted moving average methods, forecasts are calculated using weighted averages where the weights decrease exponentially as observations come from further in the past. The smallest weights are associated with the oldest observations [16][24][25].
+\subsubsection{Exponential model}
+\textit{Exponential weighted moving average:}
+In exponential weighted moving average methods, forecasts are calculated using weighted averages where the weights decrease exponentially as observations come from further in the past. The smallest weights are associated with the oldest observations [16][24][25].
 Simple exponential smoothing:
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)X_{t-1}$$
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
@@ -76,8 +77,8 @@ $h$             & time horizon
 
 We have used the implementations of the time series forecasting models in R Forecast pacakge \cite{forecastPackage}
 
-$auto.arima()$ :  find out the best fitted ARIMA model and approximated the model coefficients by minimizing the past forecasting error \cite{forecasting_otexts}.
+$auto.arima()$ :  find out the best fitted ARIMA model and approximated the model coefficients by minimizing the past forecasting error \cite{Forecasting_OTexts}.
 
-$ets()$ : Find out best fitted exponential model among the family of exponential models(simple exponential smoothing, Holt's linear trend , exponential trend,Holt-Winters seasonal method) automatically and calculate the model coefficients by reducing past forecast error. \cite{forecasting_otexts}
+$ets()$ : Find out best fitted exponential model among the family of exponential models(simple exponential smoothing, Holt's linear trend , exponential trend,Holt-Winters seasonal method) automatically and calculate the model coefficients by reducing past forecast error. \cite{Forecasting_OTexts}
     
 $nnetar()$ :Feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series.
