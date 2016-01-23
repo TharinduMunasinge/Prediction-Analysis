@@ -41,31 +41,31 @@ ANNs are a class of nonlinear, nonparametric, data-driven and self-adaptive mode
 \subsubsection{Exponential model}
 \textit{Exponential weighted moving average:}
 In exponential weighted moving average methods, forecasts are calculated using weighted averages where the weights decrease exponentially as observations come from further in the past. The smallest weights are associated with the oldest observations \cite{Forecasting_OTexts} \cite{StatSoft} \cite{STAT510}.
-Simple exponential smoothing:
+
+\textit{Simple exponential smoothing:}
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)X_{t-1}$$
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
-where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1, …, x_t$. The rate at which the weights decrease is controlled by the parameter α. If $\alpha$ is small (i.e. close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
+where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e. close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
-Double exponential smoothing: Double smoothing can be applied to a time-series with an existing linear trend. This can be derived by applying exponential smoothing to the data already smoothed using simple exponential smoothing. There is a need to add a second smoothing constant to account for trend.
-Triple exponential smoothing: Triple smoothing can be applied to a time-series with existing trend and seasonality. This can be derived by applying exponential smoothing to the data already smoothed using double exponential smoothing.
+\textit{Double exponential smoothing:}
+Double smoothing can be applied to a time-series with an existing linear trend. This can be derived by applying exponential smoothing to the data already smoothed using simple exponential smoothing. There is a need to add a second smoothing constant to account for the trend.
 
+\textit{Triple exponential smoothing:} Triple smoothing can be applied to a time-series with existing trend and seasonality. This can be derived by applying exponential smoothing to the data already smoothed using double exponential smoothing.
 
 \subsubsection{Prediction method in Apache Stratos}
-
-Apache stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the autoscaling solution used in Stratos, there is a workload demand prediction method which can be explained using motion equation in physics. That method calculate one-lookahead prediction using the workload demand in last period.
-$S_T$ be the predicted  calculate at time T, 
+Apache Stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the auto scaling solution used in Stratos, there is a workload demand prediction method which can be explained using the motion equation in physics. The method calculate one lookahead prediction using the workload demand in last period.
 $$S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 \hat{x}_{t+h}=avg(x)_{t}  + S_{t+h|t}$$ \\
 
 \begin{table}[]
 \centering
-\caption{My caption}
+\caption{List of symbols}
 \label{my-label}
 \begin{tabular}{ll}
 Parameter       & Description                                                                     \\
-$S_{t+h|t}$     & The predicted change of the workload for $(t+h)$ time based on the interval $t$ \\
+$S_{t+h|t}$     & The predicted change of the workload for time $(t+h)$ based on the interval $t$ \\
 $x$             & Workload metrics                                                                \\
-$\hat{x}_{t+h}$ & Predicted workload metrics for t+h time                                         \\
+$\hat{x}_{t+h}$ & Predicted workload metrics for time $t+h$                                       \\
 $u_{t}$         & First derivative of the workload metrics within the $t^{th}$ interval           \\
 $a_{t}$         & Second derivative of the workload metrics within the $t^{th}$ interval          \\
 $h$             & time horizon                                                                   
@@ -75,10 +75,10 @@ $h$             & time horizon
 
 \subsection{Time series forecasting library}
 
-We have used the implementations of the time series forecasting models in R Forecast pacakge \cite{forecastPackage}
+We have used the implementations of the time series forecasting models in R forecast package  \cite{forecastPackage}.
 
-$auto.arima()$ :  find out the best fitted ARIMA model and approximated the model coefficients by minimizing the past forecasting error \cite{Forecasting_OTexts}.
+$auto.arima()$:  finds out the best fitted ARIMA model and approximates the model coefficients by minimizing the past forecast error \cite{Forecasting_OTexts}.
 
-$ets()$ : Find out best fitted exponential model among the family of exponential models(simple exponential smoothing, Holt's linear trend , exponential trend,Holt-Winters seasonal method) automatically and calculate the model coefficients by reducing past forecast error. \cite{Forecasting_OTexts}
+$ets()$: finds out the best fitted exponential model among the family of exponential models (simple exponential smoothing, Holt's linear trend, exponential trend, Holt-Winters seasonal method) automatically and calculates the model coefficients by reducing the past forecast error. \cite{Forecasting_OTexts}
     
-$nnetar()$ :Feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series.
+$nnetar()$: feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series
