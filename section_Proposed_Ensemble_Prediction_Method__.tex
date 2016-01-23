@@ -56,7 +56,7 @@ b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-
 \begin{enumerate}
 \item Consider the time series history window at time $t$, $X=[x_{1},x_{2},.. x_{t}]$.
 \item Calculate forecast value for $h$, horizon from the $i$\textsuperscript{th} method, $\hat{x}_{(t+h)}^{(i)} \forall i \in \{1,2,3,...,k\}$.
-\item Fit the fitted values using $i$\textsuperscript{th} method for the last $t$ window using an exponential smoothing model and calculate the contribution factor from $i$\textsuperscript{th} model at $t$, $c_(i,t)$.
+\item Fit the fitted values using $i$\textsuperscript{th} method for the last $t$ window using an exponential smoothing model and calculate the contribution factor from $i$\textsuperscript{th} model at $t$, $c_{(i,t)}$.
 \item Calculate the point forecast for time $t+h$ using 
 $\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$.
 \item At time $t+1$, actual value for time $t+1$ will be obtained. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from step 2.
