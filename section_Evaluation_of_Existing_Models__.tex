@@ -72,11 +72,11 @@ $h$             & time horizon
 \end{table}
 
 
+Time series forecasting library
+We have used the implementations of the time series forecasting models in R Forecast pacakge \cite{forecastPackage}
 
-\subsection{implementation of methods}
-For this evaluation we have used the implementations of the Forecast pacakge \cite{forecastPackage}
-ARIMA: According to <<ROBIN>> auto.arima()  find out the best fitted ARIMA model and approximated the model coeffficents in by minimizing the error<<<BESPECIFIC >>> [https://www.otexts.org/fpp/8/7]
+$auto.arima()$ :  find out the best fitted ARIMA model and approximated the model coefficients by minimizing the past forecasting error \cite{forecasting_otexts}.
 
-Ets: Model the data with best fitted exponential model [https://www.otexts.org/fpp/7/7]
-    \cite{Wagner_2011}
-	Nnetar: [https://www.otexts.org/fpp/9/3]
+$ets()$ : Find out best fitted exponential model among the family of exponential models(simple exponential smoothing, Holt's linear trend , exponential trend,Holt-Winters seasonal method) automatically and calculate the model coefficients by reducing past forecast error. \cite{forecasting_otexts}
+    
+$nnetar()$ :Feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series.
