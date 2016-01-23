@@ -51,16 +51,24 @@ Triple exponential smoothing: Triple smoothing can be applied to a time-series w
 
 \subsubsection{Prediction method in Apache Stratos}
 
-Apache stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the autoscaling solution used in Stratos, there is a workload demand prediction method which can be explained using motion equation physics. That method calculate one-lookahead prediction using the workload demand in last period.
+Apache stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the autoscaling solution used in Stratos, there is a workload demand prediction method which can be explained using motion equation in physics. That method calculate one-lookahead prediction using the workload demand in last period.
 $S_T$ be the predicted  calculate at time T, 
-s = ut+ 1/2 at2
-s = predicted load
-u = first derivative (eg. first derivative of current load average)
-t = time interval (eg. one minute)
-a = second derivative (eg. second derivative of current load average)
+$$S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
+\hat{x}_{t+h}=avg(x)_{t}  + S_{t+h|t}$$
 
-Predicted value= average workload over last time period
-
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{ll}
+Parameter       & Description                                                        \\
+$S_{t+h|t}$     & The predicted change of the workload for $(t+h)^th$ time based on the $t^th$ interval    \\
+x               & Workload metrics.
+u_{t}           & First derivative of the workload metrics within the $t^th$ interval   \\
+a_{t}           & Second derivative of the workload metrics within the $t^th$ interval  \\
+h               & time horizon
+\end{tabular}
+\end{table}
 
 
 
