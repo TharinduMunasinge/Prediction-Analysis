@@ -1,0 +1,15 @@
+\section{Conclusion}
+
+Time series models of the same type are often considered for fitting time series data. The task of choosing the most appropriate one for forecasting can be very difficult. In this work, we proposed the use of a combining method, AFTER, to convexly combine the candidate models instead of selecting one of them.
+
+The idea is that, when there is much uncertainty in finding the best model as is the case in many applications, combining may reduce the instability of the forecast and therefore improve prediction accuracy.
+
+Simulation and real data examples indicate the potential advantage of AFTER over model selection for such cases. Simple stability (or instability) measures were proposed for model selection. They are intended to give one an idea of whether or not one can trust the selected model and the corresponding forecast when using a model selection procedure. If there is apparent instability, it is perhaps a good idea to consider combining the models as an alternative. The results of the simulations and the data examples with ARIMA models in this paper are summarized as follows.
+
+1. Model selection can outperform AFTER when there is little difficulty in finding the best model by the model selection criteria. 
+
+2. When there is significant uncertainty in model selection, AFTER tends to perform better or much better in forecasting than the information criteria AIC, BIC and HQ. 3.
+3. The proposed instability measures seem to be sensible indicators of uncertainty in model selection and thus can provide information useful for assessing forecasts based on model selection.
+
+We should also point out that it is not a good idea to blindly combine all possible models available. Preliminary analysis (e.g., examining ACF) should be performed to obtain a list of reasonable models. Transformation and differencing may also be considered in that process.
+
