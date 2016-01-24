@@ -61,7 +61,7 @@ ARIMA pre-assumes a linear form of the model. That is, a linear correlation stru
 
 A neural network can capture complex nonlinear relationships within a time series. It has a data driven approach which can extract patterns within time series without predefined knowledge on the relationships inside data. But neural networks require sufficiently large amounts of data points in order to accurately identify patterns. Observations in Section 3 also show that neural networks make larger errors in initial stages due to lack of data points, but perform extremely well after they correctly identify the relationships. Training time of neural networks is also significant. Since we propose real-time training, the data point history should not be allowed to grow arbitrarily, which would slow down the prediction process.
 
-Contrary to the general belief that ARIMA is more general than exponential models, there are no equivalent ARIMA models for some of the nonlinear exponential models (e.g., the exponential trend model) \cite(AHyndman 2013). Therefore, to preserve generality, we also choose the exponential model as part of our ensemble solution.
+Contrary to the general belief that ARIMA is more general than exponential models, there are no equivalent ARIMA models for some of the nonlinear exponential models (e.g., the exponential trend model) \cite{AHyndman 2013}. Therefore, to preserve generality, we also choose the exponential model as part of our ensemble solution.
 
 There is a possibility of the above models producing out-of-range forecasts, especially in case of early-stage neural networks. We compensate this with a naive forecast model, which reproduces the last data point as a forecast for the next interval, added as part of the complete ensemble model.
 
