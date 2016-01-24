@@ -1,6 +1,6 @@
 \section{Proposed Ensemble Prediction Method}
 
-We propose an error based ensemble technique for workload prediction. Contrary to what is mentioned in Section 2, offline training is not possible in this problem since the workload history data may not be available at the beginning of the prediction process. While the auto scaler is in operation, workload history gets accumulated based on the user's workload requirement (CPU, memory, and request count). However, the prediction method should still be able to predict the future horizon based on the initially available dataset. After initial predictions, actual data will become available for the next time periods, so that we can accumulate the latest actual data into the workload history and use them for the next forecast horizon.
+We propose an error based ensemble technique for workload prediction. Our approach tries to address situations where offline training is not possible due to workload history data not being available at the beginning of the prediction process. While the auto scaler is in operation, workload history gets accumulated based on the user's workload requirement (CPU, memory, and request count). However, the prediction method should still be able to predict the future horizon based on the initially available dataset. After initial predictions, actual data will become available for the next time periods, so that we can accumulate the latest actual data into the workload history and use them for the next forecast horizon.
 
 In the existing error based combining techniques, mean values of error metrics (absolute error, absolute percentage error, squared error, etc.) are taken into account when calculating the contribution factors for individual methods. 
 
@@ -15,32 +15,35 @@ here $w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$.
 
 Since $\sum_{j=1}^{k}w_{j}=1$, this weight assignment is unbiased and would result in the weighted average of the predictions.
 
-\subsection{Determination of the Contribution coefficients}
-
+\subsection{Determination of Contribution Coefficients}
 To determine the optimal contribution coefficients in our proposed ensemble technique, we use past forecast errors for each model. In our prediction problem, accuracy of the prediction for the next time horizon is more significant. Hence the contributions are calculated using inverses of the past forecasting error measures. There are various choices for error measurement, and we have identified certain pros and cons of each measure.
 
-\subsubsection{Error of the most recent prediction}
-
+\subsubsection{Error of the Most Recent Prediction}
 This model does not capture overall accuracy; it only captures how accurately the last prediction has been calculated by the model. if the model has repeatedly made large errors in past predictions except the most recent one, contribution coefficients are biased and may lead to error-prone decisions.
 
-\textit{Absolute error of the last prediction:}
+\noindent
+\textit{Absolute Error of the Last Prediction:}
 $$AE_t=|\hat{x}_t-x_t|$$
 
-\textit{Squared error of the last prediction:}
+\noindent
+\textit{Squared error of the Last Prediction:}
 $$SE_t=(\hat{x}_t-x_t)^2$$
 penalizes errors more efficiently than the absolute error.
 
-\textit{Absolute percentage/relative error:}
+\noindent
+\textit{Absolute Percentage/Relative Error:}
 $$APE_t=100\left |\frac{\hat{x}_t-x_t}{x_t}  \right |$$
 is sensitive to errors in small actual values.
 
-\subsubsection{Average error over prediction history}
+\subsubsection{Average Error over Prediction History}
 This captures the overall error in past predictions, where all past errors have the same level of significance. If a method has produced larger errors in older predictions, the contribution may be reduced significantly even though it may be producing the best predictions for more recent values.
 
-\textit{Mean absolute error/root mean squared error:}
+\noindent
+\textit{Mean Absolute Error/Root Mean Squared Error:}
 $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$ 
 
-\textit{Mean absolute error/ Root mean squared error:}
+\noindent
+\textit{Mean Absolute Percentage Error:}
 $$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
 When calculating contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so we can calculate the contribution as the errors are fitted under the exponential model. Here, contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$\textsuperscript{th} model at the $t$\textsuperscript{th} time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error or absolute relative error at $t$\textsuperscript{th} prediction.
@@ -51,22 +54,19 @@ b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-
  c_{i,t}=\frac{1}{b_{i,t}}
 \end{multline}
 
-\subsection{Selection Of Models}
+\subsection{Selection of Models}
+The abovementioned error based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture different characteristics of datasets.
 
-Above error based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble technique should conceptually be different and capture different relationships within datasets.
+ARIMA pre-assumes a linear form of the model. That is, a linear correlation structure is assumed among the time series values; therefore non-linear patterns can not be captured by the ARIMA model \cite{Zhang_2003}. On the other hand, seasonal ARIMA models can fit the seasonal factors of the time series accurately.
 
-ARIMA model pre-assumed linear form of the model.That is, a linear correlation  structure is assumed among the time series values and therefore,  nonlinear patterns can not be captured by the ARIMA model \cite{Zhang_2003}. On the other hand seasonal ARIMA model can fit the seasonal factors of the time series well. 
+A neural network can capture complex nonlinear relationships within a time series. It has a data driven approach which can extract patterns within time series without predefined knowledge on the relationships inside data. But neural networks require sufficiently large amounts of data points in order to accurately identify patterns. Observations in Section 3 also show that neural networks make larger errors in initial stages due to lack of data points, but perform extremely well after they correctly identify the relationships. Training time of neural networks is also significant. Since we propose real-time training, the data point history should not be allowed to grow arbitrarily, which would slow down the prediction process.
 
-Neural Network allow complex nonlinear relationships within a time series. It has a data driven approach which can extract the patterns within time series without requiring pre-defined relationships in data. But Nerual Network require sufficiently large amount of data points to identify the patterns. Observations in Section 3 also show that neural network makes larger errors in initial stages due to lack of data points, but perform extremely well after it correctly identify the relationship. Training time of the Neural network is also significant, since we proposes real-time training, there should not be too much data point history which slows down the prediction process.
+Contrary to the general belief that ARIMA is more general than exponential models, there are no equivalent ARIMA models for some of the nonlinear exponential models (e.g., the exponential trend model) \cite(AHyndman 2013). Therefore, to preserve generality, we also choose the exponential model as part of our ensemble solution.
 
-Contrary to general belief that ARIMA is more general than Exponential models, there is no an equivalent model for some of the non linear exponential models (e.g exponential trend model). Therefore to preserve the  generality, we choose Exponential model as a part of ensemble solution. 
-
-While linear exponential smoothing models are all special cases of ARIMA models, the non-linear exponential smoothing models ( e.g Exponential trend model)  have no equivalent ARIMA counterparts. There are also many ARIMA models that have no exponential smoothing counterparts \cite(AHyndman 2013)
-
-There is a possibility of getting out of range forecasts from above methods specially in neural network in early stage. So that we added a naive forecast in which the last real value is taken as the forecast for next interval, also as part of the complete ensemble model.
+There is a possibility of the above models producing out-of-range forecasts, especially in case of early-stage neural networks. We compensate this with a naive forecast model, which reproduces the last data point as a forecast for the next interval, added as part of the complete ensemble model.
 
 
-\subsubsection{Prediction algorithm}
+\subsubsection{Prediction Algorithm}
 
 \begin{enumerate}
 \item Consider the time series history window at time $t$, $X=[x_{1},x_{2},.. x_{t}]$.
