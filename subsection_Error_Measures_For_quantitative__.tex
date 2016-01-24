@@ -2,14 +2,8 @@
 For quantitative analysis, we used 2 types of error measures:
 
 \begin{itemize}
-\item \textit{Root mean squared errors (RMSE)} are of the same scale as the data. since it is scale dependent, it cannot be used to make comparisons between series that are of different scales. \cite{\begin{itemize}
-\item forecasting_otexts
-\end{itemize}\begin{itemize}
-\item \begin{itemize}
-\item \subsection{}
+\item \textit{Root mean squared errors (RMSE)} are of the same scale as the data. since it is scale dependent, it cannot be used to make comparisons between series that are of different scales. \cite{Forecasting_OTexts}
 
-\end{itemize}
-\end{itemize}}
 $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
 \item \textit{Percentage errors} have the advantage of being scale-independent, but they overemphasize the errors for values that are actually small.
 $$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
@@ -18,8 +12,7 @@ $$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |
 
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Comparison of errors from MSE and MAPE}
 \begin{tabular}{|l|l|r|r|r|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                     & \multicolumn{2}{c|}{Euretail}                        \\ \cline{2-5} 
@@ -33,28 +26,28 @@ Current                                      & 546.93791                & 0.9651
 
 \begin{table}[]
 \centering
-\caption{My caption}
+\caption{Comparison of errors from MSE and MAPE}
 \label{my-label}
 \begin{tabular}{|l|r|r|r|r|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{oil}                             & \multicolumn{2}{c|}{airmiles}                        \\ \cline{2-5} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
-Arima                                        & 55.31262                 & 0.25081                   & 1,412.94416              & 0.72068                   \\ \hline
+ARIMA                                        & 55.31262                 & 0.25081                   & 1,412.94416              & 0.72068                   \\ \hline
 Exponential                                  & 54.98904                 & 0.25078                   & 1,370.47426              & 0.43516                   \\ \hline
 Neural net.                                         & 51.61619                 & 0.15951                   & 2,400.57153              & 0.71841                   \\ \hline
 Current                                      & 61.80686                 & 0.58458                   & 1,367.01715              & 0.92456                   \\ \hline
 \end{tabular}
 \end{table}
 
-The highlighted cells represent the minimum RMSE and MAPE. According to the results obtained, there is no an individual method which perform well in all the cases. Each method will fit the datasets which satisfy its assumptions well. If the conditions are not met, performance of some methods would be below the average. For example, neural network perform well on ‘oil’ dataset but perform worse in ‘euretail’. Current Stratos prediction method has the highest mean errors in almost all the cases.
+The highlighted cells represent the minimum RMSE and MAPE. According to the results obtained, there is no individual model which performs perfectly in all cases. Each model will fit the datasets which satisfy its assumptions. Where they are not satisfied, performance of some models would be below the average. For example, neural networks perform well on the ‘oil’ dataset but perform poorly on ‘euretail’. The current prediction method from Stratos has the highest mean errors in almost all the cases.
 
-The analysis primarily depicts that there is no single method which performs best in all cases. On the other hand, a method which performs well in some dataset might perform worst in another dataset.
-Since an autonomous PaaS auto scaler should be able to expect any type of workload pattern, the prediction method should be able to give good enough estimates in an average case without producing large errors on specific patterns.
+The analysis primarily depicts that there is no single method which guarantees best performance in all cases. A method which performs well in some dataset might perform worse in another dataset.
+Since an autonomous PaaS auto scaler should be able to expect any type of workload pattern, the prediction method should be able to give good enough estimates in an average case without producing large errors on any specific patterns.
 
-The idea of ensemble learning is quite frequently used in situations where there is no dominant technique which can provide the best results, but it is possible to obtain good enough results by combining results from several weak learners. In the general forecasting domain we can see several models, combining techniques proposed in various researches \cite{Zou_2004}, \cite{Wagner_2011},
+The idea of ensemble learning is quite frequently used in situations where there is no dominant technique which can provide the best results, but it is possible to obtain good enough results by combining results from several weak learners. In the general forecasting domain we can see several model combining techniques proposed in various researches \cite{Zou_2004}, \cite{Wagner_2011},
 \cite{Zhang_2003}.  
 
-There are various views regarding model selection and combining multiple models. Some researches claim that combined methods improve accuracy, while others claim that they suppress the effects of large errors from individual models rather than increasing overall accuracy. According to literature there are multiple ways of combining individual results:
+There are various views regarding model selection and combining multiple models. Some researches claim that combined methods improve accuracy, while others claim that they suppress the effects of large errors from individual models rather than improving overall accuracy. According to literature there are multiple ways of combining individual results:
 \begin{itemize}
 \item In simple average, all models are assigned equal weights, i.e. $w_{i}=\frac{1}{n}$ $(i=1, 2,..., n)$ [9, 10].
 \item In trimmed average, individual forecasts are combined by a simple arithmetic mean, excluding the worst performing $k$\% of the models. A trimming of 10\%–30\% is usually recommended [9, 10].
