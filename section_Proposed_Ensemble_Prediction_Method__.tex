@@ -51,6 +51,21 @@ b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-
  c_{i,t}=\frac{1}{b_{i,t}}
 \end{multline}
 
+\subsection{Selection Of Models}
+
+Above error based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble technique should conceptually be different and capture different relationships within datasets.
+
+ARIMA model pre-assumed linear form of the model.That is, a linear correlation  structure is assumed among the time series values and therefore,  nonlinear patterns can not be captured by the ARIMA model \cite{Zhang_2003}. On the other hand seasonal ARIMA model can fit the seasonal factors of the time series well. 
+
+Neural Network allow complex nonlinear relationships within a time series. It has a data driven approach which can extract the patterns within time series without requiring pre-defined relationships in data. But Nerual Network require sufficiently large amount of data points to identify the patterns. Observations in Section 3 also show that neural network makes larger errors in initial stages due to lack of data points, but perform extremely well after it correctly identify the relationship. Training time of the Neural network is also significant, since we proposes real-time training, there should not be too much data point history which slows down the prediction process.
+
+Contrary to general belief that ARIMA is more general than Exponential models, there is no an equivalent model for some of the non linear exponential models (e.g exponential trend model). Therefore to preserve the  generality, we choose Exponential model as a part of ensemble solution. 
+
+While linear exponential smoothing models are all special cases of ARIMA models, the non-linear exponential smoothing models ( e.g Exponential trend model)  have no equivalent ARIMA counterparts. There are also many ARIMA models that have no exponential smoothing counterparts \cite(AHyndman 2013)
+
+There is a possibility of getting out of range forecasts from above methods specially in neural network in early stage. So that we added a naive forecast in which the last real value is taken as the forecast for next interval, also as part of the complete ensemble model.
+
+
 \subsubsection{Prediction algorithm}
 
 \begin{enumerate}
