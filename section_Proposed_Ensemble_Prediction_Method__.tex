@@ -23,30 +23,30 @@ To determine the optimal contribution coefficients in our proposed ensemble tech
 
 This model does not capture overall accuracy; it only captures how accurately the last prediction has been calculated by the model. if the model has repeatedly made large errors in past predictions except the most recent one, contribution coefficients are biased and may lead to error-prone decisions.
 
-Absolute error of the last prediction
+\textit{Absolute error of the last prediction}
 $$AE_t=|\hat{x}_t-x_t|$$
 
-Squared error of the last prediction
+\textit{Squared error of the last prediction}
 $$SE_t=(\hat{x}_t-x_t)^2$$
 penalizes errors more efficiently than the absolute error.
 
-Absolute percentage/relative error
+\textit{Absolute percentage/relative error}
 $$APE_t=100\left |\frac{\hat{x}_t-x_t}{x_t}  \right |$$
 is sensitive to errors in small actual values.
 
-Average error over history captures the overall error in past predictions, where all past errors have the same level of significance. If a method produces a larger error in older predictions, the contribution is reduced significantly even though it produces the best predictions for most recent values.
+\subsubsection{Average error over prediction history}
+This captures the overall error in past predictions, where all past errors have the same level of significance. If a method has produced larger errors in older predictions, the contribution may be reduced significantly even though it may be producing the best predictions for more recent values.
 
-Mean absolute error/root mean squared error
+\textit{Mean absolute error/root mean squared error}
 $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$ 
 
-Mean absolute error/ Root mean squared error
-$$ MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
+\textit{Mean absolute error/ Root mean squared error}
+$$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
-When calculating contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has larger contribution from the errors in more recent predictions while having smaller contribution from early predictions. Exponential smoothing provides the best fit for our requirement, so we can calculate the contribution as the errors are fitted under the exponential model. Contribution coefficients $c_{i,t}$ are calculated from the inverse of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from $i$\textsuperscript{th} model at $t$\textsuperscript{th} time interval, 
-$c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error or absolute relative error at $t$\textsuperscript{th} prediction.
+When calculating contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so we can calculate the contribution as the errors are fitted under the exponential model. Here, contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$\textsuperscript{th} model at the $t$\textsuperscript{th} time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error or absolute relative error at $t$\textsuperscript{th} prediction.
 
 \begin{multline}
-b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1} \ where \ 0\leq \alpha \leq 1	\\ 
+b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1} \ \textnormal{where} \ 0\leq \alpha \leq 1	\\ 
 b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. \  \\
  c_{i,t}=\frac{1}{b_{i,t}}
 \end{multline}
@@ -55,9 +55,10 @@ b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-
 
 \begin{enumerate}
 \item Consider the time series history window at time $t$, $X=[x_{1},x_{2},.. x_{t}]$.
-\item Calculate forecast value for $h$, horizon from the $i$\textsuperscript{th} method, $\hat{x}_{(t+h)}^{(i)} \forall i \in \{1,2,3,...,k\}$.
-\item Fit the fitted values using $i$\textsuperscript{th} method for the last $t$ window using an exponential smoothing model and calculate the contribution factor from $i$\textsuperscript{th} model at $t$, $c_{(i,t)}$.
-\item Calculate the point forecast for time $t+h$ using 
+\item Calculate forecast value from the $i$\textsuperscript{th} method over the horizon $h$, $\hat{x}_{(t+h)}^{(i)} \forall i \in \{1,2,3,...,k\}$.
+\item Fit a history window of the last $t$ actual data points using the $i$\textsuperscript{th} method.
+\item Use an exponential smoothing model to fit the errors resulting from step 3, and use them to calculate the contribution factor for the $i$\textsuperscript{th} model at $t$, $c_{(i,t)}$.
+\item Calculate the point forecast for time $t+h$ using
 $\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$.
-\item At time $t+1$, actual value for time $t+1$ will be obtained. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from step 2.
+\item At time $t+1$, actual value for time $t+1$ will be available. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from step 2.
 \end{enumerate}
