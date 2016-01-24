@@ -5,7 +5,7 @@ In this analysis, we qualitatively analyze the ability of several prediction tec
 Section 3.1 presents the workloads used for the evaluation while Section 3.2 describes the time series prediction techniques selected for the evaluation. Simulation setup is presented in Section 3.3. Evaluation of selected techniques under selected workloads is presented in Section 3.4.
 
 \subsection{Datasets}
-As the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we used several publicly available datasets with predictable patterns from the R forecast package, some of which are not directly related to cloud workloads. Selection of multiple datasets enable us to evaluate the time series prediction techniques under several probable workload patterns. Neverthless, the experimental results in Section 5, where we compare the performance of the proposed ensemble technique vs. existing methods, are based only on two real-world cloud workloads and the Google cluster dataset, in addition to those found in the forecast package.
+As the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we used several publicly available datasets with predictable patterns from the R forecast package, some of which are not directly related to cloud workloads. Selection of multiple datasets enables us to evaluate the time series prediction techniques under several probable workload patterns. Neverthless, the experimental results in Section 5, where we compare the performance of the proposed ensemble technique vs. existing methods, are based only on two real-world cloud workloads and the Google cluster dataset, in addition to those found in the forecast package.
 
 Following datasets from the R forecast package is selected for the evaluation:
 \begin{itemize}
@@ -16,18 +16,18 @@ Following datasets from the R forecast package is selected for the evaluation:
 \end{itemize}
 
 \subsection{Time Series Forecasting Techniques}
-We chose three widely used prediction methods from literature, namely ARIMA, neural network and exponential models, and the existing workload prediction technique in Stratos.
+We chose three widely used prediction methods from literature, namely ARIMA, neural network, and exponential models, as well as the existing workload prediction technique in Apache Stratos.
 
 \subsubsection{ARIMA}
-This model combines two models called autoregression (of order $p$) and moving average (of order $q$) .\\
+Autoregressive Integrated Moving Average (ARIMA) model combines two models called autoregression (of order $p$) and moving average (of order $q$) .\\
 
 \noindent
-\textit{Autoregression Model AR($p$):}
-In an autoregression model, the variable of interest is forecast using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus an autoregressive model of order $p$ can be written as
+\textit{Autoregression Model AR($p$) --}
+In an autoregression model, the variable of interest is forecast using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus, an autoregressive model of order $p$ can be written as:
 	$$x_t = c + \phi_1x_{ t-1} + \phi_2x_{t-2} +...+ \phi_px_{t-p} + e_{t}$$
-where $c$ is a constant and $e_t$ is white noise. Autoregressive models are normally restricted to stationary data, and then some constraints are applied on the values of the parameters \cite{Forecasting_OTexts}. \\
-For an AR(1) model: $-1 < \phi_{1} < 1$ \\
-For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - \phi_{1} < 1$ \\
+where $c$ is a constant and $e_t$ is white noise (list of Symbols are given in Table 1). Autoregressive models are typically restricted to stationary data, and then some constraints are applied on the values of the parameters \cite{Forecasting_OTexts} as follows: \\
+    For an AR(1) model: $-1 < \phi_{1} < 1$ \\
+    For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - \phi_{1} < 1$ \\
 
 \noindent
 \textit{Moving Average Model MA($q$):}
