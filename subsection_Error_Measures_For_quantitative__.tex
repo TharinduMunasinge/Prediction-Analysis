@@ -48,11 +48,11 @@ The idea of ensemble learning is quite frequently used in situations where there
 \cite{Zhang_2003}.  
 
 There are various views regarding model selection and combining multiple models. Some researches claim that combined methods improve accuracy, while others claim that they suppress the effects of large errors from individual models rather than improving overall accuracy. According to literature there are multiple ways of combining individual results\cite{Adhikari_2012}:
+
 \begin{itemize}
-\item In simple average, all models are assigned equal weights, i.e. $w_{i}=\frac{1}{n}$ $(i=1, 2,..., n)$ [9, 10].
-\item In trimmed average, individual forecasts are combined by a simple arithmetic mean, excluding the worst performing $k$\% of the models. A trimming of 10\%–30\% is usually recommended [9, 10].
-\item In Winsorized average, the $i$ smallest and $i$ largest forecasts are selected and respectively set as the $(i+1)$\textsuperscript{th} smallest and $(i+1)$\textsuperscript{th} largest forecasts [9].
-\item In median-based combining, the combination function $f$ is the median of the individual forecasts. Median is sometimes preferred over simple average as it is less sensitive to extreme values [12, 13].
-\item In error-based combining, the weight of each model is assigned to be the inverse of the past forecast error (e.g., MSE, MAE, MAPE, etc.) of the corresponding model [3, 10].
-\item In the variance-based method, the optimal weights are determined through the minimization of the total sum of squared error (SSE) [7, 10].
+\item Simple average : all models are assigned equal weights $w_=\frac{1}{n}$.
+\item Median-based :  Get the median of the forecasts from each method.
+\item Trimmed average: Get the average of forecasts excluding  excluding the worst performing models.
+\item Error-based combining: the weight of each model is assigned to be the inverse of the past forecast error(MAE,MAPE,RMSE) of each model.
+\item Variance-based method, the optimal weights are determined through the minimization of the total sum of squared error.
 \end{itemize}
