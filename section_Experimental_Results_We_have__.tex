@@ -6,37 +6,35 @@ We have implemented the prediction algorithm in R using time series and machine 
 
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Comparison of performance of different models}
 \begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                        & \multicolumn{2}{c|}{Euretail}                               & \multicolumn{2}{c|}{oil}                                     \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE}    & \multicolumn{1}{c|}{MSE}     & \multicolumn{1}{c|}{MAPE}    & \multicolumn{1}{c|}{MSE}      & \multicolumn{1}{c|}{MAPE}    \\ \hline
 Arima                                        & 382.36019                & 1.35863                      & 0.52439                      & 0.00417                      & 55.31262                      & 0.25081                      \\ \hline
 Exponential                                  & 505.75034                & 1.16073                      & 0.57553                      & 0.01071                      & 54.98904                      & 0.25078                      \\ \hline
-Nnet                                         & 473.92407                & 0.46524                      & 1.88208                      & 0.00618                      & 51.61619                      & 0.15951                      \\ \hline
-Current                                      & 546.93791                & 0.96513                      & 0.65035                      & 0.00391                      & 61.80686                      & 0.58458                      \\ \hline
-Ensamble                                     & 356.31452                & \multicolumn{1}{l|}{0.39285} & \multicolumn{1}{l|}{0.53734} & \multicolumn{1}{l|}{0.00309} & \multicolumn{1}{l|}{50.14736} & \multicolumn{1}{l|}{0.25598} \\ \hline
+Neural net.                                         & 473.92407                & 0.46524                      & 1.88208                      & 0.00618                      & 51.61619                      & 0.15951                      \\ \hline
+Stratos                                      & 546.93791                & 0.96513                      & 0.65035                      & 0.00391                      & 61.80686                      & 0.58458                      \\ \hline
+Ensemble                                     & 356.31452                & \multicolumn{1}{l|}{0.39285} & \multicolumn{1}{l|}{0.53734} & \multicolumn{1}{l|}{0.00309} & \multicolumn{1}{l|}{50.14736} & \multicolumn{1}{l|}{0.25598} \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Comparison of performance of different models}
 \begin{tabular}{|l|r|r|r|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{airmiles}                                   & \multicolumn{2}{l|}{Memory} & \multicolumn{2}{l|}{CPU} \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE}         & \multicolumn{1}{c|}{MAPE}    & MSE           & MAPE        & MSE         & MAPE       \\ \hline
-Arima                                        & 1,412.94416                      & 0.72068                      & 7.59887       & 0.07539     & 2.97641     & 0.03593    \\ \hline
+ARIMA                                        & 1,412.94416                      & 0.72068                      & 7.59887       & 0.07539     & 2.97641     & 0.03593    \\ \hline
 Exponential                                  & 1,370.47426                      & 0.43516                      & 8.86926       & 0.02381     & 3.15038     & 0.04807    \\ \hline
-Nnet                                         & 2,400.57153                      & 0.71841                      & 7.13630       & 0.15322     & 2.79244     & 0.03130    \\ \hline
-Current                                      & 1,367.01715                      & 0.92456                      & 11.73576      & 0.04637     & 5.69167     & 0.02372    \\ \hline
-Ensamble                                     & \multicolumn{1}{l|}{1,361.41694} & \multicolumn{1}{l|}{0.58676} & 7.25582       & 0.09773     & 2.87274     & 0.02738    \\ \hline
+Neural net.                                         & 2,400.57153                      & 0.71841                      & 7.13630       & 0.15322     & 2.79244     & 0.03130    \\ \hline
+Stratos                                      & 1,367.01715                      & 0.92456                      & 11.73576      & 0.04637     & 5.69167     & 0.02372    \\ \hline
+Ensemble                                     & \multicolumn{1}{l|}{1,361.41694} & \multicolumn{1}{l|}{0.58676} & 7.25582       & 0.09773     & 2.87274     & 0.02738    \\ \hline
 \end{tabular}
 \end{table}
 
 
 Highlighted cells contain the smallest error values for each dataset column, whereas underlined cells contain the worst performance observed for each dataset among all methods. 
 
-According to the results obtained, the existing model from Stratos shows the largest errors in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
+According to the results obtained, the existing model from Stratos suffers from errors of the largest magnitude in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
