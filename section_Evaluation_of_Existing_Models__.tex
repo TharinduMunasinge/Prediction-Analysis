@@ -7,11 +7,12 @@ Section 3.1 presents the workloads used for the evaluation while Section 3.2 des
 \subsection{Datasets}
 As the objective of this experiment is to identify how well an individual prediction method can predict future values by only considering the past history, we used several publicly available datasets with predictable patterns from the R forecast package, some of which are not directly related to cloud workloads. Selection of multiple datasets enable us to evaluate the time series prediction techniques under several probable workload patterns. Neverthless, the experimental results in Section 5, where we compare the performance of the proposed ensemble technique vs. existing methods, are based only on two real-world cloud workloads and the Google cluster dataset, in addition to those found in the forecast package.
 
+Following datasets from the R forecast package is selected for the evaluation:
 \begin{itemize}
-\item airmiles: The revenue passenger miles flown by commercial airlines in the United States for each year from 1937 to 1960
-\item euretail: Quarterly retail trade index in the Euro area (17 countries), 1996-2011, covering wholesale and retail trade, and repair of motor vehicles and motorcycles (Index: 2005 = 100)
-\item sunspotarea: Annual averages of the daily sunspot areas (in units of millionths of a hemisphere) for the full sun
-\item oil: Annual oil production (millions of tonnes), Saudi Arabia, 1965-2010
+\item airmiles -- The revenue from passenger miles flown by commercial airlines in the United States for each year from 1937 - 1960.
+\item euretail -- Quarterly retail trade index in the Euro area (17 countries) from 1996 - 2011, covering wholesale and retail trade, and repair of motor vehicles and motorcycles (Index: 2005 = 100).
+\item sunspotarea -- Annual averages of the daily sunspot areas (in units of millionths of a hemisphere) for the full sun.
+\item oil -- Annual oil production (millions of tonnes) from Saudi Arabia between 1965 - 2010.
 \end{itemize}
 
 \subsection{Time Series Forecasting Techniques}
