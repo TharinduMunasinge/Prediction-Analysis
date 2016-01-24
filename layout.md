@@ -10,5 +10,5 @@ figures/Rplot06/Rplot06.png
 subsection_Error_Measures_For_quantitative__.tex
 section_Proposed_Ensemble_Prediction_Method__.tex
 section_Experimental_Results_We_have__.tex
-section_Conclusion_Providing_a_better__.tex
+section_Summary_Providing_a_better__.tex
 ACKNOWLEDGMENT.tex
