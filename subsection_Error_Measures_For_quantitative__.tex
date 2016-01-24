@@ -47,7 +47,7 @@ Since an autonomous PaaS auto scaler should be able to expect any type of worklo
 The idea of ensemble learning is quite frequently used in situations where there is no dominant technique which can provide the best results, but it is possible to obtain good enough results by combining results from several weak learners. In the general forecasting domain we can see several model combining techniques proposed in various researches \cite{Zou_2004}, \cite{Wagner_2011},
 \cite{Zhang_2003}.  
 
-There are various views regarding model selection and combining multiple models. Some researches claim that combined methods improve accuracy, while others claim that they suppress the effects of large errors from individual models rather than improving overall accuracy. According to literature there are multiple ways of combining individual results:
+There are various views regarding model selection and combining multiple models. Some researches claim that combined methods improve accuracy, while others claim that they suppress the effects of large errors from individual models rather than improving overall accuracy. According to literature there are multiple ways of combining individual results\cite{Adhikari_2012}:
 \begin{itemize}
 \item In simple average, all models are assigned equal weights, i.e. $w_{i}=\frac{1}{n}$ $(i=1, 2,..., n)$ [9, 10].
 \item In trimmed average, individual forecasts are combined by a simple arithmetic mean, excluding the worst performing $k$\% of the models. A trimming of 10\%–30\% is usually recommended [9, 10].
