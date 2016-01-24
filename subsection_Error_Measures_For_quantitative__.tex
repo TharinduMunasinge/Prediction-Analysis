@@ -50,8 +50,8 @@ The idea of ensemble learning is quite frequently used in situations where there
 There are various views regarding model selection and combining multiple models. Some researches claim that combined methods improve accuracy, while others claim that they suppress the effects of large errors from individual models rather than improving overall accuracy. According to literature there are multiple ways of combining individual results\cite{Adhikari_2012}:
 
 \begin{itemize}
-\item Simple average : all models are assigned equal weights $w_=\frac{1}{n}$.
-\item Median-based :  Get the median of the forecasts from each method.
+\item Simple average : Get the average of the forecast from each model as the forecast of ensemble
+\item Median-based :  Get the median of the forecast from each method.
 \item Trimmed average: Get the average of forecasts excluding  excluding the worst performing models.
 \item Error-based combining: the weight of each model is assigned to be the inverse of the past forecast error(MAE,MAPE,RMSE) of each model.
 \item Variance-based method, the optimal weights are determined through the minimization of the total sum of squared error.
