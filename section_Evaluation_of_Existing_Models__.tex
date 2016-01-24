@@ -53,9 +53,11 @@ Double smoothing can be applied to a time-series with an existing linear trend. 
 \textit{Triple exponential smoothing:} Triple smoothing can be applied to a time-series with existing trend and seasonality. This can be derived by applying exponential smoothing to the data already smoothed using double exponential smoothing.
 
 \subsubsection{Prediction method in Apache Stratos}
-Apache Stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the auto scaling solution used in Stratos, there is a workload demand prediction method which can be explained using the motion equation in physics. The method calculate one lookahead prediction using the workload demand in last period.
-$$S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
-\hat{x}_{t+h}=avg(x)_{t}  + S_{t+h|t}$$ \\
+Apache Stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the auto scaling solution used in Stratos, there is a workload demand prediction method which can be explained using the motion equation in physics. The method calculate one lookahead prediction using the workload demand in last period\cite{StratosModel}.
+\begin{eqnarray}
+S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
+\hat{x}_{t+h}=avg(x)_{t}  + S_{t+h|t} 
+\end{eqnarray}
 
 \begin{table}[]
 \centering
