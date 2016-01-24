@@ -30,14 +30,15 @@ For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - 
 \textit{Moving Average Model MA($q$):}
 This model uses past forecast errors in a regression-like model.
 	$$x_t =  c + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
-where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the last few forecast errors. However, moving average models should not be confused with moving average smoothing. The former is used for forecasting future values while the latter is used for estimating the trend-cycle of past values.
-By combining differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for \textit{autoregressive integrated moving average}. The full model can be written as:
+where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the last few forecast errors. 
+By combining differencing with autoregression and a moving average model, non-seasonal ARIMA model can be obtained. ARIMA is an acronym for \textit{autoregressive integrated moving average}. The full model can be written as:
 
 	$${x}'_t = c + \phi_1{x}'_{ t-1} + \phi_2{x}'_{t-2} +...+ \phi_p{x}'_{t-p} + e_{t} + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
 The “predictors” on the right hand side include both lagged values of $X_t$ and lagged errors. This is called an ARIMA($p$, $d$, $q$) model, where $p$ and $q$ are the orders of the autoregressive and moving average parts respectively, and $d$ is the degree of first differencing involved.
 
 \subsubsection{Neural Networks}
-ANNs are a class of nonlinear, nonparametric, data-driven and self-adaptive models, originally inspired by the intelligent working mechanism of human brains. Over the years, ANNs are used as excellent alternative to the common statistical models for time series forecasting. The most popular ANN architectures in the forecasting domain are the multilayer perceptrons (MLPs). They consist of a feed-forward structure of three layers, viz. an input layer, one or more hidden layer and an output layer. The nodes in each layer are connected to those in the immediate next layer by acyclic links . Single hidden layer is sufficient for most applications. It is often customary to use the notation (p, h, q) for referring an ANN with p input, h hidden and q output nodes.
+Artificial Neural Networks (ANNs) are a class of nonlinear and data-driven models which are inspired by the working mechanism of human brain. In the domain of time series forecasting, neural network is an excellent alternative for existing statistical models which require some assumptions to be satisfied in the time series. Ability of modeling nonlinear relationships is the major advantage in neural networks. Depending on the topology of the network there are various types of neural networks which are suitable fore various machine learning tasks.  Auto regressive feed forward Neural networks are the specialized neural networks in time series forecasting domain. They consist of a feed forward structure of three types of layers,  an input layer, one or more hidden layer and an output layer. Each layer consist with nodes which connected to those in the immediate next layer by acyclic links which have associated weights. In auto regressive neural networks, lagged values of the time series (input window) are injected as the inputs and train the weights of the model to forecast for given time horizon by using the past history of the dataset. 
+
 
 \subsubsection{Exponential Model}
 \noindent
@@ -45,16 +46,20 @@ ANNs are a class of nonlinear, nonparametric, data-driven and self-adaptive mode
 In exponential weighted moving average methods, forecasts are calculated using weighted averages where the weights decrease exponentially as observations come from further in the past. The smallest weights are associated with the oldest observations \cite{Forecasting_OTexts} \cite{StatSoft} \cite{STAT510}.
 
 \noindent
-\textit{Simple Exponential Smoothing:}
+\textit{Exponential Smoothing:}
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)X_{t-1}$$
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
 where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e. close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
-\noindent
-\textit{Double Exponential Smoothing:}
-Double smoothing can be applied to a time-series with an existing linear trend. This can be derived by applying exponential smoothing to the data already smoothed using simple exponential smoothing. There is a need to add a second smoothing constant to account for the trend.
+There are variations of basic exponential smoothing which suitable for various types of time series.
 
-\textit{Triple exponential smoothing:} Triple smoothing can be applied to a time-series with existing trend and seasonality. This can be derived by applying exponential smoothing to the data already smoothed using double exponential smoothing.
+Double Exponential Smoothing:  can be applied to a time-series with an existing linear trend.
+Triple exponential smoothing:  can be applied to a time-series with existing trend and seasonality.
+Holt's Linear Trend Model: extended simple exponential smoothing to allow forecasting of data with a trend.
+Exponential Trend Model : The trend in the forecast function is can be exponential rather than linear.
+Damped Trend method :dampens the trend to a flat line some time in the future to model the general nature of practical time series.
+Holt's Holt-Winters seasonal method: can be applied to a time series with adaptive or multiplicative trends and seasonality.
+
 
 \subsubsection{Prediction method in Apache Stratos}
 Apache Stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the auto scaling solution used in Stratos, there is a workload demand prediction method which can be explained using the motion equation in physics. The method calculate one lookahead prediction using the workload demand in last period\cite{StratosModel}.
