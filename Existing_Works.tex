@@ -5,7 +5,6 @@ There is a significant number of already established research work in the worklo
 Machine learning techniques like neural networks, regression and Hidden Markov Model have been applied by several authors for workload prediction. Yang et al.\cite{Yang_2013} have used use a sliding window based linear regression model (LRM) for workload prediction and showed a lower prediction deviation  . Khan et al. \cite{Khan_2012} used Hidden Markov Model (HMM) to explore the temporal correlations in workload pattern changes . Several work also focus on using history window values as the input for a neural network \cite{Islam_2012} However, the accuracy of both methods depends on the input window size.
 
 
-Another important parameter in workload prediction is the prediction interval(prediction horizon) , $h$. Islam et al. \cite{Islam_2012} proposed using a 12-minute interval, because the set-up time of VM instances in the cloud was typically around 5-15 minutes at that time. 
 
 \textbf{Limitations :} The related work outlined above primarily focus on a specific dataset. Hence, the resulting predictive model might not be a good fit for scenarios involving multiple applications with drastically different workload characteristics. In some of the solutions the predictive model has been derived using offline training on datasets, so that dynamic adaptation to current workload changes may not be possible. However, these may not work well on PasS platforms as the same platform may be used to build different application with drastically different workload characteristics.
 
