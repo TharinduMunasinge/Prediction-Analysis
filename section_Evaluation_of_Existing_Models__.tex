@@ -51,14 +51,16 @@ In exponential weighted moving average methods, forecasts are calculated using w
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
 where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e. close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
-There are variations of basic exponential smoothing which suitable for various types of time series.
+There are variations of basic exponential smoothing which suitable for forecasting time serious with  various characteristics \cite{AHyndman 2013}:
 
-Double Exponential Smoothing:  can be applied to a time-series with an existing linear trend.
-Triple exponential smoothing:  can be applied to a time-series with existing trend and seasonality.
-Holt's Linear Trend Model: extended simple exponential smoothing to allow forecasting of data with a trend.
-Exponential Trend Model : The trend in the forecast function is can be exponential rather than linear.
-Damped Trend method :dampens the trend to a flat line some time in the future to model the general nature of practical time series.
-Holt's Holt-Winters seasonal method: can be applied to a time series with adaptive or multiplicative trends and seasonality.
+\begin{itemize}
+\item \textit{Double Exponential Smoothing} :  can be applied to a time-series with an existing linear trend.
+\item \textit{Triple exponential smoothing} :  can be applied to a time-series with existing trend and seasonality.
+\item \textit{Holt's Linear Trend Model} : extended simple exponential smoothing to allow forecasting of data with a trend.
+\item \textit{Exponential Trend Model} : The trend in the forecast function is can be exponential rather than linear.
+\item \textit{Damped Trend method}  :dampens the trend to a flat line some time in the future to model the general nature of practical time series.
+\item  \textit{Holt-Winters Seasonal method} : can be applied to a time series with adaptive or multiplicative trends and seasonality.
+\end{itemize}
 
 
 \subsubsection{Prediction method in Apache Stratos}
