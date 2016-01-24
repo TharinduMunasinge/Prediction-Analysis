@@ -32,7 +32,7 @@ where $c$ is a constant and $e_t$ is white noise (list of Symbols are given in T
 \noindent
 \textit{Moving Average Model MA($q$) --}
 This model uses past forecast errors in a regression-like model.
-	$$x_t =  c + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
+	$$x_t = c + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
 where $e_t$ is white noise. $x_t$ can be thought of as a weighted moving average of the last few forecast errors. 
 By combining differencing with autoregression and a moving average model, non-seasonal ARIMA model can be obtained. The full model can be written as:
 
@@ -40,7 +40,7 @@ By combining differencing with autoregression and a moving average model, non-se
 The \textit{predictors} on the right hand side include both the lagged values of $X_t$ and lagged errors. This is called an ARIMA($p$, $d$, $q$) model, where $p$ and $q$ are the orders of the autoregressive and moving average parts respectively, and $d$ is the degree of first differencing involved.
 
 \subsubsection{Neural Networks}
-Artificial Neural Networks (ANNs) are a class of nonlinear, and data-driven models which are inspired by the working mechanism of human brain. In the domain of time series forecasting, neural network is an excellent alternative for existing statistical models which require some assumptions to be satisfied in the time series. Ability of modeling nonlinear relationships is the major advantage in neural networks. Depending on the topology of the network there are various types of neural networks which are suitable fore various machine learning tasks.  Auto regressive feed forward Neural networks are the specialized neural networks in time series forecasting domain. They consist of a feed forward structure of three types of layers,  an input layer, one or more hidden layer and an output layer. Each layer consist with nodes which connected to those in the immediate next layer by acyclic links which have associated weights. In auto regressive neural networks, lagged values of the time series (input window) are injected as the inputs and train the weights of the model to forecast for given time horizon by using the past history of the dataset. 
+Artificial Neural Networks (ANNs) are a class of nonlinear, and data-driven models which are inspired by the working mechanism of human brain. In the domain of time series forecasting, neural network is an excellent alternative for existing statistical models which require some assumptions to be satisfied in the time series. Ability of modeling nonlinear relationships is the major advantage in neural networks. Depending on the topology of the network there are various types of neural networks which are suitable for various machine learning tasks. Auto regressive feed forward Neural networks are the specialized neural networks in time series forecasting domain. They consist of a feed forward structure of three types of layers, an input layer, one or more hidden layer, and an output layer. Each layer consists with nodes, which connected to those in the immediate next layer by acyclic links which have associated weights. In auto regressive neural networks, lagged values of the time series (input window) are injected as the inputs and train the weights of the model to forecast for a given time horizon by using the past history of the dataset. 
 
 
 \subsubsection{Exponential Model}
@@ -54,15 +54,15 @@ In exponential weighted moving average methods, forecasts are calculated using w
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
 where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e. close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
-There are variations of basic exponential smoothing which suitable for forecasting time serious with  various characteristics \cite{AHyndman 2013}:
+There are variations of basic exponential smoothing which suitable for forecasting time serious with various characteristics \cite{AHyndman 2013}:
 
 \begin{itemize}
-\item \textit{Double Exponential Smoothing} :  can be applied to a time-series with an existing linear trend.
-\item \textit{Triple exponential smoothing} :  can be applied to a time-series with existing trend and seasonality.
+\item \textit{Double Exponential Smoothing} : can be applied to a time-series with an existing linear trend.
+\item \textit{Triple exponential smoothing} : can be applied to a time-series with existing trend and seasonality.
 \item \textit{Holt's Linear Trend Model} : extended simple exponential smoothing to allow forecasting of data with a trend.
 \item \textit{Exponential Trend Model} : The trend in the forecast function is can be exponential rather than linear.
-\item \textit{Damped Trend method}  :dampens the trend to a flat line some time in the future to model the general nature of practical time series.
-\item  \textit{Holt-Winters Seasonal method} : can be applied to a time series with adaptive or multiplicative trends and seasonality.
+\item \textit{Damped Trend method} : dampens the trend to a flat line some time in the future to model the general nature of practical time series.
+\item \textit{Holt-Winters Seasonal method} : can be applied to a time series with adaptive or multiplicative trends and seasonality.
 \end{itemize}
 
 
@@ -70,7 +70,7 @@ There are variations of basic exponential smoothing which suitable for forecasti
 Apache Stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the auto scaling solution used in Stratos, there is a workload demand prediction method which can be explained using the motion equation in physics. The method calculate one lookahead prediction using the workload demand in last period\cite{StratosModel}.
 \begin{eqnarray}
 S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
-\hat{x}_{t+h}=avg(x)_{t}  + S_{t+h|t} 
+\hat{x}_{t+h}=avg(x)_{t} + S_{t+h|t} 
 \end{eqnarray}
 
 \begin{table}[]
@@ -93,8 +93,8 @@ $h$             & time horizon
 
 We have used the implementations of the time series forecasting models in R forecast package  \cite{forecastPackage}.
 
-$auto.arima()$:  finds out the best fitted ARIMA model and approximates the model coefficients by minimizing the past forecast error \cite{Forecasting_OTexts}.
+$auto.arima()$: finds out the best fitted ARIMA model and approximates the model coefficients by minimizing the past forecast error \cite{Forecasting_OTexts}.
 
 $ets()$: finds out the best fitted exponential model among the family of exponential models (simple exponential smoothing, Holt's linear trend, exponential trend, Holt-Winters seasonal method) automatically and calculates the model coefficients by reducing the past forecast error. \cite{Forecasting_OTexts}
-    
+
 $nnetar()$: feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series
