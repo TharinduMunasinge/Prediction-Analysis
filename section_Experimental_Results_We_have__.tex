@@ -1,9 +1,9 @@
 
 \section{Experimental Results}
 
-We have implemented the prediction algorithm in R using time series and machine learning model implementations in the forecast package. We have tested it against the publicly available datasets mentioned in Section 4.2, as well as several real world cloud workload datasets \cite{AutoscaleAnalyser} collected from server applications.
+We implemented the proposed ensemble-based prediction algorithm in R using time series and machine learning model implementations in the forecast package. We tested it against the publicly available datasets mentioned in Section 4.2, as well as several real-world cloud workloads \cite{AutoscaleAnalyser} collected from server applications.
 
-In addition to the cloud workload dataset used in Section 3, we have also used a portion of the Google cluster dataset \cite{GoogleClusterData} in evaluating our ensemble model. The dataset includes a series of task execution details against their starting and ending times. Due to the large size of the dataset, we have summarized it to a suitably concise set of values by summing up numbers of started tasks in each time unit over the transformed time scale.
+In addition to the cloud workload dataset used in Section 3, we also used a portion of the Google cluster dataset \cite{GoogleClusterData} in evaluating our ensemble model. The dataset includes a series of task execution details against their starting and ending times. Due to the large size of the dataset, we have summarized it to a suitably concise set of values by summing up numbers of started tasks in each time unit over the transformed time scale.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -43,6 +43,6 @@ Ensemble                                     & \textbf{11.934}           & \text
 \end{tabular}
 \end{table}
 
-Boldfaced cells contain the smallest error values for each dataset column, whereas underlined cells contain the worst performance observed for each dataset among all methods.
+Boldfaced cells contain the smallest error values for each dataset under evaluation, whereas underlined cells contain the worst performance observed for each dataset among all methods.
 
 According to the results obtained, the existing model from Stratos suffers from errors of the largest magnitude in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
