@@ -7,10 +7,14 @@ In existing error-based combining techniques, mean values of error metrics (e.g.
 Considering the currently available dataset in the time series as
 $X=[x_{1},x_{2},.. x_{t}]$
 we want to calculate predictions for $x_{t+h}$. Let the final predicted value be $\hat{x}_{(t+h)}$ and the predicted value from the $i$-th model for $x_{t+h}$ be $\hat{x}_{(t+h)}^{(i)}$. We define $\hat{x}_{(t+h)}$ as a weighted sum of predictions from each model:
-$$\hat{x}_{(t+h)}= \sum_{i=1}^{k}w_i \hat{x}_{(t+h)}^{(i)} \ \ \forall k \in \{1,2,3,...,n\}$$
+\begin{equation}
+\hat{x}_{(t+h)}= \sum_{i=1}^{k}w_i \hat{x}_{(t+h)}^{(i)} \ \ \forall k \in \{1,2,3,...,n\}
+\end{equation}
 
 where $w_i$ is the weight assigned to the $i$-th forecasting method. To ensure unbiasedness, it is often assumed that the weights add up to unity \cite{Adhikari_2012}. Hence, we define the contribution from the $i$-th model to the final result as $c_i$, so that the same equation can be redefined as:
-$$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_i}$$ 
+\begin{equation}
+\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_i}
+\end{equation}
 where $w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$. As $\sum_{j=1}^{k}w_{j}=1$, this weight assignment is unbiased and would result in the weighted average of the predictions.
 
 \subsection{Determination of Contribution Coefficients}
@@ -44,10 +48,16 @@ $$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |
 
 While calculating the contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, the average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so that we can calculate the contribution as the errors are fitted under the exponential model. Here, the contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$-th model at the $t$-th time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error, or absolute relative error at $t$-th prediction. $b_{i,t}$ can be defined as follows:
 
-$$b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1}$$
+\begin{equation}
+b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1}
+\end{equation}
 where $0\leq \alpha \leq 1$
-$$b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. $$
-$$c_{i,t}=\frac{1}{b_{i,t}}$$
+\begin{equation}
+b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. 
+\end{equation}
+\begin{equation}
+c_{i,t}=\frac{1}{b_{i,t}}
+\end{equation}
 
 \subsection{Selection of Models}
 The abovementioned error-based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture the different characteristics of datasets.
