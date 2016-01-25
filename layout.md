@@ -6,6 +6,7 @@ subsection_Error_Measures_For_quantitative__.tex
 subsection_Observations_Figure_1_to__.tex
 figures/Rplot2/Rplot2.png
 figures/Rplot3/Rplot3.png
+figures/Rplot10/Rplot10.png
 figures/Rplot08/Rplot08.png
 figures/Rplot09/Rplot09.png
 section_Proposed_Ensemble_Prediction_Method__.tex
