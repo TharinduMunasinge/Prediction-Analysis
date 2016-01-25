@@ -8,6 +8,7 @@ figures/Rplot2/Rplot2.png
 figures/Rplot3/Rplot3.png
 figures/Rplot08/Rplot08.png
 figures/Rplot06/Rplot06.png
+figures/Rplot09/Rplot09.png
 section_Proposed_Ensemble_Prediction_Method__.tex
 section_Experimental_Results_We_have__.tex
 section_Summary_Providing_better_QoS__.tex
