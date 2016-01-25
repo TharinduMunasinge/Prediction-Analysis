@@ -1,22 +1,20 @@
 \section{Proposed Ensemble Prediction Method}
 
-We propose an error based ensemble technique for workload prediction. Our approach tries to address situations where offline training is not possible due to workload history data not being available at the beginning of the prediction process. While the auto scaler is in operation, workload history gets accumulated based on the user's workload requirement (CPU, memory, and request count). However, the prediction method should still be able to predict the future horizon based on the initially available dataset. After initial predictions, actual data will become available for the next time periods, so that we can accumulate the latest actual data into the workload history and use them for the next forecast horizon.
+We propose an error-based ensemble technique for workload prediction. Our approach tries to address situations where offline training is not possible due to workload history data not being available at the beginning of the prediction process. While the auto-scaler is in operation, workload history gets accumulated based on the user's workload requirement (e.g., CPU, memory, and request count). However, the prediction method should still be able to predict the future time horizon based on the initially available dataset. After the initial predictions, actual data will become available for the next time periods, so that we can accumulate the latest actual data into the workload history and use them for the next forecast horizon.
 
-In the existing error based combining techniques, mean values of error metrics (absolute error, absolute percentage error, squared error, etc.) are taken into account when calculating the contribution factors for individual methods. 
+In existing error-based combining techniques, mean values of error metrics (e.g., absolute error, absolute percentage error, squared error, etc.) are taken into account while calculating the contribution factors for individual methods. 
 
 Considering the currently available dataset in the time series as
 $X=[x_{1},x_{2},.. x_{t}]$
-we want to calculate predictions for $x_{t+h}$. Consider the final predicted value as $\hat{x}_{(t+h)}$ and the predicted value from the $i$\textsuperscript{th} model for $x_{t+h}$ as $\hat{x}_{(t+h)}^{(i)}$. We define $\hat{x}_{(t+h)}$ as a weighted sum of predictions from each model:
+we want to calculate predictions for $x_{t+h}$. Let the final predicted value be $\hat{x}_{(t+h)}$ and the predicted value from the $i$-th model for $x_{t+h}$ be $\hat{x}_{(t+h)}^{(i)}$. We define $\hat{x}_{(t+h)}$ as a weighted sum of predictions from each model:
 $$\hat{x}_{(t+h)}= \sum_{i=1}^{k}w_i \hat{x}_{(t+h)}^{(i)} \ \ \forall k \in \{1,2,3,...,n\}$$
 
-Here, $w_i$ is the weight assigned to the $i$\textsuperscript{th} forecasting method. To ensure unbiasedness, it is often assumed that the weights add up to unity \cite{Adhikari_2012}. Hence we define the contribution from the $i$\textsuperscript{th} model to the final result as $c_i$, so that the same equation can be redefined as  
-$$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_i}$$
-here $w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$.
-
-Since $\sum_{j=1}^{k}w_{j}=1$, this weight assignment is unbiased and would result in the weighted average of the predictions.
+where $w_i$ is the weight assigned to the $i$-th forecasting method. To ensure unbiasedness, it is often assumed that the weights add up to unity \cite{Adhikari_2012}. Hence, we define the contribution from the $i$-th model to the final result as $c_i$, so that the same equation can be redefined as:
+$$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_i}$$ 
+where $w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$. As $\sum_{j=1}^{k}w_{j}=1$, this weight assignment is unbiased and would result in the weighted average of the predictions.
 
 \subsection{Determination of Contribution Coefficients}
-To determine the optimal contribution coefficients in our proposed ensemble technique, we use past forecast errors for each model. In our prediction problem, accuracy of the prediction for the next time horizon is more significant. Hence the contributions are calculated using inverses of the past forecasting error measures. There are various choices for error measurement, and we have identified certain pros and cons of each measure.
+To determine the optimal contribution coefficients in our proposed ensemble technique, we use past forecast errors for each model. In our prediction problem, accuracy of the prediction of the next time horizon is more significant. Hence, the contributions are calculated using inverses of the past forecasting error measures. There are various choices for error measurement, and next we discuss several selected measures.
 
 \subsubsection{Error of the Most Recent Prediction}
 This model does not capture overall accuracy; it only captures how accurately the last prediction has been calculated by the model. if the model has repeatedly made large errors in past predictions except the most recent one, contribution coefficients are biased and may lead to error-prone decisions.
