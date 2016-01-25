@@ -19,7 +19,7 @@ Following datasets from the R forecast package is selected for the evaluation:
 We chose three widely used prediction methods from literature, namely ARIMA, neural network, and exponential models, as well as the existing workload prediction technique in Apache Stratos.
 
 \subsubsection{ARIMA}
-Autoregressive Integrated Moving Average (ARIMA) model combines two models called autoregression (of order $p$) and moving average (of order $q$) .\\
+Autoregressive Integrated Moving Average (ARIMA) model combines two models called autoregression (of order $p$) and moving average (of order $q$).\\
 
 \noindent
 \textit{Autoregression Model AR($p$) --}
@@ -44,34 +44,35 @@ Artificial Neural Networks (ANNs) are a class of nonlinear, and data-driven mode
 
 
 \subsubsection{Exponential Model}
+Several selected versions of exponential models are presented next.
 \noindent
-\textit{Exponential Weighted Moving Average:}
-In exponential weighted moving average methods, forecasts are calculated using weighted averages where the weights decrease exponentially as observations come from further in the past. The smallest weights are associated with the oldest observations \cite{Forecasting_OTexts} \cite{StatSoft} \cite{STAT510}.
+\textit{Exponential Weighted Moving Average (EWMA)} --
+In EWMA methods, forecasts are calculated using weighted averages where the weights decrease exponentially as the observations come from further in the past. The smallest weights are associated with the oldest observations \cite{Forecasting_OTexts}, \cite{STAT510}, \cite{StatSoft}. Exponential smoothing can be indicated by the following equation:
 
 \noindent
-\textit{Exponential Smoothing:}
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)X_{t-1}$$
 	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
-where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e. close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
+where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e., close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
-There are variations of basic exponential smoothing which suitable for forecasting time serious with various characteristics \cite{AHyndman 2013}:
+Following variations of basic exponential smoothing are suitable for forecasting time series with various characteristics \cite{AHyndman 2013}:
 
 \begin{itemize}
-\item \textit{Double Exponential Smoothing} : can be applied to a time-series with an existing linear trend.
-\item \textit{Triple exponential smoothing} : can be applied to a time-series with existing trend and seasonality.
-\item \textit{Holt's Linear Trend Model} : extended simple exponential smoothing to allow forecasting of data with a trend.
-\item \textit{Exponential Trend Model} : The trend in the forecast function is can be exponential rather than linear.
-\item \textit{Damped Trend method} : dampens the trend to a flat line some time in the future to model the general nature of practical time series.
-\item \textit{Holt-Winters Seasonal method} : can be applied to a time series with adaptive or multiplicative trends and seasonality.
+\item \textit{Double Exponential Smoothing} -- Applicable to a time-series with a linear trend.
+\item \textit{Triple exponential smoothing} -- Applicable to a time-series with a trend and seasonality.
+\item \textit{Holt's Linear Trend Model} -- Extended simple exponential smoothing to allow forecasting of data with a trend.
+\item \textit{Exponential Trend Model} -- Applicable when the trend in the forecast function is can be exponential rather than linear.
+\item \textit{Damped Trend method} -- Dampens the trend to a flat line some time in the future to model the general nature of practical time series.
+\item \textit{Holt-Winters Seasonal method} -- Applicable to a time series with adaptive or multiplicative trends and seasonality.
 \end{itemize}
 
 
 \subsubsection{Prediction method in Apache Stratos}
-Apache Stratos is an open source PaaS framework where a user can built a PaaS system on existing IaaS. In the auto scaling solution used in Stratos, there is a workload demand prediction method which can be explained using the motion equation in physics. The method calculate one lookahead prediction using the workload demand in last period\cite{StratosModel}.
+Apache Stratos is an open source PaaS framework where a user can build a PaaS system on top of an existing IaaS cloud. The auto-scaling solution in Stratos uses a workload demand prediction method which can be explained using the motion equation in physics. The method calculates one lookahead prediction using the workload demand in the last period as follows \cite{StratosModel}:
 \begin{eqnarray}
 S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 \hat{x}_{t+h}=avg(x)_{t} + S_{t+h|t} 
 \end{eqnarray}
+where $S_{t+h|t}$ is the ..... <<Briefly list all related variables>>
 
 \begin{table}[]
 \centering
@@ -79,22 +80,22 @@ S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 \label{my-label}
 \begin{tabular}{ll}
 Parameter       & Description                                                                     \\
-$S_{t+h|t}$     & The predicted change of the workload for time $(t+h)$ based on the interval $t$ \\
-$x$             & Workload metrics                                                                \\
+$S_{t+h|t}$     & Predicted change of the workload for time $(t+h)$ based on the interval $t$ \\
+$x$             & Workload metric(s)                                                                \\
 $\hat{x}_{t+h}$ & Predicted workload metrics for time $t+h$                                       \\
-$u_{t}$         & First derivative of the workload metrics within the $t^{th}$ interval           \\
-$a_{t}$         & Second derivative of the workload metrics within the $t^{th}$ interval          \\
-$h$             & time horizon                                                                   
+$u_{t}$         & First derivative of the workload metrics within the $t$-th interval           \\
+$a_{t}$         & Second derivative of the workload metrics within the $t$-th interval          \\
+$h$             & Time horizon                    
 \end{tabular}
 \end{table}
 
 
 \subsection{Time Series Forecasting Library}
 
-We have used the implementations of the time series forecasting models in R forecast package  \cite{forecastPackage}.
+We used the following time series forecasting models in R forecast package \cite{forecastPackage} to implement each of the selected forecasting solution:
 
-$auto.arima()$: finds out the best fitted ARIMA model and approximates the model coefficients by minimizing the past forecast error \cite{Forecasting_OTexts}.
+$auto.arima()$ -- Finds out the best fitted ARIMA model and approximates the model coefficients by minimizing the past forecast error \cite{Forecasting_OTexts}.
 
-$ets()$: finds out the best fitted exponential model among the family of exponential models (simple exponential smoothing, Holt's linear trend, exponential trend, Holt-Winters seasonal method) automatically and calculates the model coefficients by reducing the past forecast error. \cite{Forecasting_OTexts}
+$ets()$ -- Finds out the best fitted exponential model among the family of exponential models (simple exponential smoothing, Holt's linear trend, exponential trend, and Holt-Winters seasonal method) automatically and calculates the model coefficients by reducing the past forecast error \cite{Forecasting_OTexts}.
 
-$nnetar()$: feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series
+$nnetar()$ -- Feed-forward neural networks with a single hidden layer and lagged inputs for forecasting univariate time series.
