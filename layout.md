@@ -11,4 +11,3 @@ figures/Rplot06/Rplot06.png
 section_Proposed_Ensemble_Prediction_Method__.tex
 section_Experimental_Results_We_have__.tex
 section_Summary_Providing_a_better__.tex
-ACKNOWLEDGMENT.tex
