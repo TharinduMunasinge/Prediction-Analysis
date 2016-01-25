@@ -41,7 +41,7 @@ By combining differencing with autoregression and a moving average model, non-se
 The \textit{predictors} on the right hand side include both the lagged values of $X_t$ and lagged errors. This is called an ARIMA($p$, $d$, $q$) model, where $p$ and $q$ are the orders of the autoregressive and moving average parts respectively, and $d$ is the degree of first differencing involved.
 
 \subsubsection{Neural Networks}
-Artificial Neural Networks (ANNs) are a class of nonlinear, and data-driven models which are inspired by the working mechanism of human brain. In the domain of time series forecasting, neural network is an excellent alternative for existing statistical models which require some assumptions to be satisfied in the time series. Ability of modeling nonlinear relationships is the major advantage in neural networks. Depending on the topology of the network there are various types of neural networks which are suitable for various machine learning tasks. Auto regressive feed forward Neural networks are the specialized neural networks in time series forecasting domain. They consist of a feed forward structure of three types of layers, an input layer, one or more hidden layer, and an output layer. Each layer consists with nodes, which connected to those in the immediate next layer by acyclic links which have associated weights. In auto regressive neural networks, lagged values of the time series (input window) are injected as the inputs and train the weights of the model to forecast for a given time horizon by using the past history of the dataset. 
+Artificial Neural Networks (ANNs) are a class of nonlinear, and data-driven models which are inspired by the working mechanism of human brain. In the domain of time series forecasting, neural network is an excellent alternative for existing statistical models which require some assumptions to be satisfied in the time series. Ability of modeling nonlinear relationships is the major advantage in neural networks. Depending on the topology of the network there are various types of neural networks which are suitable for various machine learning tasks. Auto regressive feed forward neural networks \cite{Forecasting_OTexts} are the specialized neural networks in the time series forecasting domain. They consist of a feed forward structure of three types of layers, an input layer, one or more hidden layer, and an output layer. Each layer consists with nodes, which connected to those in the immediate next layer by acyclic links which have associated weights. In auto regressive neural networks, lagged values of the time series (input window) are injected as the inputs and train the weights of the model to forecast for a given time horizon by using the past history of the dataset. 
 
 
 \subsubsection{Exponential Model}
@@ -52,9 +52,9 @@ Several selected versions of exponential models are presented next.
 In EWMA methods, forecasts are calculated using weighted averages where the weights decrease exponentially as the observations come from further in the past. The smallest weights are associated with the oldest observations \cite{Forecasting_OTexts}, \cite{STAT510}, \cite{StatSoft}. Exponential smoothing can be indicated by the following equation:
 
 \noindent
-	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)X_{t-1}$$
-	$$X_{t+1}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
-where $0\leq \alpha \leq 1$ is the smoothing parameter. The one-step-ahead forecast for time $t+1$ is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e., close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
+	$$\hat{x}_{t+1|t}=\alpha x_t +\alpha(1-\alpha)\hat{x}_{t|t-1}$$
+	$$\hat{x}_{t+1|t}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
+where $0\leq \alpha \leq 1$ is the smoothing parameter. $\hat{x}_{t+1|t}$, the one-step-ahead forecast for time $t+1$, is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e., close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
 Following variations of basic exponential smoothing are suitable for forecasting time series with various characteristics \cite{AHyndman 2013}:
 
@@ -74,12 +74,10 @@ Apache Stratos is an open source PaaS framework where a user can build a PaaS sy
 S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 \hat{x}_{t+h}=avg(x)_{t} + S_{t+h|t} 
 \end{eqnarray}
-where $S_{t+h|t}$ is the ..... <<Briefly list all related variables>>
 
 \begin{table}[]
 \centering
-\caption{List of symbols}
-\label{my-label}
+\caption{List of Symbols from Apache Stratos Prediction Model}
 \begin{tabular}{ll}
 Parameter       & Description                                                                     \\
 $S_{t+h|t}$     & Predicted change of the workload for time $(t+h)$ based on the interval $t$ \\
