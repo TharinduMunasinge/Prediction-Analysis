@@ -1,8 +1,7 @@
 
 \section{Experimental Results}
 
-We have implemented the prediction algorithm in R using time series and machine learning model implementations in the forecast package. We have tested it against the publicly available datasets mentioned in Section 4.2, as well as several real world cloud workload datasets [GITHUB LINK FOR DATASET] collected from server applications.
-% Please add the following required packages to your document preamble:
+We have implemented the prediction algorithm in R using time series and machine learning model implementations in the forecast package. We have tested it against the publicly available datasets mentioned in Section 4.2, as well as several real world cloud workload datasets \cite{AutoscaleAnalyser} collected from server applications.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -16,11 +15,11 @@ We have implemented the prediction algorithm in R using time series and machine 
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                                  & \multicolumn{2}{c|}{Euretail}                                        & \multicolumn{2}{c|}{oil}                                              \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}    & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}              & \multicolumn{1}{c|}{MAPE}    \\ \hline
-Arima                                        & 382.36019                 & {\ul 1.35863}                         & \textbf{0.52439}             & 0.00417                               & 55.31262                               & 0.25081                      \\ \hline
-Exponential                                  & 505.75034                 & 1.16073                               & 0.57553                      & {\ul 0.01071}                         & 54.98904                               & 0.25078                      \\ \hline
-Neural net.                                  & 473.92407                 & 0.46524                               & {\ul 1.88208}                & 0.00618                               & 51.61619                               & \textbf{0.15951}             \\ \hline
-Stratos                                      & {\ul 546.93791}           & 0.96513                               & 0.65035                      & 0.00391                               & {\ul 61.80686}                         & {\ul 0.58458}                \\ \hline
-Ensemble                                     & \textbf{356.31452}        & \multicolumn{1}{l|}{\textbf{0.39285}} & \multicolumn{1}{l|}{0.53734} & \multicolumn{1}{l|}{\textbf{0.00309}} & \multicolumn{1}{l|}{\textbf{50.14736}} & \multicolumn{1}{l|}{0.25598} \\ \hline
+ARIMA                                        & 382.360                 & {\ul 1.359}                         & \textbf{0.524}             & 0.004                               & 55.313                               & 0.251                      \\ \hline
+Exponential                                  & 505.750                 & 1.161                               & 0.576                      & {\ul 0.011}                         & 54.989                               & 0.251                      \\ \hline
+Neural net.                                  & 473.924                 & 0.465                               & {\ul 1.882}                & 0.006                               & 51.616                               & \textbf{0.160}             \\ \hline
+Stratos                                      & {\ul 546.938}           & 0.965                               & 0.650                      & 0.004                               & {\ul 61.807}                         & {\ul 0.585}                \\ \hline
+Ensemble                                     & \textbf{356.315}        & \multicolumn{1}{l|}{\textbf{0.393}} & \multicolumn{1}{l|}{0.537} & \multicolumn{1}{l|}{\textbf{0.003}} & \multicolumn{1}{l|}{\textbf{50.147}} & \multicolumn{1}{l|}{0.256} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -37,14 +36,14 @@ Ensemble                                     & \textbf{356.31452}        & \mult
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{airmiles}                                            & \multicolumn{2}{c|}{Memory}      & \multicolumn{2}{c|}{CPU}            \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE}                  & \multicolumn{1}{c|}{MAPE}    & MSE              & MAPE          & MSE              & MAPE             \\ \hline
-ARIMA                                        & 1,412.94416                               & 0.72068                      & 7.59887          & 0.07539       & 2.97641          & 0.03593          \\ \hline
-Exponential                                  & 1,370.47426                               & \textbf{0.43516}             & 8.86926          & 0.02381       & 3.15038          & {\ul 0.04807}    \\ \hline
-Neural net.                                  & {\ul 2,400.57153}                         & 0.71841                      & \textbf{7.13630} & {\ul 0.15322} & \textbf{2.79244} & 0.03130          \\ \hline
-Stratos                                      & 1,367.01715                               & {\ul 0.92456}                & {\ul 11.73576}   & 0.04637       & {\ul 5.69167}    & \textbf{0.02372} \\ \hline
-Ensemble                                     & \multicolumn{1}{l|}{\textbf{1,361.41694}} & \multicolumn{1}{l|}{0.58676} & 7.25582          & 0.09773       & 2.87274          & 0.02738          \\ \hline
+ARIMA                                        & 1,412.944                               & 0.721                      & 7.599          & 0.075       & 2.976          & 0.034          \\ \hline
+Exponential                                  & 1,370.474                               & \textbf{0.435}             & 8.869          & 0.024       & 3.150          & {\ul 0.048}    \\ \hline
+Neural net.                                  & {\ul 2,400.572}                         & 0.718                      & \textbf{7.136} & {\ul 0.153} & \textbf{2.792} & 0.031          \\ \hline
+Stratos                                      & 1,367.017                               & {\ul 0.925}                & {\ul 11.736}   & 0.046       & {\ul 5.692}    & \textbf{0.024} \\ \hline
+Ensemble                                     & \multicolumn{1}{l|}{\textbf{1,361.417}} & \multicolumn{1}{l|}{0.587} & 7.256          & 0.098       & 2.873          & 0.027          \\ \hline
 \end{tabular}
 \end{table}
 
-Boldfaced cells contain the smallest error values for each dataset column, whereas underlined cells contain the worst performance observed for each dataset among all methods. 
+Boldfaced cells contain the smallest error values for each dataset column, whereas underlined cells contain the worst performance observed for each dataset among all methods.
 
 According to the results obtained, the existing model from Stratos suffers from errors of the largest magnitude in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
