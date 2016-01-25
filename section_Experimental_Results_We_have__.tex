@@ -18,22 +18,25 @@ Stratos                                      & 546.93791                & 0.9651
 Ensemble                                     & 356.31452                & \multicolumn{1}{l|}{0.39285} & \multicolumn{1}{l|}{0.53734} & \multicolumn{1}{l|}{0.00309} & \multicolumn{1}{l|}{50.14736} & \multicolumn{1}{l|}{0.25598} \\ \hline
 \end{tabular}
 \end{table}
-
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
-\caption{Comparison of performance of different models}
+\caption{My caption}
+\label{my-label}
 \begin{tabular}{|l|r|r|r|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{airmiles}                                   & \multicolumn{2}{l|}{Memory} & \multicolumn{2}{l|}{CPU} \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE}         & \multicolumn{1}{c|}{MAPE}    & MSE           & MAPE        & MSE         & MAPE       \\ \hline
-ARIMA                                        & 1,412.94416                      & 0.72068                      & 7.59887       & 0.07539     & 2.97641     & 0.03593    \\ \hline
-Exponential                                  & 1,370.47426                      & 0.43516                      & 8.86926       & 0.02381     & 3.15038     & 0.04807    \\ \hline
-Neural net.                                         & 2,400.57153                      & 0.71841                      & 7.13630       & 0.15322     & 2.79244     & 0.03130    \\ \hline
-Stratos                                      & 1,367.01715                      & 0.92456                      & 11.73576      & 0.04637     & 5.69167     & 0.02372    \\ \hline
-Ensemble                                     & \multicolumn{1}{l|}{1,361.41694} & \multicolumn{1}{l|}{0.58676} & 7.25582       & 0.09773     & 2.87274     & 0.02738    \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{airmiles}                                            & \multicolumn{2}{l|}{Memory}      & \multicolumn{2}{l|}{CPU}            \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE}                  & \multicolumn{1}{c|}{MAPE}    & MSE              & MAPE          & MSE              & MAPE             \\ \hline
+ARIMA                                        & 1,412.94416                               & 0.72068                      & 7.59887          & 0.07539       & 2.97641          & 0.03593          \\ \hline
+Exponential                                  & 1,370.47426                               & \textbf{0.43516}             & 8.86926          & 0.02381       & 3.15038          & {\ul 0.04807}    \\ \hline
+Neural net.                                  & {\ul 2,400.57153}                         & 0.71841                      & \textbf{7.13630} & {\ul 0.15322} & \textbf{2.79244} & 0.03130          \\ \hline
+Stratos                                      & 1,367.01715                               & {\ul 0.92456}                & {\ul 11.73576}   & 0.04637       & {\ul 5.69167}    & \textbf{0.02372} \\ \hline
+Ensemble                                     & \multicolumn{1}{l|}{\textbf{1,361.41694}} & \multicolumn{1}{l|}{0.58676} & 7.25582          & 0.09773       & 2.87274          & 0.02738          \\ \hline
 \end{tabular}
 \end{table}
-
 
 Highlighted cells contain the smallest error values for each dataset column, whereas underlined cells contain the worst performance observed for each dataset among all methods. 
 
