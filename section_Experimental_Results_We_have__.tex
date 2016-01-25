@@ -3,6 +3,8 @@
 
 We have implemented the prediction algorithm in R using time series and machine learning model implementations in the forecast package. We have tested it against the publicly available datasets mentioned in Section 4.2, as well as several real world cloud workload datasets \cite{AutoscaleAnalyser} collected from server applications.
 
+The cloud workload dataset we have used in the evaluation consists of a portion of system statistics obtained from a Linux server with a Quad-Core AMD Opteron CPU and 16 GB of RAM. We have also used a portion of the Google cluster dataset \cite{GoogleClusterData}, which includes a time series of task details, in evaluating our ensemble model. Due to the large size of the dataset, we have summarized it to a suitably concise set of values by summing up numbers of started tasks in each time unit over the transformed time scale.
+
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % \usepackage[normalem]{ulem}
