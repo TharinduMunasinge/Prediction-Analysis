@@ -28,7 +28,7 @@ $$AE_t=|\hat{x}_t-x_t|$$
 $$SE_t=(\hat{x}_t-x_t)^2$$
 
 \noindent
-Where as \textit{Absolute Percentage/Relative Error} is sensitive to errors in small actual values and is defined as:
+Whereas \textit{Absolute Percentage/Relative Error} is sensitive to errors related to values of small magnitudes and is defined as:
 $$APE_t=100\left |\frac{\hat{x}_t-x_t}{x_t}  \right |$$
 
 \subsubsection{Average Error Over Prediction History}
@@ -58,8 +58,7 @@ A neural network can capture complex nonlinear relationships within a time serie
 
 Contrary to the general belief that ARIMA is more general than exponential models, there are no equivalent ARIMA models for some of the nonlinear exponential models (e.g., the exponential trend model) \cite{AHyndman 2013}. Therefore, to preserve generality, we also choose the exponential model as part of our ensemble solution.
 
-There is a possibility that the above models may produce out-of-range forecasts, especially in the case of early-stage neural networks. We compensate this with a naive forecast model, which reproduces the last data point as a forecast for the next interval, added as part of the complete ensemble model.
-
+There is a possibility that the above models may produce out-of-range forecasts, especially in the case of early-stage neural networks. To compensate for this, we use a naive forecast model which forecasts the last known data point for the next interval as well.
 
 \subsection{Proposed Prediction Algorithm}
 Proposed workload prediction technique can be explained using the following algorithm:
