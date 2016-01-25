@@ -7,7 +7,6 @@ subsection_Observations_Figure_1_to__.tex
 figures/Rplot2/Rplot2.png
 figures/Rplot1/Rplot1.png
 figures/Rplot03/Rplot03.png
-figures/Rplot05/Rplot05.png
 figures/Rplot06/Rplot06.png
 section_Proposed_Ensemble_Prediction_Method__.tex
 section_Experimental_Results_We_have__.tex
