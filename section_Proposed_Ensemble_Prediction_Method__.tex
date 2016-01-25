@@ -2,7 +2,7 @@
 
 We propose an error-based ensemble technique for workload prediction. Our approach tries to address situations where offline training is not possible due to workload history data not being available at the beginning of the prediction process. While the auto-scaler is in operation, workload history gets accumulated based on the user's workload requirement (e.g., CPU, memory, and request count). However, the prediction method should still be able to predict the future time horizon based on the initially available dataset. After the initial predictions, actual data will become available for the next time periods, so that we can accumulate the latest actual data into the workload history and use them for the next forecast horizon.
 
-In existing error-based combining techniques, mean values of error metrics (e.g., absolute error, absolute percentage error, squared error, etc.) are taken into account while calculating the contribution factors for individual methods. 
+In existing error-based combining techniques, mean values of error metrics (e.g., absolute error, absolute percentage error, squared error, etc.) are taken into account while calculating the contributing factors for individual methods. 
 
 Considering the currently available dataset in the time series as
 $X=[x_{1},x_{2},.. x_{t}]$
@@ -17,40 +17,37 @@ where $w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$. As $\sum_{j=1}^{k}w_{j}=1$, this
 To determine the optimal contribution coefficients in our proposed ensemble technique, we use past forecast errors for each model. In our prediction problem, accuracy of the prediction of the next time horizon is more significant. Hence, the contributions are calculated using inverses of the past forecasting error measures. There are various choices for error measurement, and next we discuss several selected measures.
 
 \subsubsection{Error of the Most Recent Prediction}
-This model does not capture overall accuracy; it only captures how accurately the last prediction has been calculated by the model. if the model has repeatedly made large errors in past predictions except the most recent one, contribution coefficients are biased and may lead to error-prone decisions.
+This model only captures how accurately the last prediction has been calculated by the model. Hence, it does not capture the overall accuracy. If the model has repeatedly made large errors in past predictions, except the most recent one, contribution coefficients are biased and may lead to error-prone decisions.
 
 \noindent
-\textit{Absolute Error of the Last Prediction:}
+\textit{Absolute Error of the Last Prediction} can be defined as follows:
 $$AE_t=|\hat{x}_t-x_t|$$
 
 \noindent
-\textit{Squared error of the Last Prediction:}
+\textit{Squared error of the Last Prediction}, which penalizes errors more efficiently than the absolute error, can be defined as follows:
 $$SE_t=(\hat{x}_t-x_t)^2$$
-penalizes errors more efficiently than the absolute error.
 
 \noindent
-\textit{Absolute Percentage/Relative Error:}
+Where as \textit{Absolute Percentage/Relative Error} is sensitive to errors in small actual values and is defined as:
 $$APE_t=100\left |\frac{\hat{x}_t-x_t}{x_t}  \right |$$
-is sensitive to errors in small actual values.
 
-\subsubsection{Average Error over Prediction History}
-This captures the overall error in past predictions, where all past errors have the same level of significance. If a method has produced larger errors in older predictions, the contribution may be reduced significantly even though it may be producing the best predictions for more recent values.
+\subsubsection{Average Error Over Prediction History}
+This measure captures the overall error in past predictions, where all past errors have the same level of significance. If a method has produced larger errors in past predictions, the contribution may be reduced significantly even though it may be producing the best predictions for more recent values.
 
 \noindent
-\textit{Mean Absolute Error/Root Mean Squared Error:}
+In this case \textit{Mean Absolute Error/Root Mean Squared Error} can be defined as:
 $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$ 
 
 \noindent
-\textit{Mean Absolute Percentage Error:}
+Whereas \textit{Mean Absolute Percentage Error} is defined as:
 $$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
-When calculating contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so we can calculate the contribution as the errors are fitted under the exponential model. Here, contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$\textsuperscript{th} model at the $t$\textsuperscript{th} time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error or absolute relative error at $t$\textsuperscript{th} prediction.
+While calculating the contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, the average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so that we can calculate the contribution as the errors are fitted under the exponential model. Here, the contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$-th model at the $t$-th time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error, or absolute relative error at $t$-th prediction. $b_{i,t}$ can be defined as follows:
 
-\begin{multline}
-b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1} \ \mathrm{where} \ 0\leq \alpha \leq 1	\\ 
-b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. \  \\
- c_{i,t}=\frac{1}{b_{i,t}}
-\end{multline}
+$$b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1}$$
+where \ 0\leq \alpha \leq 1	\\
+$$b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. $$
+$$c_{i,t}=\frac{1}{b_{i,t}}$$
 
 \subsection{Selection of Models}
 The abovementioned error based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture different characteristics of datasets.
