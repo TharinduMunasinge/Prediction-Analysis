@@ -5,6 +5,7 @@ section_Evaluation_of_Existing_Models__.tex
 subsection_Error_Measures_For_quantitative__.tex
 subsection_Observations_Figure_1_to__.tex
 figures/Screenshot from 2016-01-25 14:50:50/Screenshot from 2016-01-25 14:50:50.png
+figures/Rplot2/Rplot2.png
 figures/Screenshot from 2016-01-25 15:47:32/Screenshot from 2016-01-25 15:47:32.png
 figures/Rplot1/Rplot1.png
 figures/Rplot03/Rplot03.png
