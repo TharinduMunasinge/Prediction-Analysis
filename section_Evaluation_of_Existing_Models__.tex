@@ -1,6 +1,6 @@
 \section{Evaluation of Existing Models}
 
-In this analysis, we quantitatively and qualitatively analyze the ability of several prediction techniques to learn from the current workload history, and then predict future workload while the workload itself is evolving, similar to what happens in case of an auto-scaler in operation. We simulated an online training scenario by streaming data points of the workload time series one at a time to each prediction technique. We then plotted the one-step lookahead predictions from the resulting prediction technique at each stage, against the real data points. For evaluation purpose, we used the forecast package in R \cite{forecastPackage} which contains time series datasets in different domains with typical patterns like trends, cycles and seasonality factors.
+In this analysis, we quantitatively and qualitatively analyze the ability of several prediction techniques to learn from the current workload history, and then predict future workload while the workload itself is evolving, similar to what happens in case of an auto scaler in operation. We simulated an online training scenario by streaming data points of the workload time series one at a time to each prediction technique. We then plotted the one-step lookahead predictions from the resulting prediction technique at each stage, against the real data points. For evaluation purpose, we used the forecast package in R \cite{forecastPackage} which contains time series datasets in different domains with typical patterns like trends, cycles and seasonality factors.
 
 Section 3.1 presents the workloads used for the evaluation while Section 3.2 describes the time series prediction techniques selected for the evaluation. Simulation setup is presented in Section 3.3. Evaluation of selected techniques under selected workloads is presented in Section 3.4.
 
@@ -72,6 +72,7 @@ Apache Stratos is an open source PaaS framework where a user can build a PaaS sy
 S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 \hat{x}_{t+h}=avg(x)_{t} + S_{t+h|t} 
 \end{eqnarray}
+where $S_{t+h|t}$ is the ..... <<Briefly list all related variables>>
 
 \begin{table}[]
 \centering
