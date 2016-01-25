@@ -4,6 +4,7 @@ Existing_Works.tex
 section_Evaluation_of_Existing_Models__.tex
 subsection_Error_Measures_For_quantitative__.tex
 subsection_Observations_Figure_1_to__.tex
+figures/RplotCPU/RplotCPU.png
 figures/Rplot1/Rplot1.png
 figures/Rplot03/Rplot03.png
 figures/Rplot05/Rplot05.png
