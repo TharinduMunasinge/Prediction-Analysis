@@ -12,4 +12,5 @@ figures/Rplot11/Rplot11.png
 section_Proposed_Ensemble_Prediction_Method__.tex
 section_Experimental_Results_We_implemented__.tex
 figures/Rplot5/Rplot5.png
+figures/Rplot12/Rplot12.png
 section_Summary_Providing_better_QoS__.tex
