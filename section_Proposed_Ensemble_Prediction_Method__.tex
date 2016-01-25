@@ -45,30 +45,30 @@ $$MAPE=\frac{1}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |
 While calculating the contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, the average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so that we can calculate the contribution as the errors are fitted under the exponential model. Here, the contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$-th model at the $t$-th time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error, or absolute relative error at $t$-th prediction. $b_{i,t}$ can be defined as follows:
 
 $$b_{i,t}= \alpha e_t + (1-\alpha)b_{i,t-1}$$
-where \ 0\leq \alpha \leq 1	\\
+where $0\leq \alpha \leq 1$
 $$b_{i,t}=\alpha e_t + \alpha(1-\alpha)e_{t-1}+\alpha(1-\alpha)^2e_{t-1}+\alpha(1-\alpha)^3e_{t-1}+ . .. $$
 $$c_{i,t}=\frac{1}{b_{i,t}}$$
 
 \subsection{Selection of Models}
-The abovementioned error based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture different characteristics of datasets.
+The above mentioned error based, weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture the different characteristics of datasets.
 
-ARIMA pre-assumes a linear form of the model. That is, a linear correlation structure is assumed among the time series values; therefore non-linear patterns can not be captured by the ARIMA model \cite{Zhang_2003}. On the other hand, seasonal ARIMA models can fit the seasonal factors of the time series accurately.
+ARIMA assumes a linear form of the model, i.e., a linear correlation structure is assumed among the time series values. Therefore, it cannot capture non-linear patterns \cite{Zhang_2003}. Alternatively, seasonal ARIMA models can fit the seasonal factors of the time series accurately.
 
-A neural network can capture complex nonlinear relationships within a time series. It has a data driven approach which can extract patterns within time series without predefined knowledge on the relationships inside data. But neural networks require sufficiently large amounts of data points in order to accurately identify patterns. Observations in Section 3 also show that neural networks make larger errors in initial stages due to lack of data points, but perform extremely well after they correctly identify the relationships. Training time of neural networks is also significant. Since we propose real-time training, the data point history should not be allowed to grow arbitrarily, which would slow down the prediction process.
+A neural network can capture complex nonlinear relationships within a time series. It has a data driven approach which can extract patterns within a time series without predefined knowledge on the relationships inside data. But neural networks require sufficiently large amounts of data points to accurately identify patterns. Observations in Section 3 also show that neural networks make larger errors in initial stages due to lack of data, but perform well after they correctly identify the relationships. Time to train a neural networks is also significant factor. As we propose real-time training, the data point history should not be allowed to grow arbitrarily large, which would slow down the prediction process.
 
 Contrary to the general belief that ARIMA is more general than exponential models, there are no equivalent ARIMA models for some of the nonlinear exponential models (e.g., the exponential trend model) \cite{AHyndman 2013}. Therefore, to preserve generality, we also choose the exponential model as part of our ensemble solution.
 
-There is a possibility of the above models producing out-of-range forecasts, especially in case of early-stage neural networks. We compensate this with a naive forecast model, which reproduces the last data point as a forecast for the next interval, added as part of the complete ensemble model.
+There is a possibility that the above models may produce out-of-range forecasts, especially in the case of early-stage neural networks. We compensate this with a naive forecast model, which reproduces the last data point as a forecast for the next interval, added as part of the complete ensemble model.
 
 
-\subsubsection{Prediction Algorithm}
-
+\subsection{Proposed Prediction Algorithm}
+Proposed workload prediction technique can be explained using the following algorithm:
 \begin{enumerate}
 \item Consider the time series history window at time $t$, $X=[x_{1},x_{2},.. x_{t}]$.
-\item Calculate forecast value from the $i$\textsuperscript{th} method over the horizon $h$, $\hat{x}_{(t+h)}^{(i)} \forall i \in \{1,2,3,...,k\}$.
-\item Fit a history window of the last $t$ actual data points using the $i$\textsuperscript{th} method.
-\item Use an exponential smoothing model to fit the errors resulting from step 3, and use them to calculate the contribution factor for the $i$\textsuperscript{th} model at $t$, $c_{(i,t)}$.
+\item Calculate forecast value from the $i$-th time series forecasting method over the time horizon $h$, $\hat{x}_{(t+h)}^{(i)} \forall i \in \{1,2,3,...,k\}$, where $k$ is the number of forecasting methods used.
+\item Fit a history window for the last $t$ actual data points using the $i$-th method.
+\item Use an exponential smoothing model to fit the errors resulting from Step 3, and use them to calculate the contribution factor for the $i$-th model at $t$, $c_{(i,t)}$.
 \item Calculate the point forecast for time $t+h$ using
 $\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$.
-\item At time $t+1$, actual value for time $t+1$ will be available. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from step 2.
+\item At time $t+1$, actual value for time $t+1$ will be available. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from Step 2.
 \end{enumerate}
