@@ -23,7 +23,6 @@ Ensemble                                     & \textbf{356.315}        & \multic
 \end{tabular}
 \end{table}
 
-
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % \usepackage[normalem]{ulem}
@@ -32,15 +31,15 @@ Ensemble                                     & \textbf{356.315}        & \multic
 \centering
 \caption{Comparison of performance of different models}
 \label{my-label}
-\begin{tabular}{|l|r|r|r|l|l|l|}
+\begin{tabular}{|l|r|r|r|r|r|r|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{airmiles}                                            & \multicolumn{2}{c|}{Memory}      & \multicolumn{2}{c|}{CPU}            \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE}                  & \multicolumn{1}{c|}{MAPE}    & MSE              & MAPE          & MSE              & MAPE             \\ \hline
-ARIMA                                        & 1,412.944                               & 0.721                      & 7.599          & 0.075       & 2.976          & 0.034          \\ \hline
-Exponential                                  & 1,370.474                               & \textbf{0.435}             & 8.869          & 0.024       & 3.150          & {\ul 0.048}    \\ \hline
-Neural net.                                  & {\ul 2,400.572}                         & 0.718                      & \textbf{7.136} & {\ul 0.153} & \textbf{2.792} & 0.031          \\ \hline
-Stratos                                      & 1,367.017                               & {\ul 0.925}                & {\ul 11.736}   & 0.046       & {\ul 5.692}    & \textbf{0.024} \\ \hline
-Ensemble                                     & \multicolumn{1}{l|}{\textbf{1,361.417}} & \multicolumn{1}{l|}{0.587} & 7.256          & 0.098       & 2.873          & 0.027          \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{Google Cluster}                   & \multicolumn{2}{c|}{Memory}                & \multicolumn{2}{l|}{CPU}                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} & RMSE           & \multicolumn{1}{l|}{MAPE} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE} \\ \hline
+ARIMA                                        & 12.963                    & 0.051                     & 7.601          & 0.075                     & 2.976                     & 0.036                     \\ \hline
+Exponential                                  & 12.886                    & 0.041                     & 8.870          & \textbf{0.024}            & 3.150                     & {\ul 0.048}               \\ \hline
+Neural net.                                  & 12.530                    & 0.036                     & \textbf{7.136} & {\ul 0.153}               & \textbf{2.792}            & 0.031                     \\ \hline
+Stratos                                      & {\ul 19.757}              & {\ul 0.116}               & {\ul 11.736}   & 0.046                     & {\ul 5.692}               & \textbf{0.024}            \\ \hline
+Ensemble                                     & \textbf{11.934}           & \textbf{0.027}            & 7.256          & 0.098                     & 2.873                     & 0.027                     \\ \hline
 \end{tabular}
 \end{table}
 
