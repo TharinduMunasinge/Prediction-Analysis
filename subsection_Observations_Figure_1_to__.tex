@@ -10,8 +10,8 @@ According to the results obtained, there is no single model which performs well 
 \caption{Comparison of errors from MSE and MAPE}
 \begin{tabular}{|l|l|r|r|r|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                     & \multicolumn{2}{c|}{Euretail}                        \\ \cline{2-5} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                     & \multicolumn{2}{c|}{Euretail}                        \\ \cline{2-5}
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
 ARIMA                                        & 382.360                & 1.359                   & 0.524                  & 0.004                   \\ \hline
 Exponential                                  & 505.750                & 1.161                   & 0.576                  & 0.011                   \\ \hline
 Neural net.                                  & 473.924                & 0.465                   & 1.882                  & 0.006                   \\ \hline
@@ -21,12 +21,12 @@ Current                                      & 546.938                & 0.965   
 
 \begin{table}[]
 \centering
-\caption{Comparison of errors from MSE and MAPE}
+\caption{Comparison of errors from RMSE and MAPE}
 \label{my-label}
 \begin{tabular}{|l|r|r|r|r|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{oil}                             & \multicolumn{2}{c|}{airmiles}                        \\ \cline{2-5} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
 ARIMA                                        & 55.313                 & 0.251                   & 1,412.944              & 0.721                   \\ \hline
 Exponential                                  & 54.989                 & 0.251                   & 1,370.474              & 0.435                   \\ \hline
 Neural net.                                  & 51.616                 & 0.159                   & 2,400.572              & 0.718                   \\ \hline
