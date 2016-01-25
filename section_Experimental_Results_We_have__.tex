@@ -11,17 +11,16 @@ The cloud workload dataset we have used in the evaluation consists of a portion 
 % \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
-\caption{Comparison of performance of different models}
-\label{my-label}
+\caption{Comparison of performance on standard datasets}
 \begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                                  & \multicolumn{2}{c|}{Euretail}                                        & \multicolumn{2}{c|}{oil}                                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                                  & \multicolumn{2}{c|}{euretail}                                        & \multicolumn{2}{c|}{oil}                                              \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}    & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}              & \multicolumn{1}{c|}{MAPE}    \\ \hline
 ARIMA                                        & 382.360                 & {\ul 1.359}                         & \textbf{0.524}             & 0.004                               & 55.313                               & 0.251                      \\ \hline
 Exponential                                  & 505.750                 & 1.161                               & 0.576                      & {\ul 0.011}                         & 54.989                               & 0.251                      \\ \hline
 Neural net.                                  & 473.924                 & 0.465                               & {\ul 1.882}                & 0.006                               & 51.616                               & \textbf{0.160}             \\ \hline
 Stratos                                      & {\ul 546.938}           & 0.965                               & 0.650                      & 0.004                               & {\ul 61.807}                         & {\ul 0.585}                \\ \hline
-Ensemble                                     & \textbf{356.315}        & \multicolumn{1}{l|}{\textbf{0.393}} & \multicolumn{1}{l|}{0.537} & \multicolumn{1}{l|}{\textbf{0.003}} & \multicolumn{1}{l|}{\textbf{50.147}} & \multicolumn{1}{l|}{0.256} \\ \hline
+Ensemble                                     & \textbf{356.315}        & \textbf{0.393} & 0.537 & \textbf{0.003} & \textbf{50.147} & 0.256 \\ \hline
 \end{tabular}
 \end{table}
 
@@ -31,11 +30,10 @@ Ensemble                                     & \textbf{356.315}        & \multic
 % \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
-\caption{Comparison of performance of different models}
-\label{my-label}
+\caption{Comparison of performance on cloud datasets}
 \begin{tabular}{|l|r|r|r|r|r|r|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{Google Cluster}                   & \multicolumn{2}{c|}{Memory}                & \multicolumn{2}{l|}{CPU}                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{Google Cluster}                   & \multicolumn{2}{c|}{Memory}                & \multicolumn{2}{c|}{CPU}                              \\ \cline{2-7} 
 \multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} & RMSE           & \multicolumn{1}{l|}{MAPE} & \multicolumn{1}{l|}{RMSE} & \multicolumn{1}{l|}{MAPE} \\ \hline
 ARIMA                                        & 12.963                    & 0.051                     & 7.601          & 0.075                     & 2.976                     & 0.036                     \\ \hline
 Exponential                                  & 12.886                    & 0.041                     & 8.870          & \textbf{0.024}            & 3.150                     & {\ul 0.048}               \\ \hline
