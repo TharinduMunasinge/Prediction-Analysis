@@ -46,4 +46,6 @@ Ensemble                                     & \textbf{11.934}           & \text
 
 Boldfaced cells contain the smallest error values for each dataset under evaluation, whereas underlined cells contain the worst performance observed for each dataset among all methods.
 
+Figure 6 represents how each individual forecasting model fits the Google cluster dataset. It can be observed that the first three models show smoothened predictions, the Stratos prediction model generates rapid fluctuations and values that are significantly off the range relative to actual values. Although the ensemble model shows smoothened predictions at the start, it eventually manages to capture finer details of the series as the available dataset grows in the course of online training.
+
 According to the results obtained, the existing model from Stratos suffers from errors of the largest magnitude in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
