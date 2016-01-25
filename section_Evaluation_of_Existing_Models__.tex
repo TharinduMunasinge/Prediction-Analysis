@@ -40,11 +40,7 @@ By combining differencing with autoregression and a moving average model, non-se
 
 $$	{x}'_t = c+ \phi_1{x}'_{ t-1} + \phi_2{x}'_{t-2} +...+ \phi_p{x}'_{t-p} + e_{t} + \theta_1e_{ t-1} + \theta_2e_{t-2} +...+ \theta_qe_{t-q}$$
 
-\begin{align}
-  X &= Y + Z \label{eqn:1} \\
-    &\leq U \times W. \nonumber \\
-    & = Y + Z \tag{a}
-\end{align}
+
 
 The \textit{predictors} on the right hand side include both the lagged values of $X_t$ and lagged errors. This is called an ARIMA($p$, $d$, $q$) model, where $p$ and $q$ are the orders of the autoregressive and moving average parts respectively, and $d$ is the degree of first differencing involved.
 
