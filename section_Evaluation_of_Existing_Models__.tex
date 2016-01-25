@@ -12,22 +12,22 @@ Following datasets from the R forecast package is selected for the evaluation:
 \item airmiles -- The revenue from passenger miles flown by commercial airlines in the United States for each year from 1937 - 1960.
 \item euretail -- Quarterly retail trade index in the Euro area (17 countries) from 1996 - 2011, covering wholesale and retail trade, and repair of motor vehicles and motorcycles (Index: 2005 = 100).
 \item sunspotarea -- Annual averages of the daily sunspot areas (in units of millionths of a hemisphere) for the full sun.
-\item oil -- Annual oil production (millions of tonnes) from Saudi Arabia between 1965 - 2010.
 \end{itemize}
 
 \subsection{Time Series Forecasting Techniques}
 We chose three widely used prediction methods from literature, namely ARIMA, neural network, and exponential models, as well as the existing workload prediction technique in Apache Stratos.
 
 \subsubsection{ARIMA}
-Autoregressive Integrated Moving Average (ARIMA) model combines two models called autoregression (of order $p$) and moving average (of order $q$).\\
+Autoregressive Integrated Moving Average (ARIMA) model combines two models called autoregression (of order $p$) and moving average (of order $q$).
 
 \noindent
 \textit{Autoregression Model AR($p$) --}
 In an autoregression model, the variable of interest is forecast using a linear combination of past values of the variable. The term autoregression indicates that it is a regression of the variable against itself. Thus, an autoregressive model of order $p$ can be written as:
 	$$x_t = c + \phi_1x_{ t-1} + \phi_2x_{t-2} +...+ \phi_px_{t-p} + e_{t}$$
-where $c$ is a constant and $e_t$ is white noise (list of Symbols are given in Table 1). Autoregressive models are typically restricted to stationary data, and then some constraints are applied on the values of the parameters \cite{Forecasting_OTexts} as follows: \\
-    For an AR(1) model: $-1 < \phi_{1} < 1$ \\
-    For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - \phi_{1} < 1$ \\
+where $c$ is a constant and $e_t$ is white noise (list of Symbols are given in Table 1). Autoregressive models are typically restricted to stationary data, and then some constraints are applied on the values of the parameters \cite{Forecasting_OTexts} as follows:
+
+    For an AR(1) model: $-1 < \phi_{1} < 1$
+    For an AR(2) model: $-1 < \phi_{2} < 1$ ,$\phi_{2}+ \phi_{1} < 1$ , $\phi_{2} - \phi_{1} < 1$
 
 \noindent
 \textit{Moving Average Model MA($q$) --}
@@ -43,7 +43,6 @@ The \textit{predictors} on the right hand side include both the lagged values of
 \subsubsection{Neural Networks}
 Artificial Neural Networks (ANNs) are a class of nonlinear, and data-driven models which are inspired by the working mechanism of human brain. In the domain of time series forecasting, neural network is an excellent alternative for existing statistical models which require some assumptions to be satisfied in the time series. Ability of modeling nonlinear relationships is the major advantage in neural networks. Depending on the topology of the network there are various types of neural networks which are suitable for various machine learning tasks. Auto regressive feed forward neural networks \cite{Forecasting_OTexts} are the specialized neural networks in the time series forecasting domain. They consist of a feed forward structure of three types of layers, an input layer, one or more hidden layer, and an output layer. Each layer consists with nodes, which connected to those in the immediate next layer by acyclic links which have associated weights. In auto regressive neural networks, lagged values of the time series (input window) are injected as the inputs and train the weights of the model to forecast for a given time horizon by using the past history of the dataset. 
 
-
 \subsubsection{Exponential Model}
 Several selected versions of exponential models are presented next.
 
@@ -51,12 +50,11 @@ Several selected versions of exponential models are presented next.
 \textit{Exponential Weighted Moving Average (EWMA)} --
 In EWMA methods, forecasts are calculated using weighted averages where the weights decrease exponentially as the observations come from further in the past. The smallest weights are associated with the oldest observations \cite{Forecasting_OTexts}, \cite{STAT510}, \cite{StatSoft}. Exponential smoothing can be indicated by the following equation:
 
-\noindent
 	$$\hat{x}_{t+1|t}=\alpha x_t +\alpha(1-\alpha)\hat{x}_{t|t-1}$$
-	$$\hat{x}_{t+1|t}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+\alpha(1-\alpha)^3x_{t-3}+...$$
+	$$\hat{x}_{t+1|t}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+...$$
 where $0\leq \alpha \leq 1$ is the smoothing parameter. $\hat{x}_{t+1|t}$, the one-step-ahead forecast for time $t+1$, is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e., close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
-Following variations of basic exponential smoothing are suitable for forecasting time series with various characteristics \cite{AHyndman 2013}:
+Following variations of basic exponential smoothing are suitable for forecasting time series with various characteristics \cite{Forecasting_OTexts}:
 
 \begin{itemize}
 \item \textit{Double Exponential Smoothing} -- Applicable to a time-series with a linear trend.
@@ -66,7 +64,6 @@ Following variations of basic exponential smoothing are suitable for forecasting
 \item \textit{Damped Trend method} -- Dampens the trend to a flat line some time in the future to model the general nature of practical time series.
 \item \textit{Holt-Winters Seasonal method} -- Applicable to a time series with adaptive or multiplicative trends and seasonality.
 \end{itemize}
-
 
 \subsubsection{Prediction method in Apache Stratos}
 Apache Stratos is an open source PaaS framework where a user can build a PaaS system on top of an existing IaaS cloud. The auto scaling solution in Stratos uses a workload demand prediction method which can be explained using the motion equation in physics. The method calculates one lookahead prediction using the workload demand in the last period as follows \cite{StratosModel}:
@@ -88,7 +85,6 @@ $a_{t}$         & Second derivative of the workload metrics within the $t$-th in
 $h$             & Time horizon                    
 \end{tabular}
 \end{table}
-
 
 \subsection{Time Series Forecasting Library}
 
