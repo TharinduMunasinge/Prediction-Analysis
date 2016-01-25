@@ -4,20 +4,27 @@
 We have implemented the prediction algorithm in R using time series and machine learning model implementations in the forecast package. We have tested it against the publicly available datasets mentioned in Section 4.2, as well as several real world cloud workload datasets [GITHUB LINK FOR DATASET] collected from server applications.
 % Please add the following required packages to your document preamble:
 
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
-\caption{Comparison of performance of different models}
+\caption{My caption}
+\label{my-label}
 \begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                        & \multicolumn{2}{c|}{Euretail}                               & \multicolumn{2}{c|}{oil}                                     \\ \cline{2-7} 
-\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{MSE} & \multicolumn{1}{c|}{MAPE}    & \multicolumn{1}{c|}{MSE}     & \multicolumn{1}{c|}{MAPE}    & \multicolumn{1}{c|}{MSE}      & \multicolumn{1}{c|}{MAPE}    \\ \hline
-Arima                                        & 382.36019                & 1.35863                      & 0.52439                      & 0.00417                      & 55.31262                      & 0.25081                      \\ \hline
-Exponential                                  & 505.75034                & 1.16073                      & 0.57553                      & 0.01071                      & 54.98904                      & 0.25078                      \\ \hline
-Neural net.                                         & 473.92407                & 0.46524                      & 1.88208                      & 0.00618                      & 51.61619                      & 0.15951                      \\ \hline
-Stratos                                      & 546.93791                & 0.96513                      & 0.65035                      & 0.00391                      & 61.80686                      & 0.58458                      \\ \hline
-Ensemble                                     & 356.31452                & \multicolumn{1}{l|}{0.39285} & \multicolumn{1}{l|}{0.53734} & \multicolumn{1}{l|}{0.00309} & \multicolumn{1}{l|}{50.14736} & \multicolumn{1}{l|}{0.25598} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                                  & \multicolumn{2}{c|}{Euretail}                                        & \multicolumn{2}{c|}{oil}                                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}    & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}              & \multicolumn{1}{c|}{MAPE}    \\ \hline
+Arima                                        & 382.36019                 & {\ul 1.35863}                         & \textbf{0.52439}             & 0.00417                               & 55.31262                               & 0.25081                      \\ \hline
+Exponential                                  & 505.75034                 & 1.16073                               & 0.57553                      & {\ul 0.01071}                         & 54.98904                               & 0.25078                      \\ \hline
+Neural net.                                  & 473.92407                 & 0.46524                               & {\ul 1.88208}                & 0.00618                               & 51.61619                               & \textbf{0.15951}             \\ \hline
+Stratos                                      & {\ul 546.93791}           & 0.96513                               & 0.65035                      & 0.00391                               & {\ul 61.80686}                         & {\ul 0.58458}                \\ \hline
+Ensemble                                     & \textbf{356.31452}        & \multicolumn{1}{l|}{\textbf{0.39285}} & \multicolumn{1}{l|}{0.53734} & \multicolumn{1}{l|}{\textbf{0.00309}} & \multicolumn{1}{l|}{\textbf{50.14736}} & \multicolumn{1}{l|}{0.25598} \\ \hline
 \end{tabular}
 \end{table}
+
+
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % \usepackage[normalem]{ulem}
