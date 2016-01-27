@@ -1,0 +1,67 @@
+
+\section{Experimental Results}
+
+We implemented the proposed ensemble-based prediction algorithm in R using time series and machine learning model implementations in the forecast package. For our ensemble solution we selected ARIMA, Neural Network, Exponential Model and Naive Prediction as the base models. After emperical  evaluation of various error measurements for contribution coefficient calculation, we used square root of the exponentially fitted squared  forecasting error as the error measure for calculating the contribution coefficients from each model (where $e_{i,t}$ is defined as $e_{(i,t)}=(x_t-\hat{x}^{(i)}_{t})^2$ in Equation 10 and $c_{(i,t)}=\frac{1}{\sqrt{b_{(i,t)}}}$ in Equation 11).
+
+We tested proposed technique against the publicly available datasets mentioned in Section 4.2, as well as several real-world cloud workloads \cite{AutoscaleAnalyser} collected from server applications. Our proposed solution is compared with each individual models in ensemble solution, two other popular ensemble techniques (mean ensemble, median ensemble), existing prediction technique in Apache Stratos and prediction model describes in \cite{Roy_2011}. 
+
+
+In addition to the cloud workload dataset used in Section 3, we also used a portion of the Google cluster dataset \cite{GoogleClusterData} in evaluating our ensemble model. The dataset includes a series of task execution details against their starting and ending times. Due to the large size of the dataset, we have summarized it to a suitably concise set of values by summing up numbers of started tasks in each time unit over the transformed time scale.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
+\centering
+\caption{Comparison of performance on standard datasets}
+\begin{tabular}{|l|l|r|r|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{sunspotarea}                                  & \multicolumn{2}{c|}{euretail}                                        & \multicolumn{2}{c|}{oil}                                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}    & \multicolumn{1}{c|}{MAPE}             & \multicolumn{1}{c|}{RMSE}              & \multicolumn{1}{c|}{MAPE}    \\ \hline
+ARIMA                                        & 382.360                 & {\ul 1.359}                         & \textbf{0.524}             & 0.004                               & 55.313                               & 0.251                      \\ \hline
+Exponential                                  & 505.750                 & 1.161                               & 0.576                      & {\ul 0.011}                         & 54.989                               & 0.251                      \\ \hline
+Neural net.                                  & 473.924                 & 0.465                               & {\ul 1.882}                & 0.006                               & 51.616                               & \textbf{0.160}             \\ \hline
+Stratos                                      & {\ul 546.938}           & 0.965                               & 0.650                      & 0.004                               & {\ul 61.807}                         & {\ul 0.585}                \\ \hline
+ARMA config.\tnote{1}                                      & {\ul 530.160}           & 1.181                               & 0.600                      & 0.004                           & {\ul 51.986}                         & {\ul 0.250}                \\ \hline
+
+Mean ensemble                                  & 369.525                 & 0.519                               & {\ul 0.697}                & \textbf{0.003}                               & \textbf{49.922}                              & 0.227             \\ \hline
+Median ensemble                                  & 397.439                 & 0.777                               & 0.531                & 0.004                               & 50.046                              &  0.250             \\ \hline
+
+Proposed ensemble                                     & \textbf{356.315}        & \textbf{0.393} & 0.537 & \textbf{0.003} &  50.147 & 0.256 \\ \hline
+\end{tabular}
+\begin{tablenotes}
+\item[1] taken from \cite{Roy_2011}
+\end{tablenotes}
+\end{table}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
+\centering
+\caption{Comparison of performance on cloud datasets}
+\begin{tabular}{|l|r|r|r|r|r|r|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Model}} & \multicolumn{2}{c|}{Google Cluster}                   & \multicolumn{2}{c|}{RIF}                              & \multicolumn{2}{c|}{CPU}                              \\ \cline{2-7} 
+\multicolumn{1}{|c|}{}                       & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} & \multicolumn{1}{c|}{RMSE} & \multicolumn{1}{c|}{MAPE} \\ \hline
+ARIMA                                        & 12.963                    & 0.051                     & 7.238                     & 0.136                     & 2.976                     & 0.036                     \\ \hline
+Exponential                                  & 12.886                    & 0.041                     & 7.005                     & 0.160                     & 3.150                     & {\ul 0.048}               \\ \hline
+Neural net.                                  & 12.530                    & 0.036                     & 8.169                     & 0.135                     & \textbf{2.792}            & 0.031                     \\ \hline
+Stratos                                      & {\ul 19.757}              & {\ul 0.116}               & {\ul 9.928}               & {\ul 0.172}               & {\ul 5.692}               & \textbf{0.024}            \\ \hline
+
+ARMA config.                                      & {\ul 12.549}              & {\ul 0.069}               & {\ul 7.185}               & {\ul 0.180}               & {\ul 3.477}               & \textbf{0.023}            \\ \hline
+
+Mean Ensemble                                      & 12.099              & 0.051               & 7.036               & 0.130               & 2.900               & 0.029            \\ \hline
+Median Ensemble                                      &  12.059              & 0.055               &  7.010               & 0.141               & 2.944               & 0.028            \\ \hline
+
+Proposed Ensemble                                     & \textbf{11.934}           & \textbf{0.027}            & \textbf{6.972}            & \textbf{0.129}            & 2.873                     & 0.027                     \\ \hline
+\end{tabular}
+\end{table}
+
+Boldfaced cells in Tables 4 and 5 contain the smallest error values for each dataset under evaluation, whereas underlined cells contain the worst performance observed for each dataset among all methods.
+
+Figure 6 represents how each individual forecasting model fits the Google cluster dataset. It can be observed that the first three models show smoothened predictions, while the Stratos prediction model generates rapid fluctuations and values that are significantly off the range relative to actual values. Although the ensemble model shows smoothened predictions at the start, it eventually manages to capture finer details of the series as the available dataset grows during real-time training.
+
+According to the results obtained, the existing model from Stratos suffers from errors of the largest magnitude in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
