@@ -48,7 +48,7 @@ $$MAPE=\frac{100}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right
 
 While calculating the contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, the average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so that we can calculate the contribution as the errors are fitted under the exponential model. Here, the contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$-th model at the $t$-th time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error, or absolute relative error at $t$-th prediction. $b_{i,t}$ can be defined as follows:
 
-\begin{equation}
+\begin{equation} \label{eq:1}
 b_{i,t}= \alpha e_{(i,t)} + (1-\alpha)b_{(i,t-1)}
 \end{equation}
 where $0\leq \alpha \leq 1$
@@ -60,7 +60,7 @@ c_{i,t}=\frac{1}{b_{i,t}}
 \end{equation}
 
 \subsection{Selection of Models}
-The abovementioned error-based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture the different characteristics of datasets.
+The above mentioned error-based weighting mechanism can be used with different combinations of forecasting models. To preserve the ability to cope up with drastically different workload patterns, models used in ensemble techniques should conceptually be different and capture the different characteristics of datasets.
 
 ARIMA assumes a linear form of the model, i.e., a linear correlation structure is assumed among the time series values. Therefore, it cannot capture non-linear patterns \cite{Zhang_2003}. Alternatively, seasonal ARIMA models can fit the seasonal factors of the time series accurately.
 
