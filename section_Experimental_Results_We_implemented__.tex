@@ -5,7 +5,6 @@ We implemented the proposed ensemble-based prediction algorithm in R using time 
 
 We tested proposed technique against the publicly available datasets mentioned in Section 4.2, as well as several real-world cloud workloads \cite{AutoscaleAnalyser} collected from server applications. Our proposed solution is compared with each individual models in ensemble solution, two other popular ensemble techniques (mean ensemble, median ensemble), existing prediction technique in Apache Stratos and prediction model describes in \cite{Roy_2011}. 
 
-
 In addition to the cloud workload dataset used in Section 3, we also used a portion of the Google cluster dataset \cite{GoogleClusterData} in evaluating our ensemble model. The dataset includes a series of task execution details against their starting and ending times. Due to the large size of the dataset, we have summarized it to a suitably concise set of values by summing up numbers of started tasks in each time unit over the transformed time scale.
 
 % Please add the following required packages to your document preamble:
@@ -59,6 +58,6 @@ Proposed Ensemble                                     & \textbf{11.934}         
 
 Boldfaced cells in Tables 4 and 5 contain the smallest error values for each dataset under evaluation, whereas underlined cells contain the worst performance observed for each dataset among all methods.
 
-Figure 6 represents how each individual forecasting model fits the Google cluster dataset. It can be observed that the first three models show smoothened predictions, while the Stratos prediction model generates rapid fluctuations and values that are significantly off the range relative to actual values. Although the ensemble model shows smoothened predictions at the start, it eventually manages to capture finer details of the series as the available dataset grows during real-time training.
+Figure 6 represents how each individual forecasting model fits the Google cluster dataset. It can be observed that the first three models show smoothened predictions, while the Stratos prediction model generates rapid fluctuations and values that are significantly off the range relative to actual values. As shown by Figure 7, although the ensemble model shows smoothened predictions at the start, it eventually manages to capture finer details of the series as the available dataset grows during real-time training.
 
 According to the results obtained, the existing model from Stratos suffers from errors of the largest magnitude in several datasets, while each individual model shows largest errors in at least one dataset. Our proposed prediction technique provides the best prediction results in several datasets while never performing worse than the individual prediction methods.
