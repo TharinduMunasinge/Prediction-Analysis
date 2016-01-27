@@ -8,7 +8,7 @@ $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
 where $x_{t}$ is the real value at time $t$,  $\hat{x}_{t}$ is the forecast value at time $t$ and $n$ is the number of data points in dataset.
 
 \item \textit{Percentage errors} have the advantage of being scale-independent, but they overemphasize the errors for values that are actually small. Percentage errors can be represented as follows:
-$$MAPE=\frac{1}{n}\sum_{t=100}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
+$$MAPE=\frac{100}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 where $x_{t}$ is the real value at time $t$,  $\hat{x}_{t}$ is the forecast value at time $t$ and $n$ is the number of data points in dataset.
 
 \end{itemize}
