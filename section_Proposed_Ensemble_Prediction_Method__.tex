@@ -46,17 +46,17 @@ $$RMSE=\sqrt{\frac{\sum_{t=1}^{n}(\hat{x}_{t}-x_{t})^{2}}{n}}$$
 Whereas \textit{Mean Absolute Percentage Error} is defined as:
 $$MAPE=\frac{100}{n}\sum_{t=1}^{n}\left | \frac{\hat{x}_{t}-x_{t}}{x_{t}} \right |$$
 
-While calculating the contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, the average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so that we can calculate the contribution as the errors are fitted under the exponential model. Here, the contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$-th model at the $t$-th time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{(i,t)}$ can be the absolute error, squared error, or absolute relative error at $t$-th prediction from $i^{th}$ model. $b_{i,t}$ can be defined as follows:
+While calculating the contributions based on errors, models whose errors are based on the last observation overlook overall accuracy and assign high importance to the last prediction error. On the other extreme, the average errors assume that all the last prediction errors have the same level of significance. However, what we really need is an error measure which has a larger contribution from the errors in more recent predictions and smaller contributions from early predictions. Exponential smoothing provides the best fit for our requirement, so that we can calculate the contribution as the errors are fitted under the exponential model. Here, the contribution coefficients $c_{i,t}$ are calculated from the inverses of the the fitted past forecast errors ($e_{t}$). If $b_{i,t}$ is the fitted value of the past forecasting error from the $i$-th model at the $t$-th time interval, $c_{i,t}=\frac{1}{b_{i,t}}$. $e_{t}$ can be the absolute error, squared error, or absolute relative error at $t$-th prediction. $b_{i,t}$ can be defined as follows:
 
 \begin{equation}
-b_{(i,t)}= \alpha e_{(i,t)} + (1-\alpha)b_{(i,t-1)}
+b_{i,t}= \alpha e_{(i,t)} + (1-\alpha)b_{(i,t-1)}
 \end{equation}
 where $0\leq \alpha \leq 1$
 \begin{equation}\nonumber
-b_{(i,t)}=\alpha e_{(i,t)} + \alpha(1-\alpha)e_{(i,t-1)}+\alpha(1-\alpha)^2e_{(i,t-2)}+ . ..  
+b_{i,t}=\alpha e_{(i,t)} + \alpha(1-\alpha)e_{(i,t-1)}+\alpha(1-\alpha)^2e_{(i,t-2)}+ . ..  
 \end{equation}
 \begin{equation}
-c_{(i,t)}=\frac{1}{b_{(i,t)}} 
+c_{i,t}=\frac{1}{b_{i,t}} 
 \end{equation}
 
 \subsection{Selection of Models}
