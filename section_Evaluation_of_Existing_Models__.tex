@@ -64,7 +64,7 @@ In EWMA methods, forecasts are calculated using weighted averages where the weig
 \begin{equation}
 \hat{x}_{t+1|t}=\alpha x_t +\alpha(1-\alpha)x_{t-1}+\alpha(1-\alpha)^2x_{t-2}+...
 \end{equation}
-where $0\leq \alpha \leq 1$ is the smoothing parameter. $\hat{x}_{t+1|t}$, the one-step-ahead forecast for time $t+1$, is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e., close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
+where $0\leq \alpha \leq 1$ is the smoothing parameter. $\hat{x}_{t+1|t}$, the one-step-ahead forecast for time $(t+1)$, is a weighted average of all the observations in the series $x_1$, ..., $x_t$. The rate at which the weights decrease is controlled by the parameter $\alpha$. If $\alpha$ is small (i.e., close to 0), more weight is given to observations from the distant past. If $\alpha$ is large (i.e., close to 1), more weight is given to the more recent observations. This method is suitable for forecasting data with no trend or seasonal patterns.
 
 Following variations of basic exponential smoothing are suitable for forecasting time series with various characteristics \cite{Forecasting_OTexts}:
 
@@ -92,9 +92,9 @@ S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 Parameter       & Description                                                                     \\ \hline
 $S_{t+h|t}$     & Predicted change of workload for time $(t+h)$ based on interval $t$ \\
 $x$             & Workload metric(s)                                                                \\ \hline
-$\hat{x}_{t+h}$ & Predicted workload metrics for time $t+h$                                       \\ \hline
-$u_{t}$         & First derivative of the workload metrics within the $t$-th interval           \\ \hline
-$a_{t}$         & Second derivative of the workload metrics within the $t$-th interval          \\ \hline
+$\hat{x}_{t+h}$ & Predicted workload metrics for time $(t+h)$                                       \\ \hline
+$u_{t}$         & First derivative of the workload metrics within the $t$^th interval           \\ \hline
+$a_{t}$         & Second derivative of the workload metrics within the $t$^th interval          \\ \hline
 $h$             & Time horizon \\ \hline
 \end{tabular}
 \end{table}
