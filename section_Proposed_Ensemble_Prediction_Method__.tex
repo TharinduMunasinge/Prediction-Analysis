@@ -6,7 +6,7 @@ In existing error-based combining techniques, mean values of error metrics (e.g.
 
 Considering the currently available dataset in the time series as
 $X=[x_{1},x_{2},.. x_{t}]$
-we want to calculate predictions for $x_{t+h}$. Let the final predicted value be $\hat{x}_{(t+h)}$ and the predicted value from the $i$-th model for $x_{t+h}$ be $\hat{x}_{(t+h)}^{(i)}$. We define $\hat{x}_{(t+h)}$ as a weighted sum of predictions from each model:
+we want to calculate predictions for $x_{t+h}$. Let the final predicted value be $\hat{x}_{(t+h)}$ and the predicted value from the $i$-th model for $x_{(t+h)}$ be $\hat{x}_{(t+h)}^{(i)}$. We define $\hat{x}_{(t+h)}$ as a weighted sum of predictions from each model:
 \begin{equation}
 \hat{x}_{(t+h)}= \sum_{i=1}^{k}w_i \hat{x}_{(t+h)}^{(i)} \ \ \forall k \in \{1,2,3,...,n\}
 \end{equation}
