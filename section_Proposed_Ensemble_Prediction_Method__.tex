@@ -6,14 +6,14 @@ In existing error-based combining techniques, mean values of error metrics (e.g.
 
 Considering the currently available dataset in the time series as
 $X=[x_{1},x_{2},.. x_{t}]$
-we want to calculate predictions for $x_{t+h}$. Let the final predicted value be $\hat{x}_{(t+h)}$ and the predicted value from the $i$-th model for $x_{(t+h)}$ be $\hat{x}_{(t+h)}^{(i)}$. We define $\hat{x}_{(t+h)}$ as a weighted sum of predictions from each model:
+we want to calculate predictions for $x_{t+h}$. Let the final predicted value be $\hat{x}_{t+h}$ and the predicted value from the $i$-th model for $x_{t+h}$ be $\hat{x}_{t+h}^{i}$. We define $\hat{x}_{t+h}$ as a weighted sum of predictions from each model:
 \begin{equation}
-\hat{x}_{(t+h)}= \sum_{i=1}^{k}w_i \hat{x}_{(t+h)}^{(i)} \ \ \forall k \in \{1,2,3,...,n\}
+\hat{x}_{t+h}= \sum_{i=1}^{k}w_i \hat{x}_{t+h}^{i} \ \ \forall k \in \{1,2,3,...,n\}
 \end{equation}
 
 where $w_i$ is the weight assigned to the $i$-th forecasting method. To ensure unbiasedness, it is often assumed that the weights add up to unity \cite{Adhikari_2012}. Hence, we define the contribution from the $i$-th model to the final result as $c_i$, so that the same equation can be redefined as:
 \begin{equation}
-\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_i}
+\hat{x}_{t+h}= \frac{\sum_{i=1}^{k}c_i \hat{x}_{t+h}^{i}}{\sum_{i=1}^{k}c_i}
 \end{equation}
 where $w_{i}= \frac{c_{i}}{\sum_{j=1}^{k}c_j}$. As $\sum_{j=1}^{k}w_{j}=1$, this weight assignment is unbiased and would result in the weighted average of the predictions.
 
@@ -74,10 +74,10 @@ There is a possibility that the above models may produce out-of-range forecasts,
 Proposed workload prediction technique can be explained using the following algorithm:
 \begin{enumerate}
 \item Consider the time series history window at time $t$, $X=[x_{1},x_{2},.. x_{t}]$.
-\item Calculate forecast value from the $i$-th time series forecasting method over the time horizon $h$, $\hat{x}_{(t+h)}^{(i)} \forall i \in \{1,2,3,...,k\}$, where $k$ is the number of forecasting methods used.
+\item Calculate forecast value from the $i$-th time series forecasting method over the time horizon $h$, $\hat{x}_{t+h}^{i} \forall i \in \{1,2,3,...,k\}$, where $k$ is the number of forecasting methods used.
 \item Fit a history window for the last $t$ actual data points using the $i$-th method.
 \item Use an exponential smoothing model to fit the errors resulting from Step 3, and use them to calculate the contribution factor for the $i$-th model at $t$, $c_{(i,t)}$.
-\item Calculate the point forecast for time $t+h$ using
-$\hat{x}_{(t+h)}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{(t+h)}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$.
-\item At time $t+1$, actual value for time $t+1$ will be available. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from Step 2.
+\item Calculate the point forecast for time $(t+h)$ using
+$\hat{x}_{t+h}= \frac{\sum_{i=1}^{k}c_{(i,t)} \hat{x}_{t+h}^{(i)}}{\sum_{i=1}^{k}c_{(i,t)}}$.
+\item At time $(t+1)$, actual value for time $(t+1)$ will be available. Add this value to the history window $X=X\cup \{x_{t+1}\}$ and repeat from Step 2.
 \end{enumerate}
