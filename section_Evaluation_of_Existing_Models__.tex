@@ -78,7 +78,7 @@ Following variations of basic exponential smoothing are suitable for forecasting
 \end{itemize}
 
 \subsubsection{Prediction method in Apache Stratos}
-Apache Stratos is an open source PaaS framework where a user can build a PaaS system on top of an existing IaaS cloud. The auto scaling solution in Stratos uses a workload demand prediction method which can be explained using the motion equation in physics. The method calculates one lookahead prediction using the workload demand in the last period as follows \cite{StratosModel}:
+Apache Stratos is an open source PaaS framework where a user can build a PaaS system on top of an existing IaaS cloud. The auto scaling solution in Stratos uses a workload demand prediction method which can be explained using the motion equation in physics. The method calculates one lookahead prediction using the workload demand in the last period as follows \cite{StratosModel}, using symbols in Table 1:
 \begin{eqnarray}
 S_{t+h|t} = u_{t}h+ \frac{1}{2} a_{t}h^2 \\
 \hat{x}_{t+h}=avg(x)_{t} + S_{t+h|t} 
