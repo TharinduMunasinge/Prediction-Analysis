@@ -1,13 +1,9 @@
 
 \section{Experimental Results}
 
-We implemented the proposed ensemble-based prediction algorithm in R using time series and machine learning model implementations in the forecast package. For our ensemble solution we selected ARIMA, Neural Network, Exponential Model and Naive Prediction as the base models. After emperical  evaluation of various error measurements for contribution coefficient calculation, we used square root of the exponentially fitted squared  forecasting error as the error measure for calculating the contribution coefficients from each model. We tested it against the publicly available datasets mentioned in Section 4.2, as well as several real-world cloud workloads \cite{AutoscaleAnalyser} collected from server applications.
-            $$e_{(i,t)}=(x_t-\hat{x}^{(i)}_{t})^2$$
-            $$b_{(i,t)}=\alpha e_{(i,t)} + \alpha(1-\alpha)e_{(i,t-1)}+\alpha(1-\alpha)^2e_{(i,t-2)}+ . .. $$ \\
-$$c_{(i,t)}=\frac{1}{\sqrt{b_{(i,t)}}}$$
-            
+We implemented the proposed ensemble-based prediction algorithm in R using time series and machine learning model implementations in the forecast package. For our ensemble solution we selected ARIMA, Neural Network, Exponential Model and Naive Prediction as the base models. After emperical  evaluation of various error measurements for contribution coefficient calculation, we used square root of the exponentially fitted squared  forecasting error as the error measure for calculating the contribution coefficients from each model (where $e_{i,t}$ is defined as $e_{(i,t)}=(x_t-\hat{x}^{(i)}_{t})^2$ in Equation 10 and $c_{(i,t)}=\frac{1}{\sqrt{b_{(i,t)}}}$ in Equation 11).
 
-Our proposed solution is compared with each individual models in ensemble solution, two other popular ensemble techniques (mean ensemble, median ensemble), existing prediction technique in Apache Stratos and prediction model describes in \cite{Roy_2011}. 
+We tested it against the publicly available datasets mentioned in Section 4.2, as well as several real-world cloud workloads \cite{AutoscaleAnalyser} collected from server applications. Our proposed solution is compared with each individual models in ensemble solution, two other popular ensemble techniques (mean ensemble, median ensemble), existing prediction technique in Apache Stratos and prediction model describes in \cite{Roy_2011}. 
 
 
 In addition to the cloud workload dataset used in Section 3, we also used a portion of the Google cluster dataset \cite{GoogleClusterData} in evaluating our ensemble model. The dataset includes a series of task execution details against their starting and ending times. Due to the large size of the dataset, we have summarized it to a suitably concise set of values by summing up numbers of started tasks in each time unit over the transformed time scale.
